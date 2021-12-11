@@ -7,25 +7,25 @@ namespace ScriptableObjects
     [CreateAssetMenu(menuName = "CalcGame/Function Data", fileName = "FunctionData_00")]
     public class FunctionMaker : SerializedScriptableObject
     {
-        public delegate void SomeDelegate();
+        public delegate void SomeDelegate(double num1, double num2);
 
         public List<SomeDelegate> someDelegates = new List<SomeDelegate>();
-        
+        public string displayString;
         [BoxGroup("Operations", ShowLabel = true)]
         [ButtonGroup("Operations/Buttons")] [Button("+")]
-        public void AddOperation()
+        public void AddOperation(double num1, double num2)
         {
             someDelegates.Add(AddOperation);
         }
 
         [ButtonGroup("Operations/Buttons")][Button("-")]
-        public void MinusOperation()
+        public void MinusOperation(double num1, double num2)
         {
             someDelegates.Add(MinusOperation);
         }
         
         [ButtonGroup("Operations/Buttons")][Button("*")]
-        public void MultiplyOperation()
+        public void MultiplyOperation(double num1, double num2)
         {
             someDelegates.Add(MinusOperation);
         }
@@ -33,7 +33,7 @@ namespace ScriptableObjects
         [ShowInInspector, PropertySpace]
         [BoxGroup("Functions", ShowLabel = true)]
         [ButtonGroup("Functions/SimpleFunction")][Button("Ln(x)")]
-        public void LanFunction()
+        public void LanFunction(double num1, double num2)
         {
             someDelegates.Add(LanFunction);
         }
