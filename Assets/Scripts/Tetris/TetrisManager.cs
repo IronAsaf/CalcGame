@@ -12,9 +12,10 @@ namespace Tetris
     public class TetrisManager : MonoBehaviour
     {
         public static TetrisManager instance;
+        public Sprite spriteForDot;
         private LevelMaker level;
         private List<Vector3> startingBaseFunctionPositions;
-        
+
         private void Awake()
         {
             Singleton();
