@@ -5,6 +5,7 @@ using Utility;
 
 namespace Tetris
 {
+    // maybe remove rigid and do update time.time to fall on its own with our own speed.
     [RequireComponent(typeof(Rigidbody2D))]
     [RequireComponent(typeof(BoxCollider2D))]
     public class FallingFunction : MonoBehaviour

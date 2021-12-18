@@ -41,5 +41,14 @@ namespace Tetris
             }
             return lst;
         }
+
+
+        // Once they hit it will call for the functions of both bottom and top and will do bot - top so basically take the 
+        // value of lan(x) - x or something, calc lanx then calc x, then calc1 - calc2, create new node, add to list, send list to bot
+        // force bot to re-render itself, load new function for top, reset top position
+        public void OnHitInteraction()
+        {
+            
+        }
     }
 }
