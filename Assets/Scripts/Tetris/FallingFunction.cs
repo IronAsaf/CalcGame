@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Utility;
 
 namespace Tetris
@@ -35,6 +33,7 @@ namespace Tetris
         private void AdjustColliderSize()
         {
             collider2D.size = PositionsUtility.SizeFromList(currentFallingPositions);
+            var center = PositionsUtility.Center(currentFallingPositions);
         }
 
         private void SetupDot()
@@ -52,7 +51,6 @@ namespace Tetris
 
         private void SetupGO(List<Vector3> positions)
         {
-            print($"<color=#fdfd66>I was called by </color>" + transform.name);
             if (positions == null) return;
             foreach (var positionForGO in currentFallingPositions)
             {
