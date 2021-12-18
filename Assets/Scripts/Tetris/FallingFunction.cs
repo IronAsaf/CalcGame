@@ -1,42 +1,67 @@
+using System;
 using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Utility;
 
 namespace Tetris
 {
+    [RequireComponent(typeof(Rigidbody2D))]
+    [RequireComponent(typeof(BoxCollider2D))]
     public class FallingFunction : MonoBehaviour
     {
-        // Start is called before the first frame update
+        [SerializeField] [ReadOnly] private Transform[] functionDotsTransRefs;
         private List<Vector3> currentFallingPositions;
-        [SerializeField] private List<GameObject> functionDotsGORefs;
-        private void Start()
+        private GameObject dot;
+        private new BoxCollider2D collider2D;
+        private new Rigidbody2D rigidbody2D;
+        private float[] functionEdgesPositions; // top, bot, left, right
+
+
+        private void Awake()
         {
-            SetupInitialFallingFunction();
+            collider2D = GetComponent<BoxCollider2D>();
+            rigidbody2D = GetComponent<Rigidbody2D>();
         }
 
+        private void Start()
+        {
+            SetupDot();
+            SetupInitialFallingFunction();
+            AdjustColliderSize();
+        }
+
+        private void AdjustColliderSize()
+        {
+            collider2D.size = PositionsUtility.SizeFromList(currentFallingPositions);
+        }
+
+        private void SetupDot()
+        {
+            dot = new GameObject("pref");
+            var spr = dot.AddComponent<SpriteRenderer>();
+            spr.sprite = TetrisManager.instance.spriteForDot;
+            spr.color = Color.red;
+        }
         private void SetupInitialFallingFunction()
         {
             currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
+            SetupGO(currentFallingPositions);
+        }
 
-            if (currentFallingPositions == null) return;
-
-            functionDotsGORefs = new List<GameObject>();
-            for (var i = 0; i < currentFallingPositions.Count; i++)
+        private void SetupGO(List<Vector3> positions)
+        {
+            print($"<color=#fdfd66>I was called by </color>" + transform.name);
+            if (positions == null) return;
+            foreach (var positionForGO in currentFallingPositions)
             {
-                var go = new GameObject();
-                Instantiate(go, currentFallingPositions[i], Quaternion.identity, transform);
-                functionDotsGORefs.Add(go);
+                var goName = "GO: " + positionForGO.x + ", " + positionForGO.y;
+                dot.name = goName;
+                Instantiate(dot, positionForGO, Quaternion.identity, transform);
             }
 
+            functionDotsTransRefs = GetComponentsInChildren<Transform>();
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-    }
-
-    internal class ArrayList<T>
-    {
     }
 }
