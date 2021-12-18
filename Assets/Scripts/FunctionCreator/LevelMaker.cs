@@ -1,14 +1,16 @@
 using System.Collections.Generic;
+using ScriptableObjects;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace FunctionCreator
 {
     [CreateAssetMenu(menuName = "CalcGame/Level Data", fileName = "LevelData_00")]
     public class LevelMaker : SerializedScriptableObject
     {
         [SerializeField] private string levelName;
         [SerializeField] private int difficulty;
-        [SerializeField] private List<FunctionMaker> functionsForLevelList;
+        public List<FunctionMaker> functionsForLevelList;
+        public FunctionMaker bottomFunction;
     }
 }

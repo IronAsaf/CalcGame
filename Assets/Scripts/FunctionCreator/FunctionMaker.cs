@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace ScriptableObjects
+namespace FunctionCreator
 {
     [CreateAssetMenu(menuName = "CalcGame/Function Data", fileName = "FunctionData_00")]
     public class FunctionMaker : SerializedScriptableObject
@@ -10,6 +10,7 @@ namespace ScriptableObjects
         public delegate void SomeDelegate(double num1, double num2);
 
         public List<SomeDelegate> someDelegates = new List<SomeDelegate>();
+        private List<Vector3> positions = new List<Vector3>();
         public string displayString;
         [BoxGroup("Operations", ShowLabel = true)]
         [ButtonGroup("Operations/Buttons")] [Button("+")]
@@ -43,6 +44,11 @@ namespace ScriptableObjects
         public void Display()
         {
             
+        }
+
+        public List<Vector3> GetPositions()
+        {
+            return positions;
         }
     }
 }

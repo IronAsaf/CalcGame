@@ -1,5 +1,7 @@
 
 
+using FunctionCreator;
+
 namespace ScriptableObjects
 {
     public abstract class VariableComponent
