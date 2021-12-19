@@ -1,18 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Utility;
 
-public class FunctionComponent : MonoBehaviour
+namespace FunctionCreator
 {
-    // Start is called before the first frame update
-    void Start()
+    [System.Serializable]
+    public class FunctionComponent
     {
-        
-    }
+        public string value;
+        private FunctionUtility.FunctionalityType type;
+        public float assistiveNumber;
 
-    // Update is called once per frame
-    void Update()
-    {
+        public FunctionComponent()
+        {
+            value = FunctionUtility.x;
+            type = FunctionUtility.FunctionalityType.X;
+            assistiveNumber = 0;
+        }
+        //CTOR
+        public FunctionComponent(string value, FunctionUtility.FunctionalityType type, float assistiveNumber = 0)
+        {
+            this.value = value;
+            this.type = type;
+            this.assistiveNumber = assistiveNumber;
+        }
+
         
     }
 }
