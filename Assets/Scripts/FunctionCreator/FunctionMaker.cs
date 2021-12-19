@@ -7,36 +7,62 @@ namespace FunctionCreator
     [CreateAssetMenu(menuName = "CalcGame/Function Data", fileName = "FunctionData_00")]
     public class FunctionMaker : SerializedScriptableObject
     {
-        public delegate void SomeDelegate(double num1, double num2);
+        /*
+         * char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
 
-        public List<SomeDelegate> someDelegates = new List<SomeDelegate>();
-        private List<Vector3> positions = new List<Vector3>();
+string text = "one\ttwo three:four,five six seven";
+System.Console.WriteLine($"Original text: '{text}'");
+
+string[] words = text.Split(delimiterChars);
+         */
+        public List<string> functionComponents;
         public string displayString;
         [BoxGroup("Operations", ShowLabel = true)]
         [ButtonGroup("Operations/Buttons")] [Button("+")]
         public void AddOperation(double num1, double num2)
         {
-            someDelegates.Add(AddOperation);
+            functionComponents.Add("+");
         }
 
         [ButtonGroup("Operations/Buttons")][Button("-")]
         public void MinusOperation(double num1, double num2)
         {
-            someDelegates.Add(MinusOperation);
+            functionComponents.Add("-");
         }
         
         [ButtonGroup("Operations/Buttons")][Button("*")]
-        public void MultiplyOperation(double num1, double num2)
+        public void MultiplyOperation()
         {
-            someDelegates.Add(MinusOperation);
+            functionComponents.Add("*");
         }
         
         [ShowInInspector, PropertySpace]
         [BoxGroup("Functions", ShowLabel = true)]
-        [ButtonGroup("Functions/SimpleFunction")][Button("Ln(x)")]
-        public void LanFunction(double num1, double num2)
+        [ButtonGroup("Functions/SimpleVariables")][Button("x")]
+        public void VariableX()
         {
-            someDelegates.Add(LanFunction);
+            functionComponents.Add("x");
+        }
+        [ButtonGroup("Functions/SimpleVariables")][Button("x^n")]
+        public void PowerX(float power)
+        {
+            functionComponents.Add("x^"+power);
+        }
+        [ButtonGroup("Functions/SimpleVariables")][Button("Log[N](x)")]
+        public void LogFunction(float baseValue)
+        {
+            if (baseValue <= 0) baseValue = 1;
+            functionComponents.Add("Log["+baseValue+"](x)");
+        }
+        [ButtonGroup("Functions/SimpleVariables")][Button("|x|")]
+        public void AbsFunction()
+        {
+            functionComponents.Add("|x|");
+        }
+        [ButtonGroup("Functions/SimpleVariables")][Button("Ln(x)")]
+        public void LanFunction()
+        {
+            functionComponents.Add("ln(x)");
         }
 
         [ShowInInspector, PropertySpace]
@@ -44,11 +70,6 @@ namespace FunctionCreator
         public void Display()
         {
             
-        }
-
-        public List<Vector3> GetPositions()
-        {
-            return positions;
         }
     }
 }
