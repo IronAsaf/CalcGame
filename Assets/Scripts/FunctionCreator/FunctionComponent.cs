@@ -5,9 +5,8 @@ namespace FunctionCreator
     [System.Serializable]
     public class FunctionComponent
     {
-        private FunctionUtility.FunctionalityType type;
+        public FunctionUtility.FunctionalityType type;
         public float assistiveNumber; //TODO-0002 - Make this not be just a public float, but changeable. Maybe do a interface then we take from that, to NoneAssistive, oper, Normal.
-
         public FunctionComponent()
         {
             type = FunctionUtility.FunctionalityType.X;
@@ -19,7 +18,5 @@ namespace FunctionCreator
             this.type = type;
             this.assistiveNumber = assistiveNumber;
         }
-
-        public FunctionUtility.FunctionalityType GetCurrentType() => type;
     }
 }

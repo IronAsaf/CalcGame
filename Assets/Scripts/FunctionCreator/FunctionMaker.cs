@@ -81,14 +81,14 @@ namespace FunctionCreator
                 for (var op = 1; op < functionComponents.Count - 1; op += 2)
                 {
                     //TODO-0003 - Add arithmetic computability ( Divide comes before Add )
-                    switch (functionComponents[op].GetCurrentType())
+                    switch (functionComponents[op].type)
                     {
                         case FunctionUtility.FunctionalityType.OperatorDivide:
                         case FunctionUtility.FunctionalityType.OperatorMinus:
                         case FunctionUtility.FunctionalityType.OperatorMultiply:
                         case FunctionUtility.FunctionalityType.OperatorPlus:
                             temp.y += FunctionUtility.CalculatePairingValue(functionComponents[op - 1],
-                                functionComponents[op + 1], functionComponents[op]);
+                                functionComponents[op + 1], functionComponents[op], i);
                             break;
                         default:
                             Debug.LogWarning("Found unknown operator in calculation");
@@ -115,7 +115,7 @@ namespace FunctionCreator
 
             for (var i = 1; i < components.Count-1; i+=2)
             {
-                switch (components[i].GetCurrentType())
+                switch (components[i].type)
                 {
                     case FunctionUtility.FunctionalityType.OperatorDivide:
                     case FunctionUtility.FunctionalityType.OperatorMinus:
