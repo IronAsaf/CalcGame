@@ -17,25 +17,36 @@ namespace Utility
             Abs,
         }
 
-        public static string operatorPlus = "+";
-        public static string operatorMinus = "-";
-        public static string operatorMultiply = "*";
-        public static string operatorDivide = "/";
-        public static string logX = "Log[N](x)";
-        public static string lanX = "Lan(x)";
-        public static string powX = "x^n";
-        public static string x = "x";
-        public static string abs = "|x|";
-        
         //Calculate ImmediateValue - for like LogX , i give X it returns value.
-        private static float CalculateImmediateValue()
+        private static float CalculateImmediateValue(FunctionComponent func)
         {
             return 0;
         }
         //Calculate pairing - i give it 2 values, it does the operation, so if I get 10 and 19, and i am obj type of + i return 29.
         public static float CalculatePairingValue(FunctionComponent left, FunctionComponent right, FunctionComponent oper)
         {
-            return 0;
+            var val1 = CalculateImmediateValue(left);
+            var val2 = CalculateImmediateValue(right);
+
+            var answer = 0f;
+
+            switch (oper.GetCurrentType())
+            {
+                case FunctionalityType.OperatorDivide:
+                    answer = val1 / val2;
+                    break;
+                case FunctionalityType.OperatorMinus:
+                    answer = val1 - val2;
+                    break;
+                case FunctionalityType.OperatorMultiply:
+                    answer = val1 * val2;
+                    break;
+                case FunctionalityType.OperatorPlus:
+                    answer = val1 + val2;
+                    break;
+            }
+            
+            return answer;
         }
     }
 }
