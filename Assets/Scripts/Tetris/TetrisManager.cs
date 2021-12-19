@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using FunctionCreator;
 using UnityEngine;
+using Utility;
 
 namespace Tetris
 {
@@ -8,7 +10,7 @@ namespace Tetris
     {
         public static TetrisManager instance;
         public Sprite spriteForDot;
-        private LevelMaker level;
+        [SerializeField] private LevelMaker level;
         private List<Vector3> startingBaseFunctionPositions;
 
         private void Awake()
@@ -34,12 +36,10 @@ namespace Tetris
         /// <returns>Returns a list of Vector3's which hold the positions needed to describe a falling function's visual appearance.</returns>
         public List<Vector3> GetNewFallingFunctionListPositions()
         {
-            var lst = new List<Vector3>(); // TODO-0001 - Hook this to the actual level.
-            for (var i = 0; i < 50; i++)
-            {
-                lst.Add(new Vector3(i*0.1f,i*0.1f,0));
-            }
-            return lst;
+            var lstVec2 = level.functionsForLevelList[0].positions;
+            var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
+            b = PositionsUtility.CompactPositions(b, 100);
+            return b;
         }
 
 

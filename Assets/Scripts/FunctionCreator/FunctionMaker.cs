@@ -71,16 +71,22 @@ namespace FunctionCreator
                 Debug.Log($"<color=#ff4466>Encountered an Issue with calculation, see LogErrors</color>");
                 return;
             }
-            
             positions = new List<Vector2>();
             var advance = (clampOfX.y - clampOfX.x) / amountOfNodes;
-            
+            var isSimpleFunction = functionComponents.Count == 1;
             for (var i = clampOfX.x; i < clampOfX.y; i+=advance)
             {
                 var temp = new Vector2(i,0);
-                for (var op = 1; op < functionComponents.Count - 1; op += 2)
+                if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
+                {
+                    temp.y += FunctionUtility.CalculateImmediateValue(functionComponents[0], i);
+                    positions.Add(temp);
+                    continue;
+                }
+                for (var op = 1; op < functionComponents.Count - 1; op += 2) // Complex function like X + LanX
                 {
                     //TODO-0003 - Add arithmetic computability ( Divide comes before Add )
+
                     switch (functionComponents[op].type)
                     {
                         case FunctionUtility.FunctionalityType.OperatorDivide:
@@ -100,8 +106,21 @@ namespace FunctionCreator
             Debug.Log($"<color=#00cc99>Positions Generated</color>");
         }
 
+        [ButtonGroup("Calculation/Buttons")][Button("ClearAll")]
+        public void ClearAll()
+        {
+            functionComponents = new List<FunctionComponent>();
+            positions = new List<Vector2>();
+            amountOfNodes = 0;
+            clampOfX = Vector2.zero;
+        }
+
         private static bool ValidateComponentList(IReadOnlyList<FunctionComponent> components)
         {
+            if (components.Count == 1 && !IsOperator(components[0].type))
+            {
+                return true;
+            }
             if (components.Count < 3)
             {
                 Debug.LogError("Function Data missing enough elements. minimal-format: VAR OP VAR ...");
@@ -115,19 +134,25 @@ namespace FunctionCreator
 
             for (var i = 1; i < components.Count-1; i+=2)
             {
-                switch (components[i].type)
-                {
-                    case FunctionUtility.FunctionalityType.OperatorDivide:
-                    case FunctionUtility.FunctionalityType.OperatorMinus:
-                    case FunctionUtility.FunctionalityType.OperatorMultiply:
-                    case FunctionUtility.FunctionalityType.OperatorPlus:
-                        continue;
-                    default:
-                        Debug.LogError("Function Data needs an operator between each variable, format: VAR OP VAR ...");
-                        return false;
-                }
+                if (IsOperator(components[i].type)) continue;
+                Debug.LogError("Function Data needs at odd positions a Operator, format: VAR OP VAR ...");
+                return false;
             }
             return true;
+        }
+
+        private static bool IsOperator(FunctionUtility.FunctionalityType type)
+        {
+            switch (type)
+            {
+                case FunctionUtility.FunctionalityType.OperatorDivide:
+                case FunctionUtility.FunctionalityType.OperatorMinus:
+                case FunctionUtility.FunctionalityType.OperatorMultiply:
+                case FunctionUtility.FunctionalityType.OperatorPlus:
+                    return true;
+            }
+
+            return false;
         }
     }
 }

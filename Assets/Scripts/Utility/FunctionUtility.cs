@@ -1,5 +1,6 @@
 using System;
 using FunctionCreator;
+using UnityEngine;
 
 namespace Utility
 {
@@ -19,7 +20,7 @@ namespace Utility
         }
 
         //Calculate ImmediateValue - for like LogX , i give X it returns value.
-        private static float CalculateImmediateValue(FunctionComponent func, float currentXValue)
+        public static float CalculateImmediateValue(FunctionComponent func, float currentXValue)
         {
             var f = 0f;
             switch (func.type)
@@ -31,13 +32,17 @@ namespace Utility
                     f = (float) Math.Log(currentXValue, Math.E);
                     break;
                 case FunctionalityType.PowX:
+                    f = (float) Math.Pow(currentXValue, func.assistiveNumber);
                     break;
                 case FunctionalityType.X:
+                    f = currentXValue;
                     break;
                 case FunctionalityType.Abs:
+                    f = Math.Abs(currentXValue);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException();
+                    Debug.LogError("FunctionUtility -- ImmediateCalculation out of Range");
+                    break;
             }
             return f;
         }

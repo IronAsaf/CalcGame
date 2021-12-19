@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Utility
@@ -104,6 +105,16 @@ namespace Utility
 
         public static Vector3 Vector2ToVector3(Vector2 pos) => new Vector3(pos.x, pos.y, 0);
         public static Vector2 Vector3ToVector2(Vector3 pos) => new Vector2(pos.x, pos.y);
-        
+
+        public static List<Vector3> CompactPositions(List<Vector3> positions, float compactByThisMuch)
+        {
+            var copy = positions.ToList();
+            for (var i = 0; i < copy.Count; i++)
+            {
+                copy[i] /= compactByThisMuch;
+            }
+
+            return copy;
+        }
     }
 }
