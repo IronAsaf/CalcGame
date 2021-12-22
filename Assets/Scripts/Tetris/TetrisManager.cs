@@ -12,7 +12,7 @@ namespace Tetris
         public Sprite spriteForDot;
         [SerializeField] private LevelMaker level;
         private List<Vector3> startingBaseFunctionPositions;
-
+        private const int COMPACTION = 100;
         private void Awake()
         {
             Singleton();
@@ -38,10 +38,17 @@ namespace Tetris
         {
             var lstVec2 = level.functionsForLevelList[0].positions;
             var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
-            b = PositionsUtility.CompactPositions(b, 100);
+            b = PositionsUtility.CompactPositions(b, COMPACTION);
             return b;
         }
 
+        public List<Vector3> GetBaseFunctionListPositions()
+        {
+            var lstVec2 = level.bottomFunction.positions;
+            var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
+            b = PositionsUtility.CompactPositions(b, COMPACTION);
+            return b;
+        }
 
         // Once they hit it will call for the functions of both bottom and top and will do bot - top so basically take the 
         // value of lan(x) - x or something, calc lanx then calc x, then calc1 - calc2, create new node, add to list, send list to bot

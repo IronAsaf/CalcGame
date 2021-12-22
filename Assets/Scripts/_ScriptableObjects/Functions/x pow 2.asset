@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d42c432c314ef294a992882f0941614c, type: 3}
-  m_Name: FunctionData_00
+  m_Name: x pow 2
   m_EditorClassIdentifier: 
   serializationData:
     SerializedFormat: 2
@@ -22,7 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   amountOfNodes: 50
-  clampOfX: {x: -50, y: 50}
+  rectClamp: {x: -50, y: 50}
   positions:
   - {x: -50, y: 2500}
   - {x: -48, y: 2304}

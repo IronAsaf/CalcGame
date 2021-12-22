@@ -4,6 +4,7 @@ using Utility;
 
 namespace Tetris
 {
+    [RequireComponent(typeof(BoxCollider2D))]
     public abstract class AbstractFunction : MonoBehaviour
     {
         [SerializeField] protected Transform[] functionDotsTransRefs;
@@ -12,12 +13,9 @@ namespace Tetris
         protected new BoxCollider2D collider2D;
         protected float[] functionEdgesPositions; // top, bot, left, right
         
-
-        protected virtual void Start()
+        protected virtual void Awake()
         {
-            SetupDot();
-            SetupInitialFallingFunction();
-            AdjustColliderSize();
+            collider2D = GetComponent<BoxCollider2D>();
         }
 
         protected virtual void AdjustColliderSize()
@@ -26,7 +24,7 @@ namespace Tetris
             var center = PositionsUtility.Center(currentFallingPositions);
         }
 
-        private void SetupDot()
+        protected void SetupDot()
         {
             dot = new GameObject("pref");
             var spr = dot.AddComponent<SpriteRenderer>();
@@ -34,7 +32,7 @@ namespace Tetris
             spr.color = Color.red;
         }
 
-        private void SetupInitialFallingFunction()
+        protected void SetupInitialFallingFunction()
         {
             currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
             SetupGO(currentFallingPositions);

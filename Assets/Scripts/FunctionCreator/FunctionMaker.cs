@@ -10,7 +10,7 @@ namespace FunctionCreator
     {
         [Title("Outward Function Values")]
         [SerializeField] private int amountOfNodes;
-        [SerializeField] private Vector4 rectClamp = new(1,2,3,4);
+        [SerializeField] private Vector2 rectClamp;
         public List<Vector2> positions;
         [Title("Function Creation")]
         public List<FunctionComponent> functionComponents;

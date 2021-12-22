@@ -2,18 +2,13 @@ using UnityEngine;
 
 namespace Tetris
 {
-    public class BaseFunction : MonoBehaviour
+    public class BaseFunction : AbstractFunction
     {
-        // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
+            SetupDot();
+            currentFallingPositions = TetrisManager.instance.GetBaseFunctionListPositions();
+            AdjustColliderSize();
         }
     }
 }

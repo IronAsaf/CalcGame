@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42c432c314ef294a992882f0941614c, type: 3}
+  m_Name: ln x
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  amountOfNodes: 50
+  rectClamp: {x: 0, y: 50}
+  positions:
+  - {x: 0, y: -Infinity}
+  - {x: 1, y: 0}
+  - {x: 2, y: 0.6931472}
+  - {x: 3, y: 1.0986123}
+  - {x: 4, y: 1.3862944}
+  - {x: 5, y: 1.609438}
+  - {x: 6, y: 1.7917595}
+  - {x: 7, y: 1.9459101}
+  - {x: 8, y: 2.0794415}
+  - {x: 9, y: 2.1972246}
+  - {x: 10, y: 2.3025851}
+  - {x: 11, y: 2.3978953}
+  - {x: 12, y: 2.4849067}
+  - {x: 13, y: 2.5649493}
+  - {x: 14, y: 2.6390574}
+  - {x: 15, y: 2.7080503}
+  - {x: 16, y: 2.7725887}
+  - {x: 17, y: 2.8332133}
+  - {x: 18, y: 2.8903718}
+  - {x: 19, y: 2.944439}
+  - {x: 20, y: 2.9957323}
+  - {x: 21, y: 3.0445225}
+  - {x: 22, y: 3.0910425}
+  - {x: 23, y: 3.1354942}
+  - {x: 24, y: 3.1780539}
+  - {x: 25, y: 3.218876}
+  - {x: 26, y: 3.2580965}
+  - {x: 27, y: 3.295837}
+  - {x: 28, y: 3.3322046}
+  - {x: 29, y: 3.3672957}
+  - {x: 30, y: 3.4011974}
+  - {x: 31, y: 3.4339871}
+  - {x: 32, y: 3.465736}
+  - {x: 33, y: 3.4965076}
+  - {x: 34, y: 3.5263605}
+  - {x: 35, y: 3.5553482}
+  - {x: 36, y: 3.583519}
+  - {x: 37, y: 3.6109178}
+  - {x: 38, y: 3.637586}
+  - {x: 39, y: 3.6635616}
+  - {x: 40, y: 3.6888795}
+  - {x: 41, y: 3.713572}
+  - {x: 42, y: 3.7376697}
+  - {x: 43, y: 3.7612002}
+  - {x: 44, y: 3.7841897}
+  - {x: 45, y: 3.8066626}
+  - {x: 46, y: 3.8286414}
+  - {x: 47, y: 3.8501475}
+  - {x: 48, y: 3.871201}
+  - {x: 49, y: 3.8918202}
+  functionComponents:
+  - type: 5
+    assistiveNumber: 0
