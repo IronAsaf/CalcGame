@@ -114,7 +114,32 @@ namespace Utility
                 copy[i] /= compactByThisMuch;
             }
 
+            copy = NormalizeYAxis(copy);
             return copy;
+        }
+
+        private static List<Vector3> NormalizeYAxis(List<Vector3> positions)
+        {
+            float min = 0f, max = 0f;
+            List<Vector3> newPositions = new List<Vector3>();
+            
+            //normalizedX=(originalX-minX)/(maxX-minX)
+            for (int i = 0; i < positions.Count; i++)
+            {
+                float current = positions[i].y;
+                if (current > max)
+                    max = current;
+                else if (current < min)
+                    min = current;
+            }
+
+            for(int i = 0; i < positions.Count; i++)
+            {
+                Vector3 temp = new Vector3(positions[i].x,(positions[i].y - min) / (max - min),0);
+                newPositions.Add(temp);
+            }
+
+            return newPositions;
         }
     }
 }
