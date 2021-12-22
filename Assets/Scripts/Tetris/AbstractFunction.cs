@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using Utility;
 
@@ -26,10 +27,9 @@ namespace Tetris
 
         protected void SetupDot()
         {
-            dot = new GameObject("pref");
-            var spr = dot.AddComponent<SpriteRenderer>();
-            spr.sprite = TetrisManager.instance.spriteForDot;
-            spr.color = Color.red;
+            //dot = new GameObject("pref");
+            dot = TetrisManager.instance.dot;
+            dot.GetComponent<SpriteRenderer>().color = Color.red;
         }
 
         protected void SetupInitialFallingFunction()
@@ -38,7 +38,7 @@ namespace Tetris
             SetupGO(currentFallingPositions);
         }
 
-        private void SetupGO(List<Vector3> positions)
+        protected void SetupGO(List<Vector3> positions)
         {
             if (positions == null) return;
             foreach (var positionForGO in currentFallingPositions)

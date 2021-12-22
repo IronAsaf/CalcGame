@@ -211,7 +211,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 0
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -515,7 +515,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbc4abc3b82171340afe9040816dfed3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteForDot: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  dot: {fileID: 1989256860956898032, guid: 37cb654b781eafc4d8b6e487b2aa5cb9, type: 3}
   level: {fileID: 11400000, guid: f174a0720beb2574e8ca7b139e4fef3b, type: 2}
 --- !u!1 &891086265
 GameObject:

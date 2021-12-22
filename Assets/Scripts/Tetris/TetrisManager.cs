@@ -9,7 +9,7 @@ namespace Tetris
     public class TetrisManager : MonoBehaviour
     {
         public static TetrisManager instance;
-        public Sprite spriteForDot;
+        public GameObject dot;
         [SerializeField] private LevelMaker level;
         private List<Vector3> startingBaseFunctionPositions;
         private const int COMPACTION = 100;
