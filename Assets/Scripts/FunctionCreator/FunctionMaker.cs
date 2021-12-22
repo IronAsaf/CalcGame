@@ -10,7 +10,7 @@ namespace FunctionCreator
     {
         [Title("Outward Function Values")]
         [SerializeField] private int amountOfNodes;
-        [SerializeField] private Vector2 clampOfX;
+        [SerializeField] private Vector4 rectClamp = new(1,2,3,4);
         public List<Vector2> positions;
         [Title("Function Creation")]
         public List<FunctionComponent> functionComponents;
@@ -32,6 +32,12 @@ namespace FunctionCreator
         public void MultiplyOperation()
         {
             functionComponents.Add(new FunctionComponent(FunctionUtility.FunctionalityType.OperatorMultiply));
+        }
+        
+        [ButtonGroup("Operations/Buttons")][Button("/")]
+        public void DivideOperation()
+        {
+            functionComponents.Add(new FunctionComponent(FunctionUtility.FunctionalityType.OperatorDivide));
         }
         
         [BoxGroup("Functions", ShowLabel = true)]
@@ -72,14 +78,15 @@ namespace FunctionCreator
                 return;
             }
             positions = new List<Vector2>();
-            var advance = (clampOfX.y - clampOfX.x) / amountOfNodes;
+            var advance = (rectClamp.y - rectClamp.x) / amountOfNodes;
             var isSimpleFunction = functionComponents.Count == 1;
-            for (var i = clampOfX.x; i < clampOfX.y; i+=advance)
+            for (var i = rectClamp.x; i < rectClamp.y; i+=advance)
             {
                 var temp = new Vector2(i,0);
                 if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
                 {
                     temp.y += FunctionUtility.CalculateImmediateValue(functionComponents[0], i);
+
                     positions.Add(temp);
                     continue;
                 }
@@ -112,7 +119,7 @@ namespace FunctionCreator
             functionComponents = new List<FunctionComponent>();
             positions = new List<Vector2>();
             amountOfNodes = 0;
-            clampOfX = Vector2.zero;
+            rectClamp = Vector4.zero;
         }
 
         private static bool ValidateComponentList(IReadOnlyList<FunctionComponent> components)

@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cca608bbc0a5f843b309016a38f1d79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  functionDotsGORefs: []
+  functionDotsTransRefs: []
 --- !u!61 &102671194
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -516,6 +516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteForDot: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  level: {fileID: 11400000, guid: f174a0720beb2574e8ca7b139e4fef3b, type: 2}
 --- !u!1 &891086265
 GameObject:
   m_ObjectHideFlags: 0
