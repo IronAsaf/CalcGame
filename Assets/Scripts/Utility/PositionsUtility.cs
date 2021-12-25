@@ -103,43 +103,19 @@ namespace Utility
             return newSize;
         }
 
-        public static Vector3 Vector2ToVector3(Vector2 pos) => new Vector3(pos.x, pos.y, 0);
-        public static Vector2 Vector3ToVector2(Vector3 pos) => new Vector2(pos.x, pos.y);
+        public static Vector3 Vector2ToVector3(Vector2 pos) => new(pos.x, pos.y, 0);
+        public static Vector2 Vector3ToVector2(Vector3 pos) => new(pos.x, pos.y);
 
-        public static List<Vector3> CompactPositions(List<Vector3> positions, float compactByThisMuch)
+        public static List<Vector3> NormalizePositions(List<Vector3> positions, float resizeScalar = 1f)
         {
             var copy = positions.ToList();
             for (var i = 0; i < copy.Count; i++)
             {
-                copy[i] /= compactByThisMuch;
+                var a = copy[i].sqrMagnitude;
+                copy[i] *= resizeScalar / a;
             }
-
-            copy = NormalizeYAxis(copy);
-            return copy;
-        }
-
-        private static List<Vector3> NormalizeYAxis(List<Vector3> positions)
-        {
-            float min = 0f, max = 0f;
-            List<Vector3> newPositions = new List<Vector3>();
             
-            //normalizedX=(originalX-minX)/(maxX-minX)
-            for (int i = 0; i < positions.Count; i++)
-            {
-                float current = positions[i].y;
-                if (current > max)
-                    max = current;
-                else if (current < min)
-                    min = current;
-            }
-
-            for(int i = 0; i < positions.Count; i++)
-            {
-                Vector3 temp = new Vector3(positions[i].x,(positions[i].y - min) / (max - min),0);
-                newPositions.Add(temp);
-            }
-
-            return newPositions;
+            return copy;
         }
     }
 }

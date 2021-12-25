@@ -38,7 +38,7 @@ namespace Tetris
         {
             var lstVec2 = level.functionsForLevelList[0].positions;
             var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
-            b = PositionsUtility.CompactPositions(b, COMPACTION);
+            //b = PositionsUtility.NormalizePositions(b, COMPACTION);
             return b;
         }
 
@@ -46,7 +46,7 @@ namespace Tetris
         {
             var lstVec2 = level.bottomFunction.positions;
             var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
-            b = PositionsUtility.CompactPositions(b, COMPACTION);
+            //b = PositionsUtility.NormalizePositions(b, COMPACTION);
             return b;
         }
 
