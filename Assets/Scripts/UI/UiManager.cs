@@ -1,18 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
-public class UiManager : MonoBehaviour
+namespace UI
 {
-    // Start is called before the first frame update
-    void Start()
+    public class UiManager : MonoBehaviour
     {
-        
-    }
+        public static UiManager Instance { get; set; }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField] private GameObject menuCanvas;
+        [SerializeField] private GameObject characterCanvas;
+        [SerializeField] private GameObject staticsCanvas;
+
+        private void Awake()
+        {
+            ToggleCanvases();
+        }
+
+        private void ToggleCanvases()
+        {
+            menuCanvas.SetActive(false);
+        }
+
+        public void OnClickMenuButton()
+        {
+            menuCanvas.SetActive(true);
+        }
     }
 }
