@@ -9,7 +9,7 @@ namespace Tetris
         {
             SetupDot();
             currentFallingPositions = TetrisManager.instance.GetBaseFunctionListPositions();
-            SetupGO(currentFallingPositions);
+            SetupGo(currentFallingPositions);
             AdjustColliderSize();
         }
 

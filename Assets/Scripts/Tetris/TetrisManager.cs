@@ -11,8 +11,9 @@ namespace Tetris
         public static TetrisManager instance;
         public GameObject dot;
         [SerializeField] private LevelMaker level;
+        [SerializeField] private GameObject bottomFunction, topFunction;
         private List<Vector3> startingBaseFunctionPositions;
-        private const int COMPACTION = 100;
+
         private void Awake()
         {
             Singleton();

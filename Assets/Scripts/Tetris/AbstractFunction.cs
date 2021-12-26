@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
+using PathCreation;
 
 namespace Tetris
 {
@@ -10,17 +11,18 @@ namespace Tetris
         [SerializeField] protected Transform[] functionDotsTransRefs;
         protected List<Vector3> currentFallingPositions;
         private GameObject dot;
-        protected new BoxCollider2D collider2D;
-        protected float[] functionEdgesPositions; // top, bot, left, right
-        
+        private BoxCollider2D refCollider2D;
+        private PathCreator pathCreator;
+
         protected virtual void Awake()
         {
-            collider2D = GetComponent<BoxCollider2D>();
+            refCollider2D = GetComponent<BoxCollider2D>();
+            pathCreator = GetComponent<PathCreator>();
         }
 
         protected virtual void AdjustColliderSize()
         {
-            collider2D.size = PositionsUtility.SizeFromList(currentFallingPositions);
+            refCollider2D.size = PositionsUtility.SizeFromList(currentFallingPositions);
             var center = PositionsUtility.Center(currentFallingPositions);
         }
 
@@ -34,20 +36,22 @@ namespace Tetris
         protected void SetupInitialFallingFunction()
         {
             currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
-            SetupGO(currentFallingPositions);
+            SetupGo(currentFallingPositions);
         }
 
-        protected void SetupGO(List<Vector3> positions)
+        protected void SetupGo(List<Vector3> positions)
         {
             if (positions == null) return;
-            foreach (var positionForGO in currentFallingPositions)
+            /*foreach (var positionForGo in currentFallingPositions)
             {
-                var goName = "GO: " + positionForGO.x + ", " + positionForGO.y;
+                var goName = "GO: " + positionForGo.x + ", " + positionForGo.y;
                 dot.name = goName;
-                Instantiate(dot, positionForGO, Quaternion.identity, transform);
+                Instantiate(dot, positionForGo, Quaternion.identity, transform);
             }
 
-            functionDotsTransRefs = GetComponentsInChildren<Transform>();
+            functionDotsTransRefs = GetComponentsInChildren<Transform>();*/
+            pathCreator.bezierPath = new BezierPath(positions.ToArray(), false, PathSpace.xy);
+            
         }
     }
 }
