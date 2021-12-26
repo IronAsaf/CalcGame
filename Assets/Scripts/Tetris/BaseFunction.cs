@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Tetris
@@ -10,6 +11,11 @@ namespace Tetris
             currentFallingPositions = TetrisManager.instance.GetBaseFunctionListPositions();
             SetupGO(currentFallingPositions);
             AdjustColliderSize();
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            print($"<color=#ffdd55>hit this: </color>{other.gameObject.name}");
         }
     }
 }

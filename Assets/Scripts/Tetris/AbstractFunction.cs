@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using DG.Tweening;
 using UnityEngine;
 using Utility;
 
@@ -10,7 +9,7 @@ namespace Tetris
     {
         [SerializeField] protected Transform[] functionDotsTransRefs;
         protected List<Vector3> currentFallingPositions;
-        protected GameObject dot;
+        private GameObject dot;
         protected new BoxCollider2D collider2D;
         protected float[] functionEdgesPositions; // top, bot, left, right
         
@@ -29,7 +28,7 @@ namespace Tetris
         {
             //dot = new GameObject("pref");
             dot = TetrisManager.instance.dot;
-            dot.GetComponent<SpriteRenderer>().color = Color.red;
+            //dot.GetComponent<SpriteRenderer>().color = Color.red;
         }
 
         protected void SetupInitialFallingFunction()
