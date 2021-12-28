@@ -70,7 +70,7 @@ namespace FunctionCreator
 
         [BoxGroup("Calculation", ShowLabel = true)]
         [ButtonGroup("Calculation/Buttons")][Button("CalculatePositions")]
-        public void CalculatePositions()
+        public void CalculatePositions() //TODO-0004 - Make this into a Array not List.
         {
             if (!ValidateComponentList(functionComponents))
             {

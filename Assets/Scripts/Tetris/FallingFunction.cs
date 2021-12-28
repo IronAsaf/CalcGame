@@ -16,7 +16,6 @@ namespace Tetris
 
         private void Start()
         {
-            SetupDot();
             SetupInitialFallingFunction();
             AdjustColliderSize();
         }

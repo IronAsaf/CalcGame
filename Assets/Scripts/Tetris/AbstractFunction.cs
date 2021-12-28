@@ -1,18 +1,19 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
 using PathCreation;
+using PathCreation.Examples;
 
 namespace Tetris
 {
     [RequireComponent(typeof(BoxCollider2D))]
     public abstract class AbstractFunction : MonoBehaviour
     {
-        [SerializeField] protected Transform[] functionDotsTransRefs;
         protected List<Vector3> currentFallingPositions;
-        private GameObject dot;
         private BoxCollider2D refCollider2D;
         private PathCreator pathCreator;
+        private RoadMeshCreator roadMeshCreator;
 
         protected virtual void Awake()
         {
@@ -23,14 +24,6 @@ namespace Tetris
         protected virtual void AdjustColliderSize()
         {
             refCollider2D.size = PositionsUtility.SizeFromList(currentFallingPositions);
-            var center = PositionsUtility.Center(currentFallingPositions);
-        }
-
-        protected void SetupDot()
-        {
-            //dot = new GameObject("pref");
-            dot = TetrisManager.instance.dot;
-            //dot.GetComponent<SpriteRenderer>().color = Color.red;
         }
 
         protected void SetupInitialFallingFunction()
@@ -42,16 +35,20 @@ namespace Tetris
         protected void SetupGo(List<Vector3> positions)
         {
             if (positions == null) return;
-            /*foreach (var positionForGo in currentFallingPositions)
+            try
             {
-                var goName = "GO: " + positionForGo.x + ", " + positionForGo.y;
-                dot.name = goName;
-                Instantiate(dot, positionForGo, Quaternion.identity, transform);
+                pathCreator.bezierPath = new BezierPath(positions, false, PathSpace.xy);
             }
-
-            functionDotsTransRefs = GetComponentsInChildren<Transform>();*/
-            pathCreator.bezierPath = new BezierPath(positions.ToArray(), false, PathSpace.xy);
+            catch (Exception e)
+            {
+                Debug.LogError(
+                    $"<color=#ffdd66>bezier path</color>, There is a issue with the bezier path: {e.Message}");
+            }
             
+            //roadMeshCreator.thickness = 0.02f;
+            //roadMeshCreator.flattenSurface = true;
+            //roadMeshCreator.roadWidth = 0.02f;
+            roadMeshCreator.TriggerUpdate();
         }
     }
 }
