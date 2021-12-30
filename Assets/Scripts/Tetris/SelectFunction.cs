@@ -1,9 +1,11 @@
 using System;
+using UnityEngine;
 
 namespace Tetris
 {
     public class SelectFunction : AbstractFunction
     {
+        [SerializeField] private FallingFunction fallingFunction;
         private void Start()
         {
             currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
@@ -22,6 +24,11 @@ namespace Tetris
                 currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
             }
             SetupGo(currentFallingPositions);
+        }
+
+        public void OnClickActivate()
+        {
+            fallingFunction.ResetMe(currentFallingPositions);
         }
     }
 }

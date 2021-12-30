@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Tetris
@@ -18,6 +19,12 @@ namespace Tetris
         {
             SetupInitialFallingFunction();
             //AdjustColliderSize();
+        }
+
+        public void ResetMe(List<Vector3> positions)
+        {
+            currentFallingPositions = positions;
+            SetupGo(currentFallingPositions);
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,24 +7,22 @@ namespace Tetris
     public class LineFunction : AbstractFunction
     {
         // Start is called before the first frame update
+        [SerializeField] private BaseFunction baseFunction;
+        private BoxCollider2D colliderRef;
+
         protected override void Awake()
         {
-            currentFallingPositions = new List<Vector3>
-            {
-                new Vector3(0, 0, 0),
-                new Vector3(1, 1, 0)
-            };
-            base.Awake();
+            colliderRef = GetComponent<BoxCollider2D>();
         }
         void Start()
         {
-            SetupGo(currentFallingPositions);
+            var center = baseFunction.transform.localPosition;
+            transform.SetPositionAndRotation(center, Quaternion.identity);
         }
 
-        // Update is called once per frame
-        void Update()
+        private void OnTriggerEnter2D(Collider2D col)
         {
-        
+            print("someone triggered line - " + col.name);
         }
     }
 }

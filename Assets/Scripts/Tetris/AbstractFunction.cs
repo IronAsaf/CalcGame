@@ -12,13 +12,11 @@ namespace Tetris
     public abstract class AbstractFunction : MonoBehaviour
     {
         protected List<Vector3> currentFallingPositions;
-        [SerializeField] private MeshCollider refCollider2D;
         [SerializeField] private PathCreator pathCreator;
         [SerializeField] private RoadMeshCreator roadMeshCreator;
 
         protected virtual void Awake()
         {
-            refCollider2D = GetComponentInChildren<MeshCollider>();
             pathCreator = GetComponent<PathCreator>();
             roadMeshCreator = GetComponentInChildren<RoadMeshCreator>();
         }
