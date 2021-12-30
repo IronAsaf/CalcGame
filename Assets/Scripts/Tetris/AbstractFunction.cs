@@ -12,7 +12,7 @@ namespace Tetris
     {
         protected List<Vector3> currentFallingPositions;
         private BoxCollider2D refCollider2D;
-        private PathCreator pathCreator;
+        [SerializeField] private PathCreator pathCreator;
         private RoadMeshCreator roadMeshCreator;
 
         protected virtual void Awake()
@@ -38,17 +38,16 @@ namespace Tetris
             try
             {
                 pathCreator.bezierPath = new BezierPath(positions, false, PathSpace.xy);
+                roadMeshCreator.thickness = 0.02f;
+                roadMeshCreator.flattenSurface = true;
+                roadMeshCreator.roadWidth = 0.02f;
+                roadMeshCreator.TriggerUpdate();
             }
             catch (Exception e)
             {
                 Debug.LogError(
                     $"<color=#ffdd66>bezier path</color>, There is a issue with the bezier path: {e.Message}");
             }
-            
-            //roadMeshCreator.thickness = 0.02f;
-            //roadMeshCreator.flattenSurface = true;
-            //roadMeshCreator.roadWidth = 0.02f;
-            roadMeshCreator.TriggerUpdate();
         }
     }
 }
