@@ -12,28 +12,15 @@ namespace Tetris
     public abstract class AbstractFunction : MonoBehaviour
     {
         protected List<Vector3> currentFallingPositions;
-        private MeshCollider refCollider2D;
+        [SerializeField] private MeshCollider refCollider2D;
         [SerializeField] private PathCreator pathCreator;
-        private RoadMeshCreator roadMeshCreator;
+        [SerializeField] private RoadMeshCreator roadMeshCreator;
 
         protected virtual void Awake()
         {
             refCollider2D = GetComponentInChildren<MeshCollider>();
             pathCreator = GetComponent<PathCreator>();
             roadMeshCreator = GetComponentInChildren<RoadMeshCreator>();
-        }
-
-        protected virtual void AdjustColliderSize()
-        {
-            //refCollider2D.size = PositionsUtility.SizeFromList(currentFallingPositions);
-            StartCoroutine(ColliderWait());
-        }
-
-        private IEnumerator ColliderWait()
-        {
-            refCollider2D.convex = false;
-            yield return new WaitForEndOfFrame();
-            refCollider2D.convex = true;
         }
 
         protected void SetupInitialFallingFunction()
