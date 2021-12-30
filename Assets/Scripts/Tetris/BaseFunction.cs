@@ -3,14 +3,13 @@ using UnityEngine;
 
 namespace Tetris
 {
-    [RequireComponent(typeof(BoxCollider2D))]
     public class BaseFunction : AbstractFunction
     {
         private void Start()
         {
             currentFallingPositions = TetrisManager.instance.GetBaseFunctionListPositions();
             SetupGo(currentFallingPositions);
-            AdjustColliderSize();
+            //AdjustColliderSize();
         }
 
         private void OnCollisionEnter2D(Collision2D other)

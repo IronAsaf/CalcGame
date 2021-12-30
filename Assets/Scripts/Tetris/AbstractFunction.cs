@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -11,20 +12,28 @@ namespace Tetris
     public abstract class AbstractFunction : MonoBehaviour
     {
         protected List<Vector3> currentFallingPositions;
-        private BoxCollider2D refCollider2D;
+        private MeshCollider refCollider2D;
         [SerializeField] private PathCreator pathCreator;
         private RoadMeshCreator roadMeshCreator;
 
         protected virtual void Awake()
         {
-            refCollider2D = GetComponent<BoxCollider2D>();
+            refCollider2D = GetComponentInChildren<MeshCollider>();
             pathCreator = GetComponent<PathCreator>();
             roadMeshCreator = GetComponentInChildren<RoadMeshCreator>();
         }
 
         protected virtual void AdjustColliderSize()
         {
-            refCollider2D.size = PositionsUtility.SizeFromList(currentFallingPositions);
+            //refCollider2D.size = PositionsUtility.SizeFromList(currentFallingPositions);
+            StartCoroutine(ColliderWait());
+        }
+
+        private IEnumerator ColliderWait()
+        {
+            refCollider2D.convex = false;
+            yield return new WaitForEndOfFrame();
+            refCollider2D.convex = true;
         }
 
         protected void SetupInitialFallingFunction()
