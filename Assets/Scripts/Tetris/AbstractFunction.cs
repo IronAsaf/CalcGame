@@ -19,6 +19,7 @@ namespace Tetris
         {
             refCollider2D = GetComponent<BoxCollider2D>();
             pathCreator = GetComponent<PathCreator>();
+            roadMeshCreator = GetComponentInChildren<RoadMeshCreator>();
         }
 
         protected virtual void AdjustColliderSize()
