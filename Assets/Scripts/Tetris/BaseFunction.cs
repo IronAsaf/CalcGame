@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Tetris
 {
+    [RequireComponent(typeof(BoxCollider2D))]
     public class BaseFunction : AbstractFunction
     {
         private void Start()

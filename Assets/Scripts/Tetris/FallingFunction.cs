@@ -3,6 +3,7 @@ using UnityEngine;
 namespace Tetris
 {
     // maybe remove rigid and do update time.time to fall on its own with our own speed.
+    [RequireComponent(typeof(BoxCollider2D))]
     [RequireComponent(typeof(Rigidbody2D))]
     public class FallingFunction : AbstractFunction
     {

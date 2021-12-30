@@ -7,7 +7,7 @@ using PathCreation.Examples;
 
 namespace Tetris
 {
-    [RequireComponent(typeof(BoxCollider2D))]
+    
     public abstract class AbstractFunction : MonoBehaviour
     {
         protected List<Vector3> currentFallingPositions;

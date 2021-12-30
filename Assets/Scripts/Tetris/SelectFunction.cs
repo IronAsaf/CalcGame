@@ -1,18 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
-public class SelectFunction : MonoBehaviour
+namespace Tetris
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SelectFunction : AbstractFunction
     {
-        
-    }
+        private void Start()
+        {
+            currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
+            SetupGo(currentFallingPositions);
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public void OnClickSelectFunction(int dir)
+        {
+            if (dir < 0)
+            {
+                //go left
+                currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
+            }
+            else // go right
+            {
+                currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
+            }
+            SetupGo(currentFallingPositions);
+        }
     }
 }
