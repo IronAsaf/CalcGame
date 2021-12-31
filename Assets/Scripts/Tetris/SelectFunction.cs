@@ -1,15 +1,12 @@
-using System;
-using UnityEngine;
-
 namespace Tetris
 {
     public class SelectFunction : AbstractFunction
     {
-        [SerializeField] private FallingFunction fallingFunction;
-        private void Start()
+        protected override void Start()
         {
             currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
             SetupGo(currentFallingPositions);
+            base.Start();
         }
 
         public void OnClickSelectFunction(int dir)
@@ -28,7 +25,13 @@ namespace Tetris
 
         public void OnClickActivate()
         {
-            fallingFunction.ResetMe(currentFallingPositions);
+            TetrisManager.instance.ResetFallingFunction();
+            TetrisManager.instance.ResetSelectFunction();
+        }
+
+        protected override void OnFunctionsHitEvent()
+        {
+            OnClickActivate();
         }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 
 namespace Tetris
 {
@@ -7,24 +8,32 @@ namespace Tetris
     [RequireComponent(typeof(Rigidbody2D))]
     public class FallingFunction : AbstractFunction
     {
-        private new Rigidbody2D rigidbody2D;
-
+        private Rigidbody2D rigidbody2DRef;
+        private Vector2 startingPos;
         protected override void Awake()
         {
             base.Awake();
-            rigidbody2D = GetComponent<Rigidbody2D>();
+            startingPos = transform.localPosition;
+            rigidbody2DRef = GetComponent<Rigidbody2D>();
         }
 
-        private void Start()
+        protected override void Start()
         {
             SetupInitialFallingFunction();
             //AdjustColliderSize();
+            base.Start();
         }
 
         public void ResetMe(List<Vector3> positions)
         {
             currentFallingPositions = positions;
             SetupGo(currentFallingPositions);
+        }
+
+        protected override void OnFunctionsHitEvent()
+        {
+            transform.SetPositionAndRotation(PositionsUtility.Vector2ToVector3(startingPos),Quaternion.identity);
+            TetrisManager.instance.ResetFallingFunction();
         }
     }
 }

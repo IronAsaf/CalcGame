@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Tetris
@@ -14,15 +12,22 @@ namespace Tetris
         {
             colliderRef = GetComponent<BoxCollider2D>();
         }
-        void Start()
+        protected override void Start()
         {
             var center = baseFunction.transform.localPosition;
             transform.SetPositionAndRotation(center, Quaternion.identity);
+            base.Start();
         }
 
         private void OnTriggerEnter2D(Collider2D col)
         {
             print("someone triggered line - " + col.name);
+            
+        }
+
+        protected override void OnFunctionsHitEvent()
+        {
+            //check if we are below the line.
         }
     }
 }

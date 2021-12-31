@@ -1,17 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Utility;
 using PathCreation;
 using PathCreation.Examples;
 
 namespace Tetris
 {
-    
     public abstract class AbstractFunction : MonoBehaviour
     {
-        protected List<Vector3> currentFallingPositions;
+        public List<Vector3> currentFallingPositions;
         [SerializeField] private PathCreator pathCreator;
         [SerializeField] private RoadMeshCreator roadMeshCreator;
 
@@ -21,13 +18,18 @@ namespace Tetris
             roadMeshCreator = GetComponentInChildren<RoadMeshCreator>();
         }
 
+        protected virtual void Start()
+        {
+            TetrisManager.instance.onHitEvent.AddListener(OnFunctionsHitEvent);
+        }
+
         protected void SetupInitialFallingFunction()
         {
             currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
             SetupGo(currentFallingPositions);
         }
 
-        protected void SetupGo(List<Vector3> positions)
+        public void SetupGo(List<Vector3> positions)
         {
             if (positions == null) return;
             try
@@ -43,6 +45,21 @@ namespace Tetris
                 Debug.LogError(
                     $"<color=#ffdd66>bezier path</color>, There is a issue with the bezier path: {e.Message}");
             }
+        }
+
+        protected virtual void OnDisable()
+        {
+            TetrisManager.instance.onHitEvent.RemoveListener(OnFunctionsHitEvent);
+        }
+
+        protected void OnDestroy()
+        {
+            TetrisManager.instance.onHitEvent.RemoveListener(OnFunctionsHitEvent);
+        }
+
+        protected virtual void OnFunctionsHitEvent()
+        {
+            
         }
     }
 }

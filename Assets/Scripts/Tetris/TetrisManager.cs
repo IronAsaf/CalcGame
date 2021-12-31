@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using FunctionCreator;
 using UnityEngine;
+using UnityEngine.Events;
 using Utility;
 
 namespace Tetris
@@ -9,11 +10,13 @@ namespace Tetris
     public class TetrisManager : MonoBehaviour
     {
         public static TetrisManager instance;
-        public GameObject dot;
         [SerializeField] private LevelMaker level;
-        [SerializeField] private GameObject bottomFunction, topFunction;
+        [SerializeField] private BaseFunction baseFunction;
+        [SerializeField] private FallingFunction fallingFunction;
+        [SerializeField] public Vector3 lineStartingPosition;
         private List<Vector3> startingBaseFunctionPositions;
-
+        public UnityEvent onHitEvent;
+        
         private void Awake()
         {
             Singleton();
@@ -51,12 +54,36 @@ namespace Tetris
             return b;
         }
 
-        // Once they hit it will call for the functions of both bottom and top and will do bot - top so basically take the 
-        // value of lan(x) - x or something, calc lanx then calc x, then calc1 - calc2, create new node, add to list, send list to bot
-        // force bot to re-render itself, load new function for top, reset top position
-        public void OnHitInteraction()
+        private void OnDestroy()
         {
-            
+            onHitEvent.RemoveAllListeners();
+        }
+
+        private void OnDisable()
+        {
+            onHitEvent.RemoveAllListeners();
+        }
+
+        public void ResetBaseFunction()
+        {
+            //do the MINUS functionality, take the Function of Base and Falling, and do that.
+            var newPos = new List<Vector3>();
+            baseFunction.SetupGo(newPos);
+        }
+
+        public void ResetFallingFunction()
+        {
+            // Take current SelectFunction's 
+            var newPos = new List<Vector3>();
+            baseFunction.SetupGo(newPos);
+        }
+
+        public void ResetSelectFunction()
+        {
+            //take from list of the functions available, take the one to the right as if clicked right. Should
+            // be circular.
+            var newPos = new List<Vector3>();
+            baseFunction.SetupGo(newPos);
         }
     }
 }
