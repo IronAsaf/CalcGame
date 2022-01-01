@@ -43,7 +43,7 @@ namespace Tetris
             catch (Exception e)
             {
                 Debug.LogError(
-                    $"<color=#ffdd66>bezier path</color>, There is a issue with the bezier path: {e.Message}");
+                    $"<color=#ffdd66>[{gameObject.name}] bezier path</color> [{positions.Count}] There is a issue with the bezier path: {e.Message}");
             }
         }
 

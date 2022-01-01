@@ -18,5 +18,11 @@ namespace FunctionCreator
             this.type = type;
             this.assistiveNumber = assistiveNumber;
         }
+        
+        public FunctionComponent(FunctionComponent other)
+        {
+            type = other.type;
+            assistiveNumber = other.assistiveNumber;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using FunctionCreator;
 using UnityEngine;
 
@@ -71,6 +72,90 @@ namespace Utility
             }
             
             return answer;
+        }
+        
+        public static List<Vector2> CalculatePositions(FunctionMaker function) //TODO-0004 - Make this into a Array not List.
+        {
+            if (!ValidateComponentList(function.functionComponents))
+            {
+                Debug.Log($"<color=#ff4466>Encountered an Issue with calculation, see LogErrors</color>");
+                return null;
+            }
+            var positions = new List<Vector2>();
+            var advance = (function.rectClamp.y - function.rectClamp.x) / function.amountOfNodes;
+            var isSimpleFunction = function.functionComponents.Count == 1;
+            for (var i = function.rectClamp.x; i < function.rectClamp.y; i+=advance)
+            {
+                var temp = new Vector2(i,0);
+                if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
+                {
+                    temp.y += CalculateImmediateValue(function.functionComponents[0], i);
+
+                    positions.Add(temp);
+                    continue;
+                }
+                for (var op = 1; op < function.functionComponents.Count - 1; op += 2) // Complex function like X + LanX
+                {
+                    //TODO-0003 - Add arithmetic computability ( Divide comes before Add )
+
+                    switch (function.functionComponents[op].type)
+                    {
+                        case FunctionalityType.OperatorDivide:
+                        case FunctionalityType.OperatorMinus:
+                        case FunctionalityType.OperatorMultiply:
+                        case FunctionalityType.OperatorPlus:
+                            temp.y += CalculatePairingValue(function.functionComponents[op - 1],
+                                function.functionComponents[op + 1], function.functionComponents[op], i);
+                            break;
+                        default:
+                            Debug.LogWarning("Found unknown operator in calculation");
+                            break;
+                    }
+                }
+                positions.Add(temp);
+            }
+            Debug.Log($"<color=#00cc99>Positions Generated</color>");
+            return positions;
+        }
+
+        private static bool ValidateComponentList(IReadOnlyList<FunctionComponent> components)
+        {
+            if (components.Count == 1 && !IsOperator(components[0].type))
+            {
+                return true;
+            }
+            if (components.Count < 3)
+            {
+                Debug.LogError("Function Data missing enough elements. minimal-format: VAR OP VAR ...");
+                return false;
+            }
+            if (components.Count % 2 != 1)
+            {
+                Debug.LogError("Function Data needs odd amount of elements, format: VAR OP VAR ...");
+                return false;
+            }
+
+            for (var i = 1; i < components.Count-1; i+=2)
+            {
+                if (IsOperator(components[i].type)) continue;
+                Debug.LogError("Function Data needs at odd positions a Operator, format: VAR OP VAR ...");
+                return false;
+            }
+            return true;
+        }
+
+        private static bool IsOperator(FunctionalityType type)
+        {
+            switch (type)
+            {
+                case FunctionUtility.FunctionalityType.OperatorDivide:
+                case FunctionUtility.FunctionalityType.OperatorMinus:
+                case FunctionUtility.FunctionalityType.OperatorMultiply:
+                case FunctionUtility.FunctionalityType.OperatorPlus:
+                    return true;
+            }
+
+            return false;
         }
     }
 }

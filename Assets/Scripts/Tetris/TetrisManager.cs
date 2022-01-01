@@ -22,6 +22,7 @@ namespace Tetris
         private void Awake()
         {
             Singleton();
+            currentBottomFunction = level.bottomFunction;
         }
         
         private void Singleton()
@@ -91,8 +92,14 @@ namespace Tetris
         {
             //TODO-0005 do the MINUS functionality, take the Function of Base and Falling, and do that.
             var newPos = new List<Vector3>();
-            
-            baseFunction.SetupGo(newPos);
+            currentBottomFunction.functionComponents.Add(new FunctionComponent(FunctionUtility.FunctionalityType.OperatorMinus));
+            for (int i = 0; i < currentTopFunction.functionComponents.Count; i++)
+            {
+                currentBottomFunction.functionComponents.Add(currentTopFunction.functionComponents[i]);
+            }
+
+            //currentBottomFunction.positions.Clear();
+            //baseFunction.SetupGo(newPos);
         }
 
         public void ResetFallingFunction()
