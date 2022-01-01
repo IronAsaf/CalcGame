@@ -8,17 +8,18 @@ namespace Tetris
         {
             currentFallingPositions = TetrisManager.instance.GetStartingFallingFunction();
             SetupGo(currentFallingPositions);
-            base.Start();
+            //base.Start();
             lengthOfTotalFunctions = TetrisManager.instance.GetLengthOfFunctionsList();
         }
 
         public void OnClickSelectFunction(int dir)
         {
-            if (currentIndex + dir >= lengthOfTotalFunctions) // exceed right, loop start
+            currentIndex += dir;
+            if (currentIndex >= lengthOfTotalFunctions) // exceed right, loop start
                 currentIndex = 0;
-            else if (currentIndex + dir < 0) // exceed left, loop end
+            else if (currentIndex < 0) // exceed left, loop end
                 currentIndex = lengthOfTotalFunctions - 1;
-
+            //print($"len: {lengthOfTotalFunctions}, current index: {currentIndex}");
             currentFallingPositions = TetrisManager.instance.FetchNewFallingFunction(currentIndex);
             SetupGo(currentFallingPositions);
         }

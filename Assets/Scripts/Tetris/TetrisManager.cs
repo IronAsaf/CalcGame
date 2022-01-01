@@ -51,10 +51,19 @@ namespace Tetris
         }
 
         public int GetLengthOfFunctionsList() => level.functionsForLevelList.Count;
-        public List<Vector3> FetchNewFallingFunction(int currentIndex = 0)
+        public List<Vector3> FetchNewFallingFunction(int currentIndex)
         {
             //TODO-0001 - Make all of this cycle in order.
+            currentFallingFunctionIndex = currentIndex;
             var lstVec2 = level.functionsForLevelList[currentIndex].positions; //
+            var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
+            print($"len of the new func's pos is {b.Count}");
+            return b;
+        }
+        
+        public List<Vector3> FetchNewFallingFunction()
+        {
+            var lstVec2 = level.functionsForLevelList[currentFallingFunctionIndex].positions; //
             var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
             return b;
         }
