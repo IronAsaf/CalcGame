@@ -16,13 +16,14 @@ namespace Tetris
         [SerializeField] public Vector3 lineStartingPosition;
         private List<Vector3> startingBaseFunctionPositions;
         public UnityEvent onHitEvent;
-        private FunctionMaker currentBottomFunction, currentTopFunction;
+        private List<FunctionComponent> currentBottomFunction, currentTopFunction;
         private int currentFallingFunctionIndex;
         
         private void Awake()
         {
             Singleton();
-            currentBottomFunction = level.bottomFunction;
+            currentBottomFunction = level.bottomFunction.functionComponents.ToList();
+            currentTopFunction = level.functionsForLevelList[0].functionComponents.ToList();
         }
         
         private void Singleton()
@@ -43,26 +44,25 @@ namespace Tetris
         /// <returns>Returns a list of Vector3's which hold the positions needed to describe a falling function's visual appearance.</returns>
         public List<Vector3> GetStartingFallingFunction()
         {
-            if (currentTopFunction == null) currentTopFunction = level.functionsForLevelList[0];
             currentFallingFunctionIndex = 0;
             var lstVec2 = level.functionsForLevelList[0].positions; //
             var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
-            //b = PositionsUtility.NormalizePositions(b, COMPACTION);
             return b;
         }
 
         public int GetLengthOfFunctionsList() => level.functionsForLevelList.Count;
-        public List<Vector3> FetchNewFallingFunction(int currentIndex)
+        public List<Vector3> FetchNewFallingFunction(int currentIndex) // When Select is clicked
         {
             //TODO-0001 - Make all of this cycle in order.
             currentFallingFunctionIndex = currentIndex;
+            currentTopFunction = level.functionsForLevelList[currentIndex].functionComponents.ToList();
             var lstVec2 = level.functionsForLevelList[currentIndex].positions; //
             var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
             print($"len of the new func's pos is {b.Count}");
             return b;
         }
         
-        public List<Vector3> FetchNewFallingFunction()
+        public List<Vector3> FetchNewFallingFunction() // On Hit
         {
             var lstVec2 = level.functionsForLevelList[currentFallingFunctionIndex].positions; //
             var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
@@ -71,7 +71,6 @@ namespace Tetris
         
         public List<Vector3> GetStartingBaseFunction()
         {
-            currentBottomFunction = level.bottomFunction;
             var lstVec2 = level.bottomFunction.positions;
             var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
             //b = PositionsUtility.NormalizePositions(b, COMPACTION);
@@ -88,18 +87,17 @@ namespace Tetris
             onHitEvent.RemoveAllListeners();
         }
 
-        public void ResetBaseFunction()
+        public List<Vector3> ResetBaseFunction()
         {
-            //TODO-0005 do the MINUS functionality, take the Function of Base and Falling, and do that.
-            var newPos = new List<Vector3>();
-            currentBottomFunction.functionComponents.Add(new FunctionComponent(FunctionUtility.FunctionalityType.OperatorMinus));
-            for (int i = 0; i < currentTopFunction.functionComponents.Count; i++)
+            currentBottomFunction.Add(new FunctionComponent(FunctionUtility.FunctionalityType.OperatorMinus));
+            foreach (var t in currentTopFunction)
             {
-                currentBottomFunction.functionComponents.Add(currentTopFunction.functionComponents[i]);
+                currentBottomFunction.Add(t);
             }
 
-            //currentBottomFunction.positions.Clear();
-            //baseFunction.SetupGo(newPos);
+            var newPos = FunctionUtility.CalculatePositions(currentBottomFunction, level.bottomFunction.rectClamp, 20);
+            var b = newPos.Select(PositionsUtility.Vector2ToVector3).ToList();
+            return b;
         }
 
         public void ResetFallingFunction()

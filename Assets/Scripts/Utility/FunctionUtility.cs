@@ -21,7 +21,7 @@ namespace Utility
         }
 
         //Calculate ImmediateValue - for like LogX , i give X it returns value.
-        public static float CalculateImmediateValue(FunctionComponent func, float currentXValue)
+        private static float CalculateImmediateValue(FunctionComponent func, float currentXValue)
         {
             var f = 0f;
             switch (func.type)
@@ -48,7 +48,7 @@ namespace Utility
             return f;
         }
         //Calculate pairing - i give it 2 values, it does the operation, so if I get 10 and 19, and i am obj type of + i return 29.
-        public static float CalculatePairingValue(FunctionComponent left, FunctionComponent right, FunctionComponent oper, float currentXValue)
+        private static float CalculatePairingValue(FunctionComponent left, FunctionComponent right, FunctionComponent oper, float currentXValue)
         {
             var val1 = CalculateImmediateValue(left, currentXValue);
             var val2 = CalculateImmediateValue(right, currentXValue);
@@ -73,39 +73,39 @@ namespace Utility
             
             return answer;
         }
-        
-        public static List<Vector2> CalculatePositions(FunctionMaker function) //TODO-0004 - Make this into a Array not List.
+
+        public static List<Vector2> CalculatePositions(List<FunctionComponent> components, Vector2 rectClamp, int amountOfNodes)
         {
-            if (!ValidateComponentList(function.functionComponents))
+            if (!ValidateComponentList(components))
             {
                 Debug.Log($"<color=#ff4466>Encountered an Issue with calculation, see LogErrors</color>");
                 return null;
             }
             var positions = new List<Vector2>();
-            var advance = (function.rectClamp.y - function.rectClamp.x) / function.amountOfNodes;
-            var isSimpleFunction = function.functionComponents.Count == 1;
-            for (var i = function.rectClamp.x; i < function.rectClamp.y; i+=advance)
+            var advance = (rectClamp.y - rectClamp.x) / amountOfNodes;
+            var isSimpleFunction = components.Count == 1;
+            for (var i = rectClamp.x; i < rectClamp.y; i+=advance)
             {
                 var temp = new Vector2(i,0);
                 if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
                 {
-                    temp.y += CalculateImmediateValue(function.functionComponents[0], i);
+                    temp.y += CalculateImmediateValue(components[0], i);
 
                     positions.Add(temp);
                     continue;
                 }
-                for (var op = 1; op < function.functionComponents.Count - 1; op += 2) // Complex function like X + LanX
+                for (var op = 1; op < components.Count - 1; op += 2) // Complex function like X + LanX
                 {
                     //TODO-0003 - Add arithmetic computability ( Divide comes before Add )
 
-                    switch (function.functionComponents[op].type)
+                    switch (components[op].type)
                     {
                         case FunctionalityType.OperatorDivide:
                         case FunctionalityType.OperatorMinus:
                         case FunctionalityType.OperatorMultiply:
                         case FunctionalityType.OperatorPlus:
-                            temp.y += CalculatePairingValue(function.functionComponents[op - 1],
-                                function.functionComponents[op + 1], function.functionComponents[op], i);
+                            temp.y += CalculatePairingValue(components[op - 1],
+                                components[op + 1], components[op], i);
                             break;
                         default:
                             Debug.LogWarning("Found unknown operator in calculation");
@@ -148,14 +148,14 @@ namespace Utility
         {
             switch (type)
             {
-                case FunctionUtility.FunctionalityType.OperatorDivide:
-                case FunctionUtility.FunctionalityType.OperatorMinus:
-                case FunctionUtility.FunctionalityType.OperatorMultiply:
-                case FunctionUtility.FunctionalityType.OperatorPlus:
+                case FunctionalityType.OperatorDivide:
+                case FunctionalityType.OperatorMinus:
+                case FunctionalityType.OperatorMultiply:
+                case FunctionalityType.OperatorPlus:
                     return true;
+                default:
+                    return false;
             }
-
-            return false;
         }
     }
 }

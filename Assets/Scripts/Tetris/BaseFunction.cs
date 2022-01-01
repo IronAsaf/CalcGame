@@ -21,7 +21,8 @@ namespace Tetris
 
         protected override void OnFunctionsHitEvent()
         {
-            TetrisManager.instance.ResetBaseFunction();
+            currentFallingPositions = TetrisManager.instance.ResetBaseFunction();
+            SetupGo(currentFallingPositions);
         }
     }
 }

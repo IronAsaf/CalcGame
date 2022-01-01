@@ -73,7 +73,7 @@ namespace FunctionCreator
         [ButtonGroup("Calculation/Buttons")][Button("CalculatePositions")]
         public void CalculatePositions() //TODO-0004 - Make this into a Array not List.
         {
-            positions = FunctionUtility.CalculatePositions(this).ToList();
+            positions = FunctionUtility.CalculatePositions(functionComponents,rectClamp,amountOfNodes).ToList();
         }
 
         [ButtonGroup("Calculation/Buttons")][Button("ClearAll")]
