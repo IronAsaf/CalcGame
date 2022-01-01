@@ -25,7 +25,7 @@ namespace Tetris
 
         protected void SetupInitialFallingFunction()
         {
-            currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
+            currentFallingPositions = TetrisManager.instance.GetStartingFallingFunction();
             SetupGo(currentFallingPositions);
         }
 

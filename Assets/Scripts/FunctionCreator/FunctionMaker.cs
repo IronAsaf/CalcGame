@@ -8,6 +8,7 @@ namespace FunctionCreator
     [CreateAssetMenu(menuName = "CalcGame/Function Data", fileName = "FunctionData_00")]
     public class FunctionMaker : SerializedScriptableObject
     {
+        public int id;
         [Title("Outward Function Values")]
         [SerializeField] private int amountOfNodes;
         [SerializeField] private Vector2 rectClamp;

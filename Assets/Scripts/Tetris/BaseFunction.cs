@@ -7,7 +7,7 @@ namespace Tetris
     {
         protected override void Start()
         {
-            currentFallingPositions = TetrisManager.instance.GetBaseFunctionListPositions();
+            currentFallingPositions = TetrisManager.instance.GetStartingBaseFunction();
             SetupGo(currentFallingPositions);
             base.Start();
             //AdjustColliderSize();

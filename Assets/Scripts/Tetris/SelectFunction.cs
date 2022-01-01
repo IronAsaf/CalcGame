@@ -2,27 +2,28 @@ namespace Tetris
 {
     public class SelectFunction : AbstractFunction
     {
+        private int lengthOfTotalFunctions;
+        private int currentIndex;
         protected override void Start()
         {
-            currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
+            currentFallingPositions = TetrisManager.instance.GetStartingFallingFunction();
             SetupGo(currentFallingPositions);
             base.Start();
+            lengthOfTotalFunctions = TetrisManager.instance.GetLengthOfFunctionsList();
         }
 
         public void OnClickSelectFunction(int dir)
         {
-            if (dir < 0)
-            {
-                //go left
-                currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
-            }
-            else // go right
-            {
-                currentFallingPositions = TetrisManager.instance.GetNewFallingFunctionListPositions();
-            }
+            if (currentIndex + dir >= lengthOfTotalFunctions) // exceed right, loop start
+                currentIndex = 0;
+            else if (currentIndex + dir < 0) // exceed left, loop end
+                currentIndex = lengthOfTotalFunctions - 1;
+
+            currentFallingPositions = TetrisManager.instance.FetchNewFallingFunction(currentIndex);
             SetupGo(currentFallingPositions);
         }
 
+        public int GetCurrentIndex() => currentIndex;
         public void OnClickActivate()
         {
             TetrisManager.instance.ResetFallingFunction();

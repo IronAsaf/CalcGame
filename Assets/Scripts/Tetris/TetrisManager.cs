@@ -16,6 +16,8 @@ namespace Tetris
         [SerializeField] public Vector3 lineStartingPosition;
         private List<Vector3> startingBaseFunctionPositions;
         public UnityEvent onHitEvent;
+        private FunctionMaker currentBottomFunction, currentTopFunction;
+        private int currentFallingFunctionIndex;
         
         private void Awake()
         {
@@ -38,16 +40,28 @@ namespace Tetris
         /// Randomizes the falling function in the beginning, as well as handles the next calling of a function if need be in the middle of the round. 
         /// </summary>
         /// <returns>Returns a list of Vector3's which hold the positions needed to describe a falling function's visual appearance.</returns>
-        public List<Vector3> GetNewFallingFunctionListPositions()
+        public List<Vector3> GetStartingFallingFunction()
         {
-            var lstVec2 = level.functionsForLevelList[0].positions;
+            if (currentTopFunction == null) currentTopFunction = level.functionsForLevelList[0];
+            currentFallingFunctionIndex = 0;
+            var lstVec2 = level.functionsForLevelList[0].positions; //
             var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
             //b = PositionsUtility.NormalizePositions(b, COMPACTION);
             return b;
         }
 
-        public List<Vector3> GetBaseFunctionListPositions()
+        public int GetLengthOfFunctionsList() => level.functionsForLevelList.Count;
+        public List<Vector3> FetchNewFallingFunction(int currentIndex = 0)
         {
+            //TODO-0001 - Make all of this cycle in order.
+            var lstVec2 = level.functionsForLevelList[currentIndex].positions; //
+            var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
+            return b;
+        }
+        
+        public List<Vector3> GetStartingBaseFunction()
+        {
+            currentBottomFunction = level.bottomFunction;
             var lstVec2 = level.bottomFunction.positions;
             var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
             //b = PositionsUtility.NormalizePositions(b, COMPACTION);
@@ -66,8 +80,9 @@ namespace Tetris
 
         public void ResetBaseFunction()
         {
-            //do the MINUS functionality, take the Function of Base and Falling, and do that.
+            //TODO-0005 do the MINUS functionality, take the Function of Base and Falling, and do that.
             var newPos = new List<Vector3>();
+            
             baseFunction.SetupGo(newPos);
         }
 
