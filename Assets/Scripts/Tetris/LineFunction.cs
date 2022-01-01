@@ -21,8 +21,7 @@ namespace Tetris
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            print("someone triggered line - " + col.name);
-            
+            //print("someone triggered line - " + col.name);
         }
 
         protected override void OnFunctionsHitEvent()

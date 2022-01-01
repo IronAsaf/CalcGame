@@ -109,12 +109,14 @@ namespace Tetris
             return b;
         }
 
-        public void ResetSelectFunction()
+        public List<Vector3> ResetSelectFunction()
         {
             //take from list of the functions available, take the one to the right as if clicked right. Should
             // be circular.
-            var newPos = new List<Vector3>();
-            baseFunction.SetupGo(newPos);
+            currentFallingFunctionIndex = selectFunction.GetCurrentIndex();
+            var pos = level.functionsForLevelList[currentFallingFunctionIndex].positions;
+            var b = pos.Select(PositionsUtility.Vector2ToVector3).ToList();
+            return b;
         }
 
         public void EndGame()
