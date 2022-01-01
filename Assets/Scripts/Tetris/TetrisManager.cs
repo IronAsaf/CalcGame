@@ -13,6 +13,7 @@ namespace Tetris
         [SerializeField] private LevelMaker level;
         [SerializeField] private BaseFunction baseFunction;
         [SerializeField] private FallingFunction fallingFunction;
+        [SerializeField] private SelectFunction selectFunction;
         [SerializeField] public Vector3 lineStartingPosition;
         private List<Vector3> startingBaseFunctionPositions;
         public UnityEvent onHitEvent;
@@ -100,11 +101,12 @@ namespace Tetris
             return b;
         }
 
-        public void ResetFallingFunction()
+        public List<Vector3> ResetFallingFunction()
         {
-            // Take current SelectFunction's 
-            var newPos = new List<Vector3>();
-            baseFunction.SetupGo(newPos);
+            currentFallingFunctionIndex = selectFunction.GetCurrentIndex();
+            var pos = level.functionsForLevelList[currentFallingFunctionIndex].positions;
+            var b = pos.Select(PositionsUtility.Vector2ToVector3).ToList();
+            return b;
         }
 
         public void ResetSelectFunction()
@@ -113,6 +115,11 @@ namespace Tetris
             // be circular.
             var newPos = new List<Vector3>();
             baseFunction.SetupGo(newPos);
+        }
+
+        public void EndGame()
+        {
+            
         }
     }
 }

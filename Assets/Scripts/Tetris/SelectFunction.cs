@@ -27,7 +27,6 @@ namespace Tetris
         public int GetCurrentIndex() => currentIndex;
         public void OnClickActivate()
         {
-            TetrisManager.instance.ResetFallingFunction();
             TetrisManager.instance.ResetSelectFunction();
         }
 

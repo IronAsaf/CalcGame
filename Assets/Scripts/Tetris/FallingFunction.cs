@@ -20,20 +20,14 @@ namespace Tetris
         protected override void Start()
         {
             SetupInitialFallingFunction();
-            //AdjustColliderSize();
             base.Start();
-        }
-
-        public void ResetMe(List<Vector3> positions)
-        {
-            currentFallingPositions = positions;
-            SetupGo(currentFallingPositions);
         }
 
         protected override void OnFunctionsHitEvent()
         {
             transform.SetPositionAndRotation(PositionsUtility.Vector2ToVector3(startingPos),Quaternion.identity);
-            TetrisManager.instance.ResetFallingFunction();
+            currentFallingPositions =TetrisManager.instance.ResetFallingFunction();
+            SetupGo(currentFallingPositions);
         }
     }
 }
