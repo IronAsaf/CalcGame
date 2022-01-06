@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42c432c314ef294a992882f0941614c, type: 3}
+  m_Name: AbsX
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  amountOfNodes: 10
+  rectClamp: {x: -1, y: 1}
+  positions:
+  - {x: -1, y: 1}
+  - {x: -0.8, y: 0.8}
+  - {x: -0.6, y: 0.6}
+  - {x: -0.40000004, y: 0.40000004}
+  - {x: -0.20000003, y: 0.20000003}
+  - {x: -0.000000029802322, y: 0.000000029802322}
+  - {x: 0.19999997, y: 0.19999997}
+  - {x: 0.39999998, y: 0.39999998}
+  - {x: 0.59999996, y: 0.59999996}
+  - {x: 0.79999995, y: 0.79999995}
+  - {x: 0.99999994, y: 0.99999994}
+  functionComponents:
+  - type: 8
+    assistiveNumber: 0

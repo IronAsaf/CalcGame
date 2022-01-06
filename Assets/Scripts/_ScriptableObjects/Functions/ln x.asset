@@ -22,7 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   amountOfNodes: 50
-  rectClamp: {x: 0.02, y: 1}
+  rectClamp: {x: 0.1, y: 1}
   positions:
   - {x: 0.02, y: -3.912023}
   - {x: 0.0396, y: -3.2289262}

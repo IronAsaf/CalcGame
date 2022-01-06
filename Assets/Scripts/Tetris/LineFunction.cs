@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utility;
 
 namespace Tetris
 {
@@ -27,6 +28,12 @@ namespace Tetris
         protected override void OnFunctionsHitEvent()
         {
             //check if we are below the line.
+            var top =PositionsUtility.MostTopVector3(baseFunction.currentFallingPositions);
+            if (top.y <= transform.localPosition.y)
+            {
+                TetrisManager.instance.EndGame();
+            }
+            
         }
     }
 }

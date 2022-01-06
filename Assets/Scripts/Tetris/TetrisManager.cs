@@ -14,7 +14,7 @@ namespace Tetris
         [SerializeField] private BaseFunction baseFunction;
         [SerializeField] private FallingFunction fallingFunction;
         [SerializeField] private SelectFunction selectFunction;
-        [SerializeField] public Vector3 lineStartingPosition;
+        [SerializeField] private GameObject endGameScreen;
         private List<Vector3> startingBaseFunctionPositions;
         public UnityEvent onHitEvent;
         private List<FunctionComponent> currentBottomFunction, currentTopFunction;
@@ -121,7 +121,8 @@ namespace Tetris
 
         public void EndGame()
         {
-            
+            Time.timeScale = 0f;
+            endGameScreen.SetActive(true);
         }
     }
 }
