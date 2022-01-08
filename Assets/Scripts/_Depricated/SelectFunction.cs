@@ -2,7 +2,7 @@ namespace Tetris
 {
     public class SelectFunction : AbstractFunction
     {
-        private int lengthOfTotalFunctions;
+        /*private int lengthOfTotalFunctions;
         private int currentIndex;
         protected override void Start()
         {
@@ -27,13 +27,13 @@ namespace Tetris
         public int GetCurrentIndex() => currentIndex;
         public void OnClickActivate()
         {
-            currentFallingPositions = TetrisManager.instance.ResetSelectFunction();
+            //currentFallingPositions = TetrisManager.instance.ResetSelectFunction();
             SetupGo(currentFallingPositions);
         }
 
         protected override void OnFunctionsHitEvent()
         {
             OnClickActivate();
-        }
+        }*/
     }
 }

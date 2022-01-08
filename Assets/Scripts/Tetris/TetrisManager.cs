@@ -13,7 +13,6 @@ namespace Tetris
         [SerializeField] private LevelMaker level;
         [SerializeField] private BaseFunction baseFunction;
         [SerializeField] private FallingFunction fallingFunction;
-        [SerializeField] private SelectFunction selectFunction;
         [SerializeField] private GameObject endGameScreen;
         private List<Vector3> startingBaseFunctionPositions;
         public UnityEvent onHitEvent;
@@ -103,17 +102,7 @@ namespace Tetris
 
         public List<Vector3> ResetFallingFunction()
         {
-            currentFallingFunctionIndex = selectFunction.GetCurrentIndex();
-            var pos = level.functionsForLevelList[currentFallingFunctionIndex].positions;
-            var b = pos.Select(PositionsUtility.Vector2ToVector3).ToList();
-            return b;
-        }
-
-        public List<Vector3> ResetSelectFunction()
-        {
-            //take from list of the functions available, take the one to the right as if clicked right. Should
-            // be circular.
-            currentFallingFunctionIndex = selectFunction.GetCurrentIndex();
+            //currentFallingFunctionIndex = selectFunction.GetCurrentIndex();
             var pos = level.functionsForLevelList[currentFallingFunctionIndex].positions;
             var b = pos.Select(PositionsUtility.Vector2ToVector3).ToList();
             return b;

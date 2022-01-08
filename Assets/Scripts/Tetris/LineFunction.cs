@@ -20,11 +20,6 @@ namespace Tetris
             base.Start();
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
-        {
-            //print("someone triggered line - " + col.name);
-        }
-
         protected override void OnFunctionsHitEvent()
         {
             //check if we are below the line.
