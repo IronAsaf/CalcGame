@@ -16,6 +16,7 @@ namespace Tetris
         [SerializeField] private GameObject endGameScreen;
         private List<Vector3> startingBaseFunctionPositions;
         public UnityEvent onHitEvent;
+        public UnityEvent onFunctionChangeEvent;
         private List<FunctionComponent> currentBottomFunction, currentTopFunction;
         private int currentFallingFunctionIndex;
         
@@ -51,6 +52,12 @@ namespace Tetris
         }
 
         public int GetLengthOfFunctionsList() => level.functionsForLevelList.Count;
+
+        public Sprite GetSpriteOfFunctionByIndex(int index)
+        {
+            currentFallingFunctionIndex = index;
+            return level.functionsForLevelList[index].functionDisplay;
+        }
         public List<Vector3> FetchNewFallingFunction(int currentIndex) // When Select is clicked
         {
             //TODO-0001 - Make all of this cycle in order.

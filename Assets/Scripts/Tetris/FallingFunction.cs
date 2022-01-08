@@ -15,6 +15,7 @@ namespace Tetris
             base.Awake();
             startingPos = transform.localPosition;
             rigidbody2DRef = GetComponent<Rigidbody2D>();
+            TetrisManager.instance.onFunctionChangeEvent.AddListener(OnFunctionsHitEvent);
         }
 
         protected override void Start()
@@ -26,7 +27,7 @@ namespace Tetris
         protected override void OnFunctionsHitEvent()
         {
             transform.SetPositionAndRotation(PositionsUtility.Vector2ToVector3(startingPos),Quaternion.identity);
-            currentFallingPositions =TetrisManager.instance.ResetFallingFunction();
+            currentFallingPositions = TetrisManager.instance.ResetFallingFunction();
             SetupGo(currentFallingPositions);
         }
     }
