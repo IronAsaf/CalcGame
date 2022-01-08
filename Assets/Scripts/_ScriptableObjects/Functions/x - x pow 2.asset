@@ -21,6 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  functionDisplay: {fileID: 21300000, guid: 6008c1e9e5405496085ba3c4ebcb707a, type: 3}
   amountOfNodes: 10
   rectClamp: {x: -1, y: 1}
   positions:

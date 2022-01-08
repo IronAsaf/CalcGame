@@ -12,9 +12,10 @@ namespace UI
         private int currentFunctionIndex = 0;
         private int amountOfFunctionsToCycle;
 
-        private void Awake()
+        private void Start()
         {
             amountOfFunctionsToCycle = TetrisManager.instance.GetLengthOfFunctionsList();
+            displayedFunction.sprite = TetrisManager.instance.GetSpriteOfFunctionByIndex(0);
         }
 
         public void OnClickCycleFunction(int dir)

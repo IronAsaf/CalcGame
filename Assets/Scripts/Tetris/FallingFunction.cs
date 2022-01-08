@@ -15,11 +15,11 @@ namespace Tetris
             base.Awake();
             startingPos = transform.localPosition;
             rigidbody2DRef = GetComponent<Rigidbody2D>();
-            TetrisManager.instance.onFunctionChangeEvent.AddListener(OnFunctionsHitEvent);
         }
 
         protected override void Start()
         {
+            TetrisManager.instance.onFunctionChangeEvent.AddListener(OnFunctionsHitEvent);
             SetupInitialFallingFunction();
             base.Start();
         }
