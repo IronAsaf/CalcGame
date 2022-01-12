@@ -20,6 +20,7 @@ namespace Tetris
 
         protected virtual void Start()
         {
+            print($"register to on hit event - {gameObject.name}");
             TetrisManager.instance.onHitEvent.AddListener(OnFunctionsHitEvent);
         }
 
@@ -59,7 +60,7 @@ namespace Tetris
 
         protected virtual void OnFunctionsHitEvent()
         {
-            
+            print($"event handle on hit of {gameObject.name}");
         }
     }
 }

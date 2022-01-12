@@ -22,10 +22,13 @@ namespace Tetris
 
         protected override void OnFunctionsHitEvent()
         {
+            base.OnFunctionsHitEvent();
             //check if we are below the line.
             var top =PositionsUtility.MostTopVector3(baseFunction.currentFallingPositions);
-            if (top.y <= transform.localPosition.y)
+            print($"top: {top}, col: {colliderRef.transform.localPosition}");
+            if (top.y <= colliderRef.transform.localPosition.y)
             {
+                
                 TetrisManager.instance.EndGame();
             }
             
