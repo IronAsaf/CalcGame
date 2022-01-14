@@ -13,6 +13,7 @@ namespace FunctionCreator
         [Title("Outward Function Values")]
         public int amountOfNodes;
         public Vector2 rectClamp;
+        public Vector2 rectYClamp;
         public List<Vector2> positions;
         [Title("Function Creation")]
         public List<FunctionComponent> functionComponents;
@@ -74,7 +75,7 @@ namespace FunctionCreator
         [ButtonGroup("Calculation/Buttons")][Button("CalculatePositions")]
         public void CalculatePositions() //TODO-0004 - Make this into a Array not List.
         {
-            positions = FunctionUtility.CalculatePositions(functionComponents,rectClamp,amountOfNodes).ToList();
+            positions = FunctionUtility.CalculatePositions(functionComponents,rectClamp,rectYClamp,amountOfNodes).ToList();
         }
 
         [ButtonGroup("Calculation/Buttons")][Button("ClearAll")]

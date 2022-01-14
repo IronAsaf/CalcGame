@@ -74,7 +74,7 @@ namespace Utility
             return answer;
         }
 
-        public static List<Vector2> CalculatePositions(List<FunctionComponent> components, Vector2 rectClamp, int amountOfNodes)
+        public static List<Vector2> CalculatePositions(List<FunctionComponent> components, Vector2 rectXClamp, Vector2 rectYClamp, int amountOfNodes)
         {
             if (!ValidateComponentList(components))
             {
@@ -82,9 +82,9 @@ namespace Utility
                 return null;
             }
             var positions = new List<Vector2>();
-            var advance = (rectClamp.y - rectClamp.x) / amountOfNodes;
+            var advance = (rectXClamp.y - rectXClamp.x) / amountOfNodes;
             var isSimpleFunction = components.Count == 1;
-            for (var i = rectClamp.x; i < rectClamp.y; i+=advance)
+            for (var i = rectXClamp.x; i < rectXClamp.y; i+=advance)
             {
                 var temp = new Vector2(i,0);
                 if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.

@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 namespace UI
@@ -10,7 +11,8 @@ namespace UI
         [SerializeField] private GameObject menuCanvas;
         [SerializeField] private GameObject characterCanvas;
         [SerializeField] private GameObject staticsCanvas;
-
+        [SerializeField] private TMP_Text scoreText;
+        
         private void Awake()
         {
             ToggleCanvases();
@@ -24,6 +26,11 @@ namespace UI
         public void OnClickMenuButton()
         {
             menuCanvas.SetActive(true);
+        }
+
+        public void UpdateScore(int amount)
+        {
+            scoreText.text = amount.ToString();
         }
     }
 }

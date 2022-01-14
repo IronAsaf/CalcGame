@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility;
@@ -10,6 +11,7 @@ namespace Tetris
     {
         private Rigidbody2D rigidbody2DRef;
         private Vector2 startingPos;
+        private float speed = -1f; // TEMP
         protected override void Awake()
         {
             base.Awake();
@@ -29,6 +31,11 @@ namespace Tetris
             transform.SetPositionAndRotation(PositionsUtility.Vector2ToVector3(startingPos),Quaternion.identity);
             currentFallingPositions = TetrisManager.instance.ResetFallingFunction();
             SetupGo(currentFallingPositions);
+        }
+
+        private void FixedUpdate()
+        {
+            rigidbody2DRef.velocity = new Vector2(0, speed);
         }
     }
 }
