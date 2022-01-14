@@ -52,7 +52,7 @@ namespace Tetris
         }
 
         public int GetLengthOfFunctionsList() => level.functionsForLevelList.Count;
-
+        public float GetEndGameYPos() => level.lineFunctionYPos;
         public Sprite GetSpriteOfFunctionByIndex(int index)
         {
             currentFallingFunctionIndex = index;

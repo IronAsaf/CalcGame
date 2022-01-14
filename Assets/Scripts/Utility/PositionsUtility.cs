@@ -29,7 +29,8 @@ namespace Utility
 
         public static Vector3 MostTopVector3(List<Vector3> positions)
         {
-            var vec = Vector3.zero;
+            if (positions == null) return Vector3.negativeInfinity;
+            var vec = positions[0];
             for (var i = 0; i < positions.Count; i++)
             {
                 if (positions[i].y > vec.y)
@@ -37,7 +38,6 @@ namespace Utility
                     vec = positions[i];
                 }
             }
-
             return vec;
         }
         

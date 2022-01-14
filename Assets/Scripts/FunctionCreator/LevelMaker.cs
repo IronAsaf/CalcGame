@@ -11,5 +11,7 @@ namespace FunctionCreator
         [SerializeField] private int difficulty;
         public List<FunctionMaker> functionsForLevelList;
         public FunctionMaker bottomFunction;
+
+        public float lineFunctionYPos = 0;
     }
 }

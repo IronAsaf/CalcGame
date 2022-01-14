@@ -7,28 +7,21 @@ namespace Tetris
     {
         // Start is called before the first frame update
         [SerializeField] private BaseFunction baseFunction;
-        private BoxCollider2D colliderRef;
-
-        protected override void Awake()
-        {
-            colliderRef = GetComponent<BoxCollider2D>();
-        }
+        private float endGameY;
         protected override void Start()
         {
-            var center = baseFunction.transform.localPosition;
+            var center = baseFunction.transform.position;
             transform.SetPositionAndRotation(center, Quaternion.identity);
+            endGameY = TetrisManager.instance.GetEndGameYPos();
             base.Start();
         }
 
         protected override void OnFunctionsHitEvent()
         {
             base.OnFunctionsHitEvent();
-            //check if we are below the line.
             var top =PositionsUtility.MostTopVector3(baseFunction.currentFallingPositions);
-            print($"top: {top}, col: {colliderRef.transform.localPosition}");
-            if (top.y <= colliderRef.transform.localPosition.y)
+            if (top.y <= endGameY)
             {
-                
                 TetrisManager.instance.EndGame();
             }
             
