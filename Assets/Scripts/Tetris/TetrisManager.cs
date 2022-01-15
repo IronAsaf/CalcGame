@@ -7,37 +7,25 @@ using Utility;
 
 namespace Tetris
 {
-    public class TetrisManager : MonoBehaviour
+    public class TetrisManager : Singleton<TetrisManager>
     {
-        public static TetrisManager instance;
         [SerializeField] private LevelMaker level;
-        [SerializeField] private BaseFunction baseFunction;
-        [SerializeField] private FallingFunction fallingFunction;
+        //[SerializeField] private BaseFunction baseFunction;
+        //[SerializeField] private FallingFunction fallingFunction;
         [SerializeField] private GameObject endGameScreen;
         private List<Vector3> startingBaseFunctionPositions;
         public UnityEvent onHitEvent;
         public UnityEvent onFunctionChangeEvent;
         private List<FunctionComponent> currentBottomFunction, currentTopFunction;
         private int currentFallingFunctionIndex;
-        
-        private void Awake()
+
+        protected override void Awake()
         {
-            Singleton();
+            base.Awake();
             currentBottomFunction = level.bottomFunction.functionComponents.ToList();
             currentTopFunction = level.functionsForLevelList[0].functionComponents.ToList();
         }
-        
-        private void Singleton()
-        {
-            if (instance == null)
-            {
-                instance = this;
-            }
-            else if (instance != this)
-            {
-                Destroy(this);
-            }
-        }
+
 
         /// <summary>
         /// Randomizes the falling function in the beginning, as well as handles the next calling of a function if need be in the middle of the round. 
@@ -65,7 +53,7 @@ namespace Tetris
             currentTopFunction = level.functionsForLevelList[currentIndex].functionComponents.ToList();
             var lstVec2 = level.functionsForLevelList[currentIndex].positions; //
             var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
-            print($"len of the new func's pos is {b.Count}");
+            print($"len of the new function's pos is {b.Count}");
             return b;
         }
         
@@ -84,9 +72,10 @@ namespace Tetris
             return b;
         }
 
-        private void OnDestroy()
+        protected override void OnDestroy()
         {
             onHitEvent.RemoveAllListeners();
+            base.OnDestroy();
         }
 
         private void OnDisable()

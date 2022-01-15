@@ -21,7 +21,7 @@ namespace Tetris
 
         protected override void Start()
         {
-            TetrisManager.instance.onFunctionChangeEvent.AddListener(OnFunctionsHitEvent);
+            TetrisManager.Instance.onFunctionChangeEvent.AddListener(OnFunctionsHitEvent);
             SetupInitialFallingFunction();
             base.Start();
         }
@@ -29,7 +29,7 @@ namespace Tetris
         protected override void OnFunctionsHitEvent()
         {
             transform.SetPositionAndRotation(PositionsUtility.Vector2ToVector3(startingPos),Quaternion.identity);
-            currentFallingPositions = TetrisManager.instance.ResetFallingFunction();
+            currentFallingPositions = TetrisManager.Instance.ResetFallingFunction();
             SetupGo(currentFallingPositions);
         }
 

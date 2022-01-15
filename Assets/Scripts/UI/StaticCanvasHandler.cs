@@ -14,8 +14,8 @@ namespace UI
 
         private void Start()
         {
-            amountOfFunctionsToCycle = TetrisManager.instance.GetLengthOfFunctionsList();
-            displayedFunction.sprite = TetrisManager.instance.GetSpriteOfFunctionByIndex(0);
+            amountOfFunctionsToCycle = TetrisManager.Instance.GetLengthOfFunctionsList();
+            displayedFunction.sprite = TetrisManager.Instance.GetSpriteOfFunctionByIndex(0);
         }
 
         public void OnClickCycleFunction(int dir)
@@ -31,12 +31,12 @@ namespace UI
             }
 
             currentFunctionIndex = newVal;
-            displayedFunction.sprite = TetrisManager.instance.GetSpriteOfFunctionByIndex(currentFunctionIndex);
+            displayedFunction.sprite = TetrisManager.Instance.GetSpriteOfFunctionByIndex(currentFunctionIndex);
         }
 
         public void OnClickActivateFunction()
         {
-            TetrisManager.instance.onFunctionChangeEvent.Invoke();
+            TetrisManager.Instance.onFunctionChangeEvent.Invoke();
         }
     }
 }

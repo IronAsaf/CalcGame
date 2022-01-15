@@ -12,7 +12,7 @@ namespace Tetris
         {
             var center = baseFunction.transform.position;
             transform.SetPositionAndRotation(center, Quaternion.identity);
-            endGameY = TetrisManager.instance.GetEndGameYPos();
+            endGameY = TetrisManager.Instance.GetEndGameYPos();
             base.Start();
         }
 
@@ -22,7 +22,7 @@ namespace Tetris
             var top =PositionsUtility.MostTopVector3(baseFunction.currentFallingPositions);
             if (top.y <= endGameY)
             {
-                TetrisManager.instance.EndGame();
+                TetrisManager.Instance.EndGame();
             }
             
         }

@@ -82,7 +82,7 @@ namespace Utility
                 return null;
             }
             var positions = new List<Vector2>();
-            var advance = (rectXClamp.y - rectXClamp.x) / amountOfNodes;
+            var advance = (float) Math.Round(((rectXClamp.y - rectXClamp.x) / amountOfNodes),3);
             var isSimpleFunction = components.Count == 1;
             for (var i = rectXClamp.x; i < rectXClamp.y; i+=advance)
             {
@@ -90,7 +90,7 @@ namespace Utility
                 if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
                 {
                     temp.y += CalculateImmediateValue(components[0], i);
-
+                    temp *= temp.magnitude * 1.5f; // NORMA with MAG scaler.
                     positions.Add(temp);
                     continue;
                 }
@@ -115,6 +115,13 @@ namespace Utility
                 positions.Add(temp);
             }
             Debug.Log($"<color=#00cc99>Positions Generated</color>");
+            //Run Normilze for the Vectors.
+            string st = "";
+            foreach (var pos in positions)
+            {
+                st += pos.magnitude + ",";
+            }
+            Debug.Log(st);
             return positions;
         }
 

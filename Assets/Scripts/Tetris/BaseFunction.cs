@@ -7,7 +7,7 @@ namespace Tetris
     {
         protected override void Start()
         {
-            currentFallingPositions = TetrisManager.instance.GetStartingBaseFunction();
+            currentFallingPositions = TetrisManager.Instance.GetStartingBaseFunction();
             SetupGo(currentFallingPositions);
             base.Start();
             //AdjustColliderSize();
@@ -16,12 +16,12 @@ namespace Tetris
         private void OnCollisionEnter2D(Collision2D other)
         {
             print($"<color=#ffdd55>hit this: </color>{other.gameObject.name}");
-            TetrisManager.instance.onHitEvent.Invoke();
+            TetrisManager.Instance.onHitEvent.Invoke();
         }
 
         protected override void OnFunctionsHitEvent()
         {
-            currentFallingPositions = TetrisManager.instance.ResetBaseFunction();
+            currentFallingPositions = TetrisManager.Instance.ResetBaseFunction();
             SetupGo(currentFallingPositions);
         }
     }

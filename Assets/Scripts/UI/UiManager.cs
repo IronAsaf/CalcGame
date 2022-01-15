@@ -1,20 +1,20 @@
 using System;
 using TMPro;
 using UnityEngine;
+using Utility;
 
 namespace UI
 {
-    public class UiManager : MonoBehaviour
+    public class UiManager : Singleton<UiManager>
     {
-        public static UiManager Instance { get; set; }
-
         [SerializeField] private GameObject menuCanvas;
         [SerializeField] private GameObject characterCanvas;
         [SerializeField] private GameObject staticsCanvas;
         [SerializeField] private TMP_Text scoreText;
-        
-        private void Awake()
+
+        protected override void Awake()
         {
+            base.Awake();
             ToggleCanvases();
         }
 
