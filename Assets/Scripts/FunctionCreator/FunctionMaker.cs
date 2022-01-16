@@ -10,8 +10,12 @@ namespace FunctionCreator
     public class FunctionMaker : SerializedScriptableObject
     {
         public Sprite functionDisplay;
+
         [Title("Outward Function Values")]
-        public int amountOfNodes;
+        //public int amountOfNodes;
+        public float functionXAdvancement = 0.5f;
+        public bool shouldFunctionBeNormalized = true;
+        public float functionNormalizeScaler = 1.5f;
         public Vector2 rectClamp;
         public Vector2 rectYClamp;
         public List<Vector2> positions;
@@ -73,9 +77,15 @@ namespace FunctionCreator
 
         [BoxGroup("Calculation", ShowLabel = true)]
         [ButtonGroup("Calculation/Buttons")][Button("CalculatePositions")]
-        public void CalculatePositions() //TODO-0004 - Make this into a Array not List.
+        public void CalculatePositions()
         {
-            positions = FunctionUtility.CalculatePositions(functionComponents,rectClamp,rectYClamp,amountOfNodes).ToList();
+            positions = FunctionUtility.CalculatePositions(
+                functionComponents,
+                rectClamp,
+                rectYClamp,
+                functionXAdvancement,
+                shouldFunctionBeNormalized,
+                functionNormalizeScaler).ToList();
         }
 
         [ButtonGroup("Calculation/Buttons")][Button("ClearAll")]
@@ -83,7 +93,8 @@ namespace FunctionCreator
         {
             functionComponents = new List<FunctionComponent>();
             positions = new List<Vector2>();
-            amountOfNodes = 0;
+            functionXAdvancement = 0.5f;
+            shouldFunctionBeNormalized = true;
             rectClamp = Vector4.zero;
         }
     }

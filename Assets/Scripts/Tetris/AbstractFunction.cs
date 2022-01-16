@@ -50,12 +50,12 @@ namespace Tetris
 
         protected virtual void OnDisable()
         {
-            TetrisManager.Instance.onHitEvent.RemoveListener(OnFunctionsHitEvent);
+            TetrisManager.Instance.onHitEvent?.RemoveListener(OnFunctionsHitEvent);
         }
 
         protected void OnDestroy()
         {
-            TetrisManager.Instance.onHitEvent.RemoveListener(OnFunctionsHitEvent);
+            TetrisManager.Instance.onHitEvent?.RemoveListener(OnFunctionsHitEvent);
         }
 
         protected virtual void OnFunctionsHitEvent()

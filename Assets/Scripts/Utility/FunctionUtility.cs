@@ -74,7 +74,7 @@ namespace Utility
             return answer;
         }
 
-        public static List<Vector2> CalculatePositions(List<FunctionComponent> components, Vector2 rectXClamp, Vector2 rectYClamp, int amountOfNodes)
+        public static List<Vector2> CalculatePositions(List<FunctionComponent> components, Vector2 rectXClamp, Vector2 rectYClamp, float functionXAdvancement, bool shouldNormalize = true, float normalizeScaler = 1.5f)
         {
             if (!ValidateComponentList(components))
             {
@@ -82,15 +82,13 @@ namespace Utility
                 return null;
             }
             var positions = new List<Vector2>();
-            var advance = (float) Math.Round(((rectXClamp.y - rectXClamp.x) / amountOfNodes),3);
             var isSimpleFunction = components.Count == 1;
-            for (var i = rectXClamp.x; i < rectXClamp.y; i+=advance)
+            for (var i = rectXClamp.x; i < rectXClamp.y; i+=functionXAdvancement)
             {
                 var temp = new Vector2(i,0);
                 if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
                 {
                     temp.y += CalculateImmediateValue(components[0], i);
-                    temp *= temp.magnitude * 1.5f; // NORMA with MAG scaler.
                     positions.Add(temp);
                     continue;
                 }
@@ -115,13 +113,15 @@ namespace Utility
                 positions.Add(temp);
             }
             Debug.Log($"<color=#00cc99>Positions Generated</color>");
-            //Run Normilze for the Vectors.
-            string st = "";
-            foreach (var pos in positions)
+            
+            if(shouldNormalize)
             {
-                st += pos.magnitude + ",";
+                for (int i = 0; i < positions.Count; i++)
+                {
+                    if (positions[i] == Vector2.zero) continue;
+                    positions[i] *= normalizeScaler / positions[i].magnitude;
+                }
             }
-            Debug.Log(st);
             return positions;
         }
 

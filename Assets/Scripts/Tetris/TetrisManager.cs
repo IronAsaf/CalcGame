@@ -91,7 +91,7 @@ namespace Tetris
                 currentBottomFunction.Add(t);
             }
 
-            var newPos = FunctionUtility.CalculatePositions(currentBottomFunction, level.bottomFunction.rectClamp,level.bottomFunction.rectYClamp, 20);
+            var newPos = FunctionUtility.CalculatePositions(currentBottomFunction, level.bottomFunction.rectClamp,level.bottomFunction.rectYClamp, 0.5f);
             var b = newPos.Select(PositionsUtility.Vector2ToVector3).ToList();
             return b;
         }
