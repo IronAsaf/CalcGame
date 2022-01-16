@@ -89,6 +89,7 @@ namespace Utility
                 if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
                 {
                     temp.y += CalculateImmediateValue(components[0], i);
+                    if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
                     positions.Add(temp);
                     continue;
                 }
@@ -110,21 +111,27 @@ namespace Utility
                             break;
                     }
                 }
+                if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
                 positions.Add(temp);
             }
             Debug.Log($"<color=#00cc99>Positions Generated</color>");
             
-            if(shouldNormalize)
+            /*if(shouldNormalize)
             {
                 for (int i = 0; i < positions.Count; i++)
                 {
                     if (positions[i] == Vector2.zero) continue;
                     positions[i] *= normalizeScaler / positions[i].magnitude;
                 }
-            }
+            }*/
             return positions;
         }
 
+        private static bool ValidateVectorConstraint(float value, Vector2 constraint)
+        {
+            if (value >= constraint.x && value <= constraint.y) return true;
+            return false;
+        }
         private static bool ValidateComponentList(IReadOnlyList<FunctionComponent> components)
         {
             if (components.Count == 1 && !IsOperator(components[0].type))
