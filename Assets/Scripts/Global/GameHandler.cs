@@ -4,6 +4,7 @@ using Tetris;
 using UI;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Utility;
 
 namespace Global
@@ -65,5 +66,16 @@ namespace Global
             StopCoroutine(GameScore());
             UiManager.Instance.FixEndGameScoreText(currentScore);
         }
+
+        public void LoadStartScene()
+        {
+            SceneManager.LoadScene(0, LoadSceneMode.Single);
+        }
+
+        public void LoadEndScene()
+        {
+            SceneManager.LoadScene(2, LoadSceneMode.Single);
+        }
+        
     }
 }

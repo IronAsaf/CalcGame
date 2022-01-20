@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FunctionGame.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/QuitScene.unity
+    guid: 04a72e8e60887524a8be5fdf5332203f
   m_configObjects: {}

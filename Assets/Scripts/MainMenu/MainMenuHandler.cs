@@ -5,16 +5,22 @@ namespace MainMenu
 {
     public class MainMenuHandler : MonoBehaviour
     {
-        private enum SceneNames
+        public enum SceneNames
         {
             MainMenu,
-            FunctionGame
+            FunctionGame,
+            QuitScene
         }
         [SerializeField] private SceneNames sceneToLoad;
 
         public void OnClickStartGame()
         {
             SceneManager.LoadScene(sceneToLoad.ToString());
+        }
+
+        public void LoadSceneByName(SceneNames scene)
+        {
+            SceneManager.LoadScene(scene.ToString());
         }
     }
 }
