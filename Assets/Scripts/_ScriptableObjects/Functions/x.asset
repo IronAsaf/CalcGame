@@ -22,20 +22,24 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   functionDisplay: {fileID: 21300000, guid: 1e26e8d8a51c59e48a4d316e2f0a7903, type: 3}
-  functionXAdvancement: 0.5
+  functionXAdvancement: 0.25
   shouldFunctionBeNormalized: 0
   functionNormalizeScaler: 1.5
-  rectClamp: {x: -2, y: 2}
-  rectYClamp: {x: 0, y: 0}
+  rectClamp: {x: -1.5, y: 1.5}
+  rectYClamp: {x: -1.5, y: 1.5}
   positions:
-  - {x: -2, y: -2}
   - {x: -1.5, y: -1.5}
+  - {x: -1.25, y: -1.25}
   - {x: -1, y: -1}
+  - {x: -0.75, y: -0.75}
   - {x: -0.5, y: -0.5}
+  - {x: -0.25, y: -0.25}
   - {x: 0, y: 0}
+  - {x: 0.25, y: 0.25}
   - {x: 0.5, y: 0.5}
+  - {x: 0.75, y: 0.75}
   - {x: 1, y: 1}
-  - {x: 1.5, y: 1.5}
+  - {x: 1.25, y: 1.25}
   functionComponents:
   - type: 7
     assistiveNumber: 0

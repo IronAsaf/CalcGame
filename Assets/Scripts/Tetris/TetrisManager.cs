@@ -9,23 +9,29 @@ namespace Tetris
 {
     public class TetrisManager : Singleton<TetrisManager>
     {
-        [SerializeField] private LevelMaker level;
-        //[SerializeField] private BaseFunction baseFunction;
-        //[SerializeField] private FallingFunction fallingFunction;
-        [SerializeField] private GameObject endGameScreen;
-        private List<Vector3> startingBaseFunctionPositions;
         public UnityEvent onHitEvent;
         public UnityEvent onFunctionChangeEvent;
-        private List<FunctionComponent> currentBottomFunction, currentTopFunction;
+        [SerializeField] private LevelMaker level;
+        [SerializeField] private GameObject endGameScreen;
+        [SerializeField] private List<FunctionComponent> currentTopFunction;
+        private List<Vector3> startingBaseFunctionPositions;
         private int currentFallingFunctionIndex;
-
+        public FunctionMaker baseFunctionMaker;
+        private const float BaseFunctionAdvance = 0.01f;
         protected override void Awake()
         {
             base.Awake();
-            currentBottomFunction = level.bottomFunction.functionComponents.ToList();
+            //currentBottomFunction = level.bottomFunction.functionComponents.ToList();
             currentTopFunction = level.functionsForLevelList[0].functionComponents.ToList();
+            onHitEvent = new UnityEvent();
+            onFunctionChangeEvent = new UnityEvent();
         }
 
+        private void Start()
+        {
+            baseFunctionMaker = ScriptableObject.CreateInstance<FunctionMaker>();
+            baseFunctionMaker.Init(level.bottomFunction);
+        }
 
         /// <summary>
         /// Randomizes the falling function in the beginning, as well as handles the next calling of a function if need be in the middle of the round. 
@@ -41,6 +47,7 @@ namespace Tetris
 
         public int GetLengthOfFunctionsList() => level.functionsForLevelList.Count;
         public float GetEndGameYPos() => level.lineFunctionYPos;
+        public float GetNewFallingSpeed(float currentSpeed) => currentSpeed - level.speedIncreasePerHit;
         public Sprite GetSpriteOfFunctionByIndex(int index)
         {
             currentFallingFunctionIndex = index;
@@ -66,10 +73,7 @@ namespace Tetris
         
         public List<Vector3> GetStartingBaseFunction()
         {
-            var lstVec2 = level.bottomFunction.positions;
-            var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
-            //b = PositionsUtility.NormalizePositions(b, COMPACTION);
-            return b;
+            return baseFunctionMaker.positions.Select(PositionsUtility.Vector2ToVector3).ToList();
         }
 
         protected override void OnDestroy()
@@ -85,14 +89,23 @@ namespace Tetris
 
         public List<Vector3> ResetBaseFunction()
         {
-            currentBottomFunction.Add(new FunctionComponent(FunctionUtility.FunctionalityType.OperatorMinus));
+            baseFunctionMaker.functionComponents.Add(new FunctionComponent(FunctionUtility.FunctionalityType.OperatorMinus));
+            //currentBottomFunction.Add(new FunctionComponent(FunctionUtility.FunctionalityType.OperatorMinus));
             foreach (var t in currentTopFunction)
             {
-                currentBottomFunction.Add(t);
+                baseFunctionMaker.functionComponents.Add(t);
             }
-
-            var newPos = FunctionUtility.CalculatePositions(currentBottomFunction, level.bottomFunction.rectClamp,level.bottomFunction.rectYClamp, 0.5f);
-            var b = newPos.Select(PositionsUtility.Vector2ToVector3).ToList();
+            //check who is the max of the constrains and use that instead. Take the smallest Advancement from them.
+            //var v = PositionsUtility.MaxVectorByMag(level.functionsForLevelList[currentFallingFunctionIndex].rectClamp, 
+            //need to instantiate a copy of the thing
+            //then work from there. Or have a thing so I can keep looking at it.
+            //thing = functionMaker thing.
+            baseFunctionMaker.rectClamp = FunctionUtility.NewMaxClamp(baseFunctionMaker.rectClamp,
+                level.functionsForLevelList[currentFallingFunctionIndex].rectClamp);
+            baseFunctionMaker.rectYClamp = FunctionUtility.NewMaxClamp(baseFunctionMaker.rectYClamp,
+                level.functionsForLevelList[currentFallingFunctionIndex].rectYClamp);
+            baseFunctionMaker.positions = FunctionUtility.CalculatePositions(baseFunctionMaker.functionComponents, baseFunctionMaker.rectClamp,baseFunctionMaker.rectYClamp, BaseFunctionAdvance);
+            var b = baseFunctionMaker.positions.Select(PositionsUtility.Vector2ToVector3).ToList();
             return b;
         }
 
@@ -101,6 +114,7 @@ namespace Tetris
             //currentFallingFunctionIndex = selectFunction.GetCurrentIndex();
             var pos = level.functionsForLevelList[currentFallingFunctionIndex].positions;
             var b = pos.Select(PositionsUtility.Vector2ToVector3).ToList();
+            currentTopFunction = level.functionsForLevelList[currentFallingFunctionIndex].functionComponents.ToList();
             return b;
         }
 

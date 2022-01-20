@@ -106,6 +106,11 @@ namespace Utility
         public static Vector3 Vector2ToVector3(Vector2 pos) => new(pos.x, pos.y, 0);
         public static Vector2 Vector3ToVector2(Vector3 pos) => new(pos.x, pos.y);
 
+        public static Vector2 MaxVectorByMag(Vector2 v, Vector2 u)
+        {
+            if (v.magnitude > u.magnitude) return v;
+            return u;
+        }
         public static List<Vector3> NormalizePositions(List<Vector3> positions, float resizeScalar = 1f)
         {
             var copy = positions.ToList();

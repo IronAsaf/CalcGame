@@ -13,11 +13,11 @@ namespace FunctionCreator
 
         [Title("Outward Function Values")]
         //public int amountOfNodes;
-        public float functionXAdvancement = 0.5f;
+        public float functionXAdvancement = 0.25f;
         public bool shouldFunctionBeNormalized = true;
         public float functionNormalizeScaler = 1.5f;
-        public Vector2 rectClamp;
-        public Vector2 rectYClamp;
+        public Vector2 rectClamp = new Vector2(-1.5f,1.5f);
+        public Vector2 rectYClamp = new Vector2(-1.5f,1.5f);
         public List<Vector2> positions;
         [Title("Function Creation")]
         public List<FunctionComponent> functionComponents;
@@ -93,9 +93,22 @@ namespace FunctionCreator
         {
             functionComponents = new List<FunctionComponent>();
             positions = new List<Vector2>();
-            functionXAdvancement = 0.5f;
+            functionXAdvancement = 0.25f;
             shouldFunctionBeNormalized = true;
-            rectClamp = Vector4.zero;
+            rectClamp = new Vector2(-1.5f,1.5f);
+            rectYClamp = new Vector2(-1.5f,1.5f);
+        }
+
+        //This function will initiate a copy of the needed FunctionMaker Object.
+        public void Init(FunctionMaker other)
+        {
+            functionXAdvancement = other.functionXAdvancement;
+            shouldFunctionBeNormalized = other.shouldFunctionBeNormalized;
+            functionNormalizeScaler = other.functionNormalizeScaler;
+            rectClamp = FunctionUtility.NewMaxClamp(rectClamp, other.rectClamp);
+            rectYClamp = FunctionUtility.NewMaxClamp(rectYClamp, other.rectYClamp);
+            positions = new List<Vector2>(other.positions);
+            functionComponents = new List<FunctionComponent>(other.functionComponents);
         }
     }
 }

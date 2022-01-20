@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 using Utility;
 
@@ -28,6 +26,7 @@ namespace Tetris
 
         protected override void OnFunctionsHitEvent()
         {
+            speed = TetrisManager.Instance.GetNewFallingSpeed(speed);
             transform.SetPositionAndRotation(PositionsUtility.Vector2ToVector3(startingPos),Quaternion.identity);
             currentFallingPositions = TetrisManager.Instance.ResetFallingFunction();
             SetupGo(currentFallingPositions);

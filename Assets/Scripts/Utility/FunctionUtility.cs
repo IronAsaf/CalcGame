@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using FunctionCreator;
 using UnityEngine;
 
@@ -81,8 +82,10 @@ namespace Utility
                 Debug.Log($"<color=#ff4466>Encountered an Issue with calculation, see LogErrors</color>");
                 return null;
             }
+            
             var positions = new List<Vector2>();
             var isSimpleFunction = components.Count == 1;
+            Debug.Log("Calculating the Function: " + rectXClamp + " y: " + rectYClamp + " adv:" + functionXAdvancement + " I will have: " + Math.Abs(rectXClamp.x-rectXClamp.y)/functionXAdvancement + " dots.");
             for (var i = rectXClamp.x; i < rectXClamp.y; i+=functionXAdvancement)
             {
                 var temp = new Vector2(i,0);
@@ -127,6 +130,30 @@ namespace Utility
             return positions;
         }
 
+        //The function will condense duplications like if there is -x-x then it will condense it into -2x.
+        //TODO-0005 - Condense the Function Duplication per the Logic of the operator.
+        private static List<FunctionComponent> CondenseFunctionDuplication(List<FunctionComponent> components)
+        {
+            //Activate this function after the validation process.
+            if (components.Count == 1) return components;
+            for (int i = 2; i < components.Count; i++)
+            {
+                try
+                {
+                    if (components[i - 1].type == FunctionalityType.OperatorMinus &&
+                        components[i + 1].type == FunctionalityType.OperatorMinus)
+                    {
+                        
+                    }
+                }
+                catch (Exception e)
+                {
+                    
+                }
+            }
+
+            return null;
+        }
         private static bool ValidateVectorConstraint(float value, Vector2 constraint)
         {
             if (value >= constraint.x && value <= constraint.y) return true;
@@ -170,6 +197,12 @@ namespace Utility
                 default:
                     return false;
             }
+        }
+
+        //This will make a bigger clamp for now, that will exceed the top and bottom from both given vectors.
+        public static Vector2 NewMaxClamp(Vector2 a, Vector2 b)
+        {
+            return new Vector2(Math.Min(a.x, b.x), Math.Max(a.y, b.y));
         }
     }
 }
