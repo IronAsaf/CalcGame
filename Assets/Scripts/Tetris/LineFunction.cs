@@ -22,7 +22,7 @@ namespace Tetris
             var top =PositionsUtility.MostTopVector3(baseFunction.currentFallingPositions);
             if (top.y <= endGameY)
             {
-                //TetrisManager.Instance.EndGame();
+                TetrisManager.Instance.EndGame();
             }
             
         }

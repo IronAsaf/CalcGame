@@ -1,6 +1,10 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using FunctionCreator;
+using Global;
+using UI;
 using UnityEngine;
 using UnityEngine.Events;
 using Utility;
@@ -11,6 +15,7 @@ namespace Tetris
     {
         public UnityEvent onHitEvent;
         public UnityEvent onFunctionChangeEvent;
+        public UnityEvent onGameEndEvent;
         [SerializeField] private LevelMaker level;
         [SerializeField] private GameObject endGameScreen;
         [SerializeField] private List<FunctionComponent> currentTopFunction;
@@ -18,6 +23,7 @@ namespace Tetris
         private int currentFallingFunctionIndex;
         public FunctionMaker baseFunctionMaker;
         private const float BaseFunctionAdvance = 0.01f;
+        private const float EndGameDelay = 1f;
         protected override void Awake()
         {
             base.Awake();
@@ -25,6 +31,7 @@ namespace Tetris
             currentTopFunction = level.functionsForLevelList[0].functionComponents.ToList();
             onHitEvent = new UnityEvent();
             onFunctionChangeEvent = new UnityEvent();
+            onGameEndEvent = new UnityEvent();
         }
 
         private void Start()
@@ -120,8 +127,16 @@ namespace Tetris
 
         public void EndGame()
         {
+            onGameEndEvent?.Invoke();
+            StartCoroutine(DelayEndGame());
+        }
+
+        private IEnumerator DelayEndGame()
+        {
+            yield return new WaitForSeconds(EndGameDelay);
             Time.timeScale = 0f;
             endGameScreen.SetActive(true);
+            endGameScreen.GetComponent<CanvasGroup>().DOFade(1f, 1f).SetUpdate(true);
         }
     }
 }

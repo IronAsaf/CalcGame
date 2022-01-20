@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+using DG.Tweening;
+using Tetris;
 using TMPro;
 using UnityEngine;
 using Utility;
@@ -11,12 +14,15 @@ namespace UI
         [SerializeField] private GameObject characterCanvas;
         [SerializeField] private GameObject staticsCanvas;
         [SerializeField] private TMP_Text scoreText;
+        [SerializeField] private TMP_Text endGameScreenScoreText;
 
         protected override void Awake()
         {
             base.Awake();
             ToggleCanvases();
         }
+
+
 
         private void ToggleCanvases()
         {
@@ -31,6 +37,16 @@ namespace UI
         public void UpdateScore(int amount)
         {
             scoreText.text = amount.ToString();
+        }
+
+        public IEnumerator TextUrgency(Color color, float length = 1f)
+        {
+            yield return new DOTweenCYInstruction.WaitForCompletion(scoreText.DOColor(color, length));
+        }
+
+        public void FixEndGameScoreText(int amount)
+        {
+            endGameScreenScoreText.text = amount.ToString();
         }
     }
 }

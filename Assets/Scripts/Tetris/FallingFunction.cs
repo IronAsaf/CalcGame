@@ -20,6 +20,7 @@ namespace Tetris
         protected override void Start()
         {
             TetrisManager.Instance.onFunctionChangeEvent.AddListener(OnFunctionsHitEvent);
+            TetrisManager.Instance.onGameEndEvent.AddListener(OnEndGame);
             SetupInitialFallingFunction();
             base.Start();
         }
@@ -35,6 +36,11 @@ namespace Tetris
         private void FixedUpdate()
         {
             rigidbody2DRef.velocity = new Vector2(0, speed);
+        }
+
+        private void OnEndGame()
+        {
+            speed = 0f;
         }
     }
 }
