@@ -18,9 +18,9 @@ namespace MainMenu
             SceneManager.LoadScene(sceneToLoad.ToString());
         }
 
-        public void LoadSceneByName(SceneNames scene)
+        public void LoadSceneByName(int scene)
         {
-            SceneManager.LoadScene(scene.ToString());
+            SceneManager.LoadScene(scene);
         }
     }
 }
