@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d42c432c314ef294a992882f0941614c, type: 3}
+  m_Name: Complicated
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  functionDisplay: {fileID: 0}
+  functionXAdvancement: 0.25
+  shouldFunctionBeNormalized: 0
+  functionNormalizeScaler: 1.5
+  rectClamp: {x: -1, y: 2}
+  rectYClamp: {x: -2, y: 2}
+  positions:
+  - {x: 0.25, y: -0.38629436}
+  - {x: 0.5, y: 0.30685282}
+  - {x: 0.75, y: 0.71231794}
+  - {x: 1, y: 1}
+  - {x: 1.25, y: 1.2231436}
+  - {x: 1.5, y: 1.4054651}
+  - {x: 1.75, y: 1.5596159}
+  functionComponents:
+  - type: 6
+    componentDuplicateAmount: 2
+    assistiveNumber: 0
+  - type: 0
+    componentDuplicateAmount: 1
+    assistiveNumber: 0
+  - type: 5
+    componentDuplicateAmount: 1
+    assistiveNumber: 0

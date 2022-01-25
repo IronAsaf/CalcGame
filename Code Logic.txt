@@ -1,0 +1,12 @@
+Code notes:
+
+basically have a thing where the base function is the only one that needs a recalculation for all side. For the falling function it wqill ask a 300 dot recalculation, and for itself it will always have 300 dots, all in the same position then we do the recalc.
+The recalc would be basially to do F_new.y = F1.y -F2.y; the X would be the same X for all of them. as in it starts at like the highest minimum X to the Highest maximum X and from there it increments 300 dots. 
+
+in theory it all works fine. 
+the issue is game design - cant understand these functions without content.
+SHould it stay this way?
+
+I think we need a Grid for the player
+
+Fix scaling then see if the issue persists.

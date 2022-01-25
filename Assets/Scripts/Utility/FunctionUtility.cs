@@ -22,7 +22,7 @@ namespace Utility
         }
 
         //Calculate ImmediateValue - for like LogX , i give X it returns value.
-        private static float CalculateImmediateValue(FunctionComponent func, float currentXValue)
+        public static float CalculateImmediateValue(FunctionComponent func, float currentXValue)
         {
             var f = 0f;
             switch (func.type)
@@ -49,7 +49,7 @@ namespace Utility
             return f;
         }
         //Calculate pairing - i give it 2 values, it does the operation, so if I get 10 and 19, and i am obj type of + i return 29.
-        private static float CalculatePairingValue(FunctionComponent left, FunctionComponent right, FunctionComponent oper, float currentXValue)
+        public static float CalculatePairingValue(FunctionComponent left, FunctionComponent right, FunctionComponent oper, float currentXValue)
         {
             var val1 = CalculateImmediateValue(left, currentXValue);
             var val2 = CalculateImmediateValue(right, currentXValue);
@@ -92,7 +92,7 @@ namespace Utility
                 if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
                 {
                     temp.y += CalculateImmediateValue(components[0], i);
-                    if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
+                    //if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
                     positions.Add(temp);
                     continue;
                 }
@@ -114,19 +114,19 @@ namespace Utility
                             break;
                     }
                 }
-                if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
+                //if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
                 positions.Add(temp);
             }
             Debug.Log($"<color=#00cc99>Positions Generated</color>");
             
-            /*if(shouldNormalize)
+            if(shouldNormalize)
             {
                 for (int i = 0; i < positions.Count; i++)
                 {
                     if (positions[i] == Vector2.zero) continue;
                     positions[i] *= normalizeScaler / positions[i].magnitude;
                 }
-            }*/
+            }
             return positions;
         }
 
@@ -159,7 +159,8 @@ namespace Utility
             if (value >= constraint.x && value <= constraint.y) return true;
             return false;
         }
-        private static bool ValidateComponentList(IReadOnlyList<FunctionComponent> components)
+
+        public static bool ValidateComponentList(IReadOnlyList<FunctionComponent> components)
         {
             if (components.Count == 1 && !IsOperator(components[0].type))
             {

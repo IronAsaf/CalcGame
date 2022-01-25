@@ -30,7 +30,7 @@ namespace Tetris
             SetupGo(currentFallingPositions);
         }
 
-        public void SetupGo(List<Vector3> positions)
+        protected void SetupGo(List<Vector3> positions)
         {
             if (positions == null) return;
             try
