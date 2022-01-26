@@ -393,15 +393,9 @@ MonoBehaviour:
   positions: []
   positionsNonNormal: []
   comps:
-  - type: 7
-    componentDuplicateAmount: 1
-    assistiveNumber: 0
-  - type: 0
-    componentDuplicateAmount: 1
-    assistiveNumber: 0
   - type: 6
     componentDuplicateAmount: 1
-    assistiveNumber: 2
+    assistiveNumber: 3
 --- !u!4 &897282072
 Transform:
   m_ObjectHideFlags: 0

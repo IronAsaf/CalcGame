@@ -26,10 +26,8 @@ namespace TestingZone
 
         private void CalcPos()
         {
-            positions = CalculatePositions(comps, new Vector2(-100, 100), 
-                new Vector2(-100, 100), 10, true, 1f);
-            positionsNonNormal = CalculatePositions(comps, new Vector2(-100, 100), 
-                new Vector2(-100, 100), 10, false);
+            positions = CalculatePositions(comps, new Vector2(-1000, 1000), 
+                new Vector2(-1000, 1000), 10, true, 3f);
         }
         private void SetupGo()
         {
@@ -105,7 +103,7 @@ namespace TestingZone
             //idk if this will work but we should try it. 
             if(shouldNormalize)
             {
-                vector2S = PositionsUtility.MinMaxScalar(vector2S);
+                vector2S = PositionsUtility.MinMaxScalar(vector2S, normalizeScaler);
             }
             return vector2S;
         }

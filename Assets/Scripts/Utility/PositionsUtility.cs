@@ -123,7 +123,7 @@ namespace Utility
             return copy;
         }
 
-        public static List<Vector2> MinMaxScalar(List<Vector2> positions)
+        public static List<Vector2> MinMaxScalar(List<Vector2> positions, float manip)
         {
             var copy = positions.ToList();
             float[] xArray = new float[copy.Count];
@@ -140,8 +140,8 @@ namespace Utility
             for (var i = 0; i < copy.Count;i++)
             {
                 Vector3 nPos = Vector3.zero;
-                nPos.x = Scalar(minValues.x, maxValues.x, copy[i].x);
-                nPos.y = Scalar(minValues.y, maxValues.y, copy[i].y);
+                nPos.x = Scalar(minValues.x, maxValues.x, copy[i].x, manip);
+                nPos.y = Scalar(minValues.y, maxValues.y, copy[i].y, manip);
                 copy[i] = nPos;
             }
 
@@ -161,9 +161,9 @@ namespace Utility
             return array[0];
         }
 
-        private static float Scalar(float min, float max, float val)
+        private static float Scalar(float min, float max, float val, float manipulator)
         {
-            return (val - min) / (max - min);
+            return manipulator*(val - min) / (max - min);
         }
         
     }

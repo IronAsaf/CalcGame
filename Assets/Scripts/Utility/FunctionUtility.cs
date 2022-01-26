@@ -121,11 +121,7 @@ namespace Utility
             
             if(shouldNormalize)
             {
-                for (int i = 0; i < positions.Count; i++)
-                {
-                    if (positions[i] == Vector2.zero) continue;
-                    positions[i] *= normalizeScaler / positions[i].magnitude;
-                }
+                positions = PositionsUtility.MinMaxScalar(positions, normalizeScaler);
             }
             return positions;
         }
