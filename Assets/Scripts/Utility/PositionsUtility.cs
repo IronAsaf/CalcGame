@@ -122,5 +122,49 @@ namespace Utility
             
             return copy;
         }
+
+        public static List<Vector2> MinMaxScalar(List<Vector2> positions)
+        {
+            var copy = positions.ToList();
+            float[] xArray = new float[copy.Count];
+            float[] yArray = new float[copy.Count];
+            for (int i = 0; i < copy.Count; i++)
+            {
+                xArray[i] = copy[i].x;
+                yArray[i] = copy[i].y;
+            }
+
+            Vector2 maxValues = new Vector2(MaxValueFromArray(xArray), MaxValueFromArray(yArray));
+            Vector2 minValues = new Vector2(MinValueFromArray(xArray), MinValueFromArray(yArray));
+
+            for (var i = 0; i < copy.Count;i++)
+            {
+                Vector3 nPos = Vector3.zero;
+                nPos.x = Scalar(minValues.x, maxValues.x, copy[i].x);
+                nPos.y = Scalar(minValues.y, maxValues.y, copy[i].y);
+                copy[i] = nPos;
+            }
+
+            return copy;
+        }
+
+        private static float MaxValueFromArray(float[] array)
+        {
+            Array.Sort(array);
+            var max = array[array.Length - 1];
+            return max;
+        }
+        
+        private static float MinValueFromArray(float[] array)
+        {
+            Array.Sort(array);
+            return array[0];
+        }
+
+        private static float Scalar(float min, float max, float val)
+        {
+            return (val - min) / (max - min);
+        }
+        
     }
 }

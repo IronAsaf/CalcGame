@@ -98,17 +98,14 @@ namespace TestingZone
                 vector2S.Add(temp);
             }
             Debug.Log($"<color=#00cc99>Positions Generated</color>");
-            
+            //calc it by VAL-MIN/MAX-MIN 
+            //MAX = most top right
+            //MIN = MOST bottom LEFT
+            // Do for X do for Y. 
+            //idk if this will work but we should try it. 
             if(shouldNormalize)
             {
-                for (int i = 0; i < vector2S.Count; i++)
-                {
-                    if (vector2S[i] == Vector2.zero) continue;
-                    var ve = vector2S[i];
-                    ve.x /= vector2S[i].sqrMagnitude;
-                    ve.y /= vector2S[i].sqrMagnitude;
-                    vector2S[i] = ve;
-                }
+                vector2S = PositionsUtility.MinMaxScalar(vector2S);
             }
             return vector2S;
         }
