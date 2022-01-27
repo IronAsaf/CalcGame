@@ -1,5 +1,7 @@
 Code notes:
 
+
+25/1/22
 basically have a thing where the base function is the only one that needs a recalculation for all side. For the falling function it wqill ask a 300 dot recalculation, and for itself it will always have 300 dots, all in the same position then we do the recalc.
 The recalc would be basially to do F_new.y = F1.y -F2.y; the X would be the same X for all of them. as in it starts at like the highest minimum X to the Highest maximum X and from there it increments 300 dots. 
 
@@ -10,3 +12,12 @@ SHould it stay this way?
 I think we need a Grid for the player
 
 Fix scaling then see if the issue persists.
+
+
+26/1/22
+The scaling works on a tesdt zone, need top fix it for the new game.
+
+re do all the functons, let them normalize, give them 3f scale more or less. i mean 2 should be fine tho.
+
+the main issue i anticipate is that they all moved from the center, so things will be in a offset, which is a issue.
+the workaround is to either recenter which is a bitch and a half, or just move things to the left abit or right, depending on the sazew of nod=es they have.
