@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using FunctionCreator;
 using UnityEngine;
 
@@ -54,9 +53,17 @@ namespace Utility
             var val1 = CalculateImmediateValue(left, currentXValue);
             var val2 = CalculateImmediateValue(right, currentXValue);
 
-            var answer = 0f;
+            var answer = CalculateByOperator(val1, val2, oper.type);
 
-            switch (oper.type)
+            return answer;
+        }
+        
+        //public static 
+
+        private static float CalculateByOperator(float val1, float val2, FunctionalityType func)
+        {
+            float answer = 0f;
+            switch (func)
             {
                 case FunctionalityType.OperatorDivide:
                     answer = val1 / val2;
@@ -71,62 +78,9 @@ namespace Utility
                     answer = val1 + val2;
                     break;
             }
-            
+
             return answer;
         }
-
-        public static List<Vector2> CalculatePositions(List<FunctionComponent> components, Vector2 rectXClamp, Vector2 rectYClamp, float functionXAdvancement, bool shouldNormalize = true, float normalizeScaler = 1.5f)
-        {
-            if (!ValidateComponentList(components))
-            {
-                Debug.Log($"<color=#ff4466>Encountered an Issue with calculation, see LogErrors</color>");
-                return null;
-            }
-            
-            var positions = new List<Vector2>();
-            var isSimpleFunction = components.Count == 1;
-            Debug.Log("Calculating the Function: " + rectXClamp + " y: " + rectYClamp + " adv:" + functionXAdvancement + " I will have: " + Math.Abs(rectXClamp.x-rectXClamp.y)/functionXAdvancement + " dots.");
-            for (var i = rectXClamp.x; i < rectXClamp.y; i+=functionXAdvancement)
-            {
-                var temp = new Vector2(i,0);
-                if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
-                {
-                    temp.y += CalculateImmediateValue(components[0], i);
-                    //if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
-                    positions.Add(temp);
-                    continue;
-                }
-                for (var op = 1; op < components.Count - 1; op += 2) // Complex function like X + LanX
-                {
-                    //TODO-0003 - Add arithmetic computability ( Divide comes before Add )
-
-                    switch (components[op].type)
-                    {
-                        case FunctionalityType.OperatorDivide:
-                        case FunctionalityType.OperatorMinus:
-                        case FunctionalityType.OperatorMultiply:
-                        case FunctionalityType.OperatorPlus:
-                            temp.y += CalculatePairingValue(components[op - 1],
-                                components[op + 1], components[op], i);
-                            break;
-                        default:
-                            Debug.LogWarning("Found unknown operator in calculation");
-                            break;
-                    }
-                }
-                //if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
-                positions.Add(temp);
-            }
-            Debug.Log($"<color=#00cc99>Positions Generated</color>");
-            
-            if(shouldNormalize)
-            {
-                positions = PositionsUtility.MinMaxScalar(positions, normalizeScaler);
-            }
-            return positions;
-        }
-        
-        
         public static List<Vector2> CalculatePositionsNew(List<FunctionComponent> components, Vector2 rectXClamp, Vector2 rectYClamp, float functionXAdvancement, bool shouldNormalize = true, float normalizeScaler = 1.5f)
         {
             if (!ValidateComponentList(components))
@@ -137,20 +91,34 @@ namespace Utility
             
             var vector2S = new List<Vector2>();
             var isSimpleFunction = components.Count == 1;
-            Debug.Log("Calculating the Function: " + rectXClamp + " y: " + rectYClamp + " adv:" + functionXAdvancement + " I will have: " + Math.Abs(rectXClamp.x-rectXClamp.y)/functionXAdvancement + " dots.");
-            for (var i = rectXClamp.x; i <= rectXClamp.y; i+=functionXAdvancement)
+            List<FunctionComponent> functions = new List<FunctionComponent>();
+            List<FunctionComponent> operators = new List<FunctionComponent>();
+            foreach (var func in components)
             {
-                var temp = new Vector2(i,0);
+                if (IsOperator(func.type))
+                {
+                    operators.Add(func);
+                }
+                else
+                {
+                    functions.Add(func);
+                }
+            }
+
+            for (var x = rectXClamp.x; x <= rectXClamp.y; x+=functionXAdvancement) // generates X's
+            {
+                var temp = new Vector2(x,0);
                 if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
                 {
-                    var f = CalculateImmediateValue(components[0], i);
-                    if (double.IsNaN(f)) continue;
+                    var f = CalculateImmediateValue(components[0], x);
+                    if (float.IsNaN(f)) continue;
                     temp.y = f;
                         
                     //if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
                     vector2S.Add(temp);
                     continue;
                 }
+                /*
                 for (var op = 1; op < components.Count - 1; op += 2) // Complex function like X + LanX
                 {
                     //TODO-0003 - Add arithmetic computability ( Divide comes before Add )
@@ -170,8 +138,17 @@ namespace Utility
                             Debug.LogWarning("Found unknown operator in calculation");
                             break;
                     }
-                }
+                }*/
                 //if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
+
+                List<float> answers = new List<float>();
+                foreach (var func in functions)
+                {
+                    answers.Add(CalculateImmediateValue(func,x));
+                }
+
+                temp.y = CalculateY(answers, operators);
+                if (float.IsNaN(temp.y)) continue;
                 vector2S.Add(temp);
             }
             Debug.Log($"<color=#00cc99>Positions Generated</color>");
@@ -182,11 +159,22 @@ namespace Utility
             }
             return vector2S;
         }
+
+        private static float CalculateY(List<float> xValues, List<FunctionComponent> operators)
+        {
+            float val = xValues[0];
+            int op = 0;
+            for (int i = 1; i < xValues.Count; i++)
+            {
+                val = CalculateByOperator(val, xValues[i], operators[op].type);
+                op++;
+            }
+            return val;
+        }
         
         private static bool ValidateVectorConstraint(float value, Vector2 constraint)
         {
-            if (value >= constraint.x && value <= constraint.y) return true;
-            return false;
+            return value >= constraint.x && value <= constraint.y;
         }
 
         public static bool ValidateComponentList(IReadOnlyList<FunctionComponent> components)

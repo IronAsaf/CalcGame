@@ -12,13 +12,16 @@ namespace TestingZone
     {
         public FunctionMaker scriptable;
         public bool useScriptable = true;
+        
+        public Vector2 clamp = new(-1000, 1000); 
+        public float step = 10f;
+        public bool shouldNorma = true;
+        public float normaScale = 3f;
+        public List<FunctionComponent> comps;
+        public List<Vector2> positions;
+        
         public PathCreator pathCreator;
         public RoadMeshCreator roadMeshCreator;
-        public List<Vector2> positions;
-        public List<Vector2> positionsNonNormal;
-        public List<FunctionComponent> comps;
-        
-
         public void OnClick()
         {
             if (useScriptable)
@@ -35,11 +38,7 @@ namespace TestingZone
 
         private void CalcPos()
         {
-            positions = FunctionUtility.CalculatePositionsNew(comps, new Vector2(-1000, 1000), 
-                new Vector2(-1000, 1000), 10, true, 3f);
-            //positions = PositionsUtility.RecenterAdjustmentValue(positions);
-            positionsNonNormal = FunctionUtility.CalculatePositions(comps, new Vector2(-1.5f, 1.5f),
-                new Vector2(-1.5f, 1.5f), 0.025f, false, 1f);
+            positions = FunctionUtility.CalculatePositionsNew(comps, clamp,clamp,step,shouldNorma,normaScale);
         }
         private void SetupGo()
         {

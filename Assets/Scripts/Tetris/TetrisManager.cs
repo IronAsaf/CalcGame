@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using FunctionCreator;
-using Global;
-using UI;
 using UnityEngine;
 using UnityEngine.Events;
 using Utility;
@@ -27,7 +25,6 @@ namespace Tetris
         protected override void Awake()
         {
             base.Awake();
-            //currentBottomFunction = level.bottomFunction.functionComponents.ToList();
             currentTopFunction = level.functionsForLevelList[0].functionComponents.ToList();
             onHitEvent = new UnityEvent();
             onFunctionChangeEvent = new UnityEvent();
@@ -96,7 +93,6 @@ namespace Tetris
 
         public List<Vector3> ResetFallingFunction()
         {
-            //currentFallingFunctionIndex = selectFunction.GetCurrentIndex();
             var pos = level.functionsForLevelList[currentFallingFunctionIndex].positions;
             var b = pos.Select(PositionsUtility.Vector2ToVector3).ToList();
             currentTopFunction = level.functionsForLevelList[currentFallingFunctionIndex].functionComponents.ToList();
@@ -109,7 +105,7 @@ namespace Tetris
             StartCoroutine(DelayEndGame());
         }
 
-        private IEnumerator DelayEndGame()
+        private IEnumerator DelayEndGame() // Cut out to the proper place of this.
         {
             yield return new WaitForSeconds(EndGameDelay);
             Time.timeScale = 0f;
