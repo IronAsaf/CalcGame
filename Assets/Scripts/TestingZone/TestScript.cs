@@ -10,7 +10,8 @@ namespace TestingZone
 {
     public class TestScript : MonoBehaviour
     {
-        public GameObject prefab;
+        public FunctionMaker scriptable;
+        public bool useScriptable = true;
         public PathCreator pathCreator;
         public RoadMeshCreator roadMeshCreator;
         public List<Vector2> positions;
@@ -20,32 +21,32 @@ namespace TestingZone
 
         public void OnClick()
         {
-            CalcPos();
-            SetupGo();
+            if (useScriptable)
+            {
+                RenderStuff(scriptable.positions);
+            }
+            else
+            {
+                CalcPos();
+                SetupGo();
+            }
+            
         }
 
         private void CalcPos()
         {
             positions = FunctionUtility.CalculatePositionsNew(comps, new Vector2(-1000, 1000), 
                 new Vector2(-1000, 1000), 10, true, 3f);
+            //positions = PositionsUtility.RecenterAdjustmentValue(positions);
             positionsNonNormal = FunctionUtility.CalculatePositions(comps, new Vector2(-1.5f, 1.5f),
                 new Vector2(-1.5f, 1.5f), 0.025f, false, 1f);
         }
         private void SetupGo()
         {
             if (positions == null) return;
-            List<Vector3> pos3 = new List<Vector3>();
-            foreach (var po in positions)
-            {
-                pos3.Add(PositionsUtility.Vector2ToVector3(po));
-            }
             try
             {
-                pathCreator.bezierPath = new BezierPath(pos3, false, PathSpace.xy);
-                roadMeshCreator.thickness = 0.02f;
-                roadMeshCreator.flattenSurface = true;
-                roadMeshCreator.roadWidth = 0.02f;
-                roadMeshCreator.TriggerUpdate();
+                RenderStuff(positions);
             }
             catch (Exception e)
             {
@@ -54,13 +55,22 @@ namespace TestingZone
             }
         }
 
-        private List<Vector2> SlideLeftAdjustment(List<Vector2> pos)
+        private void RenderStuff(List<Vector2> pos)
         {
-            float[] X = new float[pos.Count], Y = new float[pos.Count];
-            PositionsUtility.Vector2ListToDimensionsArray(pos, X, Y);
+            List<Vector3> pos3 = new List<Vector3>();
+            foreach (var po in pos)
+            {
+                pos3.Add(PositionsUtility.Vector2ToVector3(po));
+            }
             
-            return null;
+            
+            pathCreator.bezierPath = new BezierPath(pos3, false, PathSpace.xy);
+            roadMeshCreator.thickness = 0.02f;
+            roadMeshCreator.flattenSurface = true;
+            roadMeshCreator.roadWidth = 0.02f;
+            roadMeshCreator.TriggerUpdate();
         }
+        
         public List<Vector2> CalculatePositions(List<FunctionComponent> components, Vector2 rectXClamp, Vector2 rectYClamp, float functionXAdvancement, bool shouldNormalize = true, float normalizeScaler = 1.5f)
         {
             if (!FunctionUtility.ValidateComponentList(components))

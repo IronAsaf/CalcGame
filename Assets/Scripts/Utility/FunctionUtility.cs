@@ -125,35 +125,11 @@ namespace Utility
             }
             return positions;
         }
-
-        //The function will condense duplications like if there is -x-x then it will condense it into -2x.
-        //TODO-0005 - Condense the Function Duplication per the Logic of the operator.
-        private static List<FunctionComponent> CondenseFunctionDuplication(List<FunctionComponent> components)
-        {
-            //Activate this function after the validation process.
-            if (components.Count == 1) return components;
-            for (int i = 2; i < components.Count; i++)
-            {
-                try
-                {
-                    if (components[i - 1].type == FunctionalityType.OperatorMinus &&
-                        components[i + 1].type == FunctionalityType.OperatorMinus)
-                    {
-                        
-                    }
-                }
-                catch (Exception e)
-                {
-                    
-                }
-            }
-
-            return null;
-        }
+        
         
         public static List<Vector2> CalculatePositionsNew(List<FunctionComponent> components, Vector2 rectXClamp, Vector2 rectYClamp, float functionXAdvancement, bool shouldNormalize = true, float normalizeScaler = 1.5f)
         {
-            if (!FunctionUtility.ValidateComponentList(components))
+            if (!ValidateComponentList(components))
             {
                 Debug.Log($"<color=#ff4466>Encountered an Issue with calculation, see LogErrors</color>");
                 return null;
@@ -167,7 +143,10 @@ namespace Utility
                 var temp = new Vector2(i,0);
                 if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
                 {
-                    temp.y += FunctionUtility.CalculateImmediateValue(components[0], i);
+                    var f = CalculateImmediateValue(components[0], i);
+                    if (double.IsNaN(f)) continue;
+                    temp.y = f;
+                        
                     //if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
                     vector2S.Add(temp);
                     continue;
@@ -178,12 +157,14 @@ namespace Utility
 
                     switch (components[op].type)
                     {
-                        case FunctionUtility.FunctionalityType.OperatorDivide:
-                        case FunctionUtility.FunctionalityType.OperatorMinus:
-                        case FunctionUtility.FunctionalityType.OperatorMultiply:
-                        case FunctionUtility.FunctionalityType.OperatorPlus:
-                            temp.y += FunctionUtility.CalculatePairingValue(components[op - 1],
-                                components[op + 1], components[op], i);
+                        case FunctionalityType.OperatorDivide:
+                        case FunctionalityType.OperatorMinus:
+                        case FunctionalityType.OperatorMultiply:
+                        case FunctionalityType.OperatorPlus:
+                            var f= CalculatePairingValue(components[op - 1],
+                                components[op + 1], components[op], i); 
+                            if (double.IsNaN(f)) continue;
+                            temp.y = f;
                             break;
                         default:
                             Debug.LogWarning("Found unknown operator in calculation");
@@ -194,14 +175,10 @@ namespace Utility
                 vector2S.Add(temp);
             }
             Debug.Log($"<color=#00cc99>Positions Generated</color>");
-            //calc it by VAL-MIN/MAX-MIN 
-            //MAX = most top right
-            //MIN = MOST bottom LEFT
-            // Do for X do for Y. 
-            //idk if this will work but we should try it. 
             if(shouldNormalize)
             {
                 vector2S = PositionsUtility.MinMaxScalar(vector2S, normalizeScaler);
+                vector2S = PositionsUtility.RecenterAdjustmentValue(vector2S);
             }
             return vector2S;
         }

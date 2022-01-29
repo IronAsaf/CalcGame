@@ -20,57 +20,6 @@ namespace Utility
             }
             return vec;
         }
-        
-        public static Vector3 MostBottomVector3(List<Vector3> positions)
-        {
-            var vec = Vector3.zero;
-            for (var i = 0; i < positions.Count; i++)
-            {
-                if (positions[i].y < vec.y)
-                {
-                    vec = positions[i];
-                }
-            }
-
-            return vec;
-        }
-        
-        public static Vector3 MostRightVector3(List<Vector3> positions)
-        {
-            var vec = Vector3.zero;
-            for (var i = 0; i < positions.Count; i++)
-            {
-                if (positions[i].x > vec.x)
-                {
-                    vec = positions[i];
-                }
-            }
-
-            return vec;
-        }
-        
-        public static Vector3 MostLeftVector3(List<Vector3> positions)
-        {
-            var vec = Vector3.zero;
-            for (var i = 0; i < positions.Count; i++)
-            {
-                if (positions[i].x < vec.x)
-                {
-                    vec = positions[i];
-                }
-            }
-
-            return vec;
-        }
-
-        public static Vector2 Center(List<Vector3> positions)
-        {
-            var newSize = new Vector2((MostLeftVector3(positions).x +
-                                       MostRightVector3(positions).x)/2,
-                (MostBottomVector3(positions).y +
-                 MostTopVector3(positions).y)/2);
-            return newSize;
-        }
 
         public static Vector3 Vector2ToVector3(Vector2 pos) => new(pos.x, pos.y, 0);
 
@@ -98,7 +47,7 @@ namespace Utility
         private static float MaxValueFromArray(float[] array)
         {
             Array.Sort(array);
-            var max = array[array.Length - 1];
+            var max = array[^1]; // end of array basically.
             return max;
         }
 
@@ -120,6 +69,23 @@ namespace Utility
         {
             return manipulator*(val - min) / (max - min);
         }
-        
+
+        public static List<Vector2> RecenterAdjustmentValue(List<Vector2> pos)
+        {
+            var copy = pos.ToList();
+            var len = copy.Count;
+            float[] x = new float[len], y = new float[len];
+            Vector2ListToDimensionsArray(copy, x, y);
+            Array.Sort(x);
+            Array.Sort(y);
+            var adj = new Vector2(x[len / 2], y[len / 2]);
+            for (var i = 0; i < len; i++)
+            {
+                copy[i] = new Vector2(copy[i].x - adj.x, copy[i].y - adj.y);
+            }
+            
+            //return ;
+            return copy;
+        }
     }
 }
