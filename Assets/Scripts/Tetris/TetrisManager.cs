@@ -60,24 +60,7 @@ namespace Tetris
             currentFallingFunctionIndex = index;
             return level.functionsForLevelList[index].functionDisplay;
         }
-        public List<Vector3> FetchNewFallingFunction(int currentIndex) // When Select is clicked
-        {
-            //TODO-0001 - Make all of this cycle in order.
-            currentFallingFunctionIndex = currentIndex;
-            currentTopFunction = level.functionsForLevelList[currentIndex].functionComponents.ToList();
-            var lstVec2 = level.functionsForLevelList[currentIndex].positions; //
-            var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
-            print($"len of the new function's pos is {b.Count}");
-            return b;
-        }
-        
-        public List<Vector3> FetchNewFallingFunction() // On Hit
-        {
-            var lstVec2 = level.functionsForLevelList[currentFallingFunctionIndex].positions; //
-            var b = lstVec2.Select(PositionsUtility.Vector2ToVector3).ToList();
-            return b;
-        }
-        
+
         public List<Vector3> GetStartingBaseFunction()
         {
             return baseFunctionMaker.positions.Select(PositionsUtility.Vector2ToVector3).ToList();
@@ -97,21 +80,16 @@ namespace Tetris
         public List<Vector3> ResetBaseFunction()
         {
             baseFunctionMaker.functionComponents.Add(new FunctionComponent(FunctionUtility.FunctionalityType.OperatorMinus));
-            //currentBottomFunction.Add(new FunctionComponent(FunctionUtility.FunctionalityType.OperatorMinus));
             foreach (var t in currentTopFunction)
             {
                 baseFunctionMaker.functionComponents.Add(t);
             }
-            //check who is the max of the constrains and use that instead. Take the smallest Advancement from them.
-            //var v = PositionsUtility.MaxVectorByMag(level.functionsForLevelList[currentFallingFunctionIndex].rectClamp, 
-            //need to instantiate a copy of the thing
-            //then work from there. Or have a thing so I can keep looking at it.
-            //thing = functionMaker thing.
+
             baseFunctionMaker.rectClamp = FunctionUtility.NewMaxClamp(baseFunctionMaker.rectClamp,
                 level.functionsForLevelList[currentFallingFunctionIndex].rectClamp);
             baseFunctionMaker.rectYClamp = FunctionUtility.NewMaxClamp(baseFunctionMaker.rectYClamp,
                 level.functionsForLevelList[currentFallingFunctionIndex].rectYClamp);
-            baseFunctionMaker.positions = FunctionUtility.CalculatePositionsNew(baseFunctionMaker.functionComponents, baseFunctionMaker.rectClamp,baseFunctionMaker.rectYClamp, BaseFunctionAdvance);
+            baseFunctionMaker.positions = FunctionUtility.CalculatePositionsNew(baseFunctionMaker.functionComponents, baseFunctionMaker.rectClamp,baseFunctionMaker.rectYClamp, BaseFunctionAdvance, true, 2f);
             var b = baseFunctionMaker.positions.Select(PositionsUtility.Vector2ToVector3).ToList();
             return b;
         }

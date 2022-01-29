@@ -657,13 +657,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scriptable: {fileID: 11400000, guid: f96bb8e1d35fc4e429ec08b75d8a0acd, type: 2}
-  useScriptable: 1
+  useScriptable: 0
   pathCreator: {fileID: 1077351939}
   roadMeshCreator: {fileID: 1077351938}
   positions: []
   positionsNonNormal: []
   comps:
+  - type: 6
+    componentDuplicateAmount: 1
+    assistiveNumber: 2
+  - type: 1
+    componentDuplicateAmount: 1
+    assistiveNumber: 0
+  - type: 6
+    componentDuplicateAmount: 1
+    assistiveNumber: 3
+  - type: 1
+    componentDuplicateAmount: 1
+    assistiveNumber: 0
   - type: 8
+    componentDuplicateAmount: 1
+    assistiveNumber: 0
+  - type: 1
+    componentDuplicateAmount: 1
+    assistiveNumber: 0
+  - type: 7
     componentDuplicateAmount: 1
     assistiveNumber: 0
 --- !u!4 &897282072
