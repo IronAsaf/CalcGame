@@ -150,6 +150,62 @@ namespace Utility
 
             return null;
         }
+        
+        public static List<Vector2> CalculatePositionsNew(List<FunctionComponent> components, Vector2 rectXClamp, Vector2 rectYClamp, float functionXAdvancement, bool shouldNormalize = true, float normalizeScaler = 1.5f)
+        {
+            if (!FunctionUtility.ValidateComponentList(components))
+            {
+                Debug.Log($"<color=#ff4466>Encountered an Issue with calculation, see LogErrors</color>");
+                return null;
+            }
+            
+            var vector2S = new List<Vector2>();
+            var isSimpleFunction = components.Count == 1;
+            Debug.Log("Calculating the Function: " + rectXClamp + " y: " + rectYClamp + " adv:" + functionXAdvancement + " I will have: " + Math.Abs(rectXClamp.x-rectXClamp.y)/functionXAdvancement + " dots.");
+            for (var i = rectXClamp.x; i <= rectXClamp.y; i+=functionXAdvancement)
+            {
+                var temp = new Vector2(i,0);
+                if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
+                {
+                    temp.y += FunctionUtility.CalculateImmediateValue(components[0], i);
+                    //if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
+                    vector2S.Add(temp);
+                    continue;
+                }
+                for (var op = 1; op < components.Count - 1; op += 2) // Complex function like X + LanX
+                {
+                    //TODO-0003 - Add arithmetic computability ( Divide comes before Add )
+
+                    switch (components[op].type)
+                    {
+                        case FunctionUtility.FunctionalityType.OperatorDivide:
+                        case FunctionUtility.FunctionalityType.OperatorMinus:
+                        case FunctionUtility.FunctionalityType.OperatorMultiply:
+                        case FunctionUtility.FunctionalityType.OperatorPlus:
+                            temp.y += FunctionUtility.CalculatePairingValue(components[op - 1],
+                                components[op + 1], components[op], i);
+                            break;
+                        default:
+                            Debug.LogWarning("Found unknown operator in calculation");
+                            break;
+                    }
+                }
+                //if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
+                vector2S.Add(temp);
+            }
+            Debug.Log($"<color=#00cc99>Positions Generated</color>");
+            //calc it by VAL-MIN/MAX-MIN 
+            //MAX = most top right
+            //MIN = MOST bottom LEFT
+            // Do for X do for Y. 
+            //idk if this will work but we should try it. 
+            if(shouldNormalize)
+            {
+                vector2S = PositionsUtility.MinMaxScalar(vector2S, normalizeScaler);
+            }
+            return vector2S;
+        }
+        
         private static bool ValidateVectorConstraint(float value, Vector2 constraint)
         {
             if (value >= constraint.x && value <= constraint.y) return true;

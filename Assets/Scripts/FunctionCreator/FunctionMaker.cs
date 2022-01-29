@@ -79,7 +79,7 @@ namespace FunctionCreator
         [ButtonGroup("Calculation/Buttons")][Button("CalculatePositions")]
         public void CalculatePositions()
         {
-            positions = FunctionUtility.CalculatePositions(
+            positions = FunctionUtility.CalculatePositionsNew(
                 functionComponents,
                 rectClamp,
                 rectYClamp,

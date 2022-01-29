@@ -10,9 +10,9 @@ namespace TestingZone
 {
     public class TestScript : MonoBehaviour
     {
+        public GameObject prefab;
         public PathCreator pathCreator;
         public RoadMeshCreator roadMeshCreator;
-
         public List<Vector2> positions;
         public List<Vector2> positionsNonNormal;
         public List<FunctionComponent> comps;
@@ -26,8 +26,10 @@ namespace TestingZone
 
         private void CalcPos()
         {
-            positions = CalculatePositions(comps, new Vector2(-1000, 1000), 
+            positions = FunctionUtility.CalculatePositionsNew(comps, new Vector2(-1000, 1000), 
                 new Vector2(-1000, 1000), 10, true, 3f);
+            positionsNonNormal = FunctionUtility.CalculatePositions(comps, new Vector2(-1.5f, 1.5f),
+                new Vector2(-1.5f, 1.5f), 0.025f, false, 1f);
         }
         private void SetupGo()
         {
@@ -51,8 +53,14 @@ namespace TestingZone
                     $"<color=#ffdd66>[{gameObject.name}] bezier path</color> [{positions.Count}] There is a issue with the bezier path: {e.Message}");
             }
         }
-        
-        
+
+        private List<Vector2> SlideLeftAdjustment(List<Vector2> pos)
+        {
+            float[] X = new float[pos.Count], Y = new float[pos.Count];
+            PositionsUtility.Vector2ListToDimensionsArray(pos, X, Y);
+            
+            return null;
+        }
         public List<Vector2> CalculatePositions(List<FunctionComponent> components, Vector2 rectXClamp, Vector2 rectYClamp, float functionXAdvancement, bool shouldNormalize = true, float normalizeScaler = 1.5f)
         {
             if (!FunctionUtility.ValidateComponentList(components))
