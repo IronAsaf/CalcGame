@@ -110,37 +110,13 @@ namespace Utility
                 var temp = new Vector2(x,0);
                 if (isSimpleFunction) // a function that is just like LANX or X^2 and thats it.
                 {
-                    var f = CalculateImmediateValue(components[0], x);
-                    if (float.IsNaN(f)) continue;
-                    temp.y = f;
-                        
-                    //if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
+                    temp.y  = CalculateImmediateValue(components[0], x);
+                    if (float.IsNaN(temp.y )) continue;
+                    if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
                     vector2S.Add(temp);
                     continue;
                 }
-                /*
-                for (var op = 1; op < components.Count - 1; op += 2) // Complex function like X + LanX
-                {
-                    //TODO-0003 - Add arithmetic computability ( Divide comes before Add )
-
-                    switch (components[op].type)
-                    {
-                        case FunctionalityType.OperatorDivide:
-                        case FunctionalityType.OperatorMinus:
-                        case FunctionalityType.OperatorMultiply:
-                        case FunctionalityType.OperatorPlus:
-                            var f= CalculatePairingValue(components[op - 1],
-                                components[op + 1], components[op], i); 
-                            if (double.IsNaN(f)) continue;
-                            temp.y = f;
-                            break;
-                        default:
-                            Debug.LogWarning("Found unknown operator in calculation");
-                            break;
-                    }
-                }*/
-                //if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
-
+                
                 List<float> answers = new List<float>();
                 foreach (var func in functions)
                 {
@@ -149,6 +125,7 @@ namespace Utility
 
                 temp.y = CalculateY(answers, operators);
                 if (float.IsNaN(temp.y)) continue;
+                if (!ValidateVectorConstraint(temp.y, rectYClamp)) continue; // Exceeds clamp.
                 vector2S.Add(temp);
             }
             Debug.Log($"<color=#00cc99>Positions Generated</color>");
