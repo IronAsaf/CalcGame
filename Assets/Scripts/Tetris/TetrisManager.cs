@@ -20,7 +20,7 @@ namespace Tetris
         private List<Vector3> startingBaseFunctionPositions;
         private int currentFallingFunctionIndex;
         public FunctionMaker baseFunctionMaker;
-        private const float BaseFunctionAdvance = 10f;
+        private const float BaseFunctionAdvance = 0.025f;
         private const float EndGameDelay = 1f;
         protected override void Awake()
         {
@@ -86,7 +86,7 @@ namespace Tetris
                 level.functionsForLevelList[currentFallingFunctionIndex].rectClamp);
             baseFunctionMaker.rectYClamp = FunctionUtility.NewMaxClamp(baseFunctionMaker.rectYClamp,
                 level.functionsForLevelList[currentFallingFunctionIndex].rectYClamp);
-            baseFunctionMaker.positions = FunctionUtility.CalculatePositionsNew(baseFunctionMaker.functionComponents, baseFunctionMaker.rectClamp,baseFunctionMaker.rectYClamp, BaseFunctionAdvance, true, 2f);
+            baseFunctionMaker.positions = FunctionUtility.CalculatePositionsNew(baseFunctionMaker.functionComponents, baseFunctionMaker.rectClamp,baseFunctionMaker.rectYClamp, BaseFunctionAdvance, false, 2f);
             var b = baseFunctionMaker.positions.Select(PositionsUtility.Vector2ToVector3).ToList();
             return b;
         }

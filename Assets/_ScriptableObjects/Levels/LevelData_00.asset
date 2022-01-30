@@ -28,6 +28,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 708fe209c923a0a438cd72c6b96ef8d7, type: 2}
   - {fileID: 11400000, guid: f96bb8e1d35fc4e429ec08b75d8a0acd, type: 2}
   - {fileID: 11400000, guid: 987aeba30a70d9f438f116dafda89e20, type: 2}
-  bottomFunction: {fileID: 11400000, guid: 026655c9a1855cf42a4c56b8ae9d8a24, type: 2}
-  speedIncreasePerHit: 0.15
+  bottomFunction: {fileID: 11400000, guid: 708fe209c923a0a438cd72c6b96ef8d7, type: 2}
+  speedIncreasePerHit: 0.4
   lineFunctionYPos: 0

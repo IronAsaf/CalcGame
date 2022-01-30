@@ -21,7 +21,7 @@ namespace Utility
         }
 
         //Calculate ImmediateValue - for like LogX , i give X it returns value.
-        public static float CalculateImmediateValue(FunctionComponent func, float currentXValue)
+        private static float CalculateImmediateValue(FunctionComponent func, float currentXValue)
         {
             var f = 0f;
             switch (func.type)
@@ -47,18 +47,6 @@ namespace Utility
             }
             return f;
         }
-        //Calculate pairing - i give it 2 values, it does the operation, so if I get 10 and 19, and i am obj type of + i return 29.
-        public static float CalculatePairingValue(FunctionComponent left, FunctionComponent right, FunctionComponent oper, float currentXValue)
-        {
-            var val1 = CalculateImmediateValue(left, currentXValue);
-            var val2 = CalculateImmediateValue(right, currentXValue);
-
-            var answer = CalculateByOperator(val1, val2, oper.type);
-
-            return answer;
-        }
-        
-        //public static 
 
         private static float CalculateByOperator(float val1, float val2, FunctionalityType func)
         {

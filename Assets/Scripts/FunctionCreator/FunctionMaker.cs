@@ -93,7 +93,7 @@ namespace FunctionCreator
         {
             functionComponents = new List<FunctionComponent>();
             positions = new List<Vector2>();
-            functionXAdvancement = 0.25f;
+            functionXAdvancement = 0.025f;
             shouldFunctionBeNormalized = true;
             rectClamp = new Vector2(-1.5f,1.5f);
             rectYClamp = new Vector2(-1.5f,1.5f);
