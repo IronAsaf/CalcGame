@@ -15,7 +15,7 @@ namespace UI
         [SerializeField] private GameObject staticsCanvas;
         [SerializeField] private TMP_Text scoreText;
         [SerializeField] private TMP_Text endGameScreenScoreText;
-
+        public int currentScore;
         protected override void Awake()
         {
             base.Awake();
@@ -37,6 +37,7 @@ namespace UI
         public void UpdateScore(int amount)
         {
             scoreText.text = amount.ToString();
+            currentScore = amount;
         }
 
         public IEnumerator TextUrgency(Color color, float length = 1f)
@@ -47,6 +48,7 @@ namespace UI
         public void FixEndGameScoreText(int amount)
         {
             endGameScreenScoreText.text = amount.ToString();
+            currentScore = amount;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Tetris
         public UnityEvent onHitEvent;
         public UnityEvent onFunctionChangeEvent;
         public UnityEvent onGameEndEvent;
-        [SerializeField] private LevelMaker level;
+        public LevelMaker level;
         [SerializeField] private GameObject endGameScreen;
         [SerializeField] private List<FunctionComponent> currentTopFunction;
         private List<Vector3> startingBaseFunctionPositions;

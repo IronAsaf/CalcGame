@@ -15,7 +15,7 @@ namespace FunctionCreator
         public float speedIncreasePerHit = 0.3f;
         public float lineFunctionYPos = 0;
         public int minimumAmountOfScoreToWin = 5000;
-
+        public bool levelComplete = false;
         private void Awake()
         {
             ReorderList();
