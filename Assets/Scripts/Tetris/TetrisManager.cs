@@ -14,6 +14,7 @@ namespace Tetris
         public UnityEvent onHitEvent;
         public UnityEvent onFunctionChangeEvent;
         public UnityEvent onGameEndEvent;
+        public UnityEvent onGamRestart;
         public LevelMaker level;
         [SerializeField] private GameObject endGameScreen;
         [SerializeField] private List<FunctionComponent> currentTopFunction;
@@ -25,16 +26,35 @@ namespace Tetris
         protected override void Awake()
         {
             base.Awake();
-            currentTopFunction = level.functionsForLevelList[0].functionComponents.ToList();
             onHitEvent = new UnityEvent();
             onFunctionChangeEvent = new UnityEvent();
             onGameEndEvent = new UnityEvent();
+            onGamRestart = new UnityEvent();
+            TetrisManagerAwake();
+            onGamRestart.AddListener(RestartTetrisManager);
         }
 
+
+        private void TetrisManagerAwake()
+        {
+            currentTopFunction = level.functionsForLevelList[0].functionComponents.ToList();
+        }
         private void Start()
         {
+            InitializeBottomFunction();
+        }
+
+        private void InitializeBottomFunction()
+        {
+            Destroy(baseFunctionMaker);
             baseFunctionMaker = ScriptableObject.CreateInstance<FunctionMaker>();
             baseFunctionMaker.Init(level.bottomFunction);
+        }
+
+        public void RestartTetrisManager()
+        {
+            TetrisManagerAwake();
+            InitializeBottomFunction();
         }
 
         /// <summary>

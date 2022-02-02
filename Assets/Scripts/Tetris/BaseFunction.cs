@@ -24,5 +24,11 @@ namespace Tetris
             currentFallingPositions = TetrisManager.Instance.ResetBaseFunction();
             SetupGo(currentFallingPositions);
         }
+
+        protected override void RestartFunction()
+        {
+            currentFallingPositions = TetrisManager.Instance.GetStartingBaseFunction();
+            SetupGo(currentFallingPositions);
+        }
     }
 }

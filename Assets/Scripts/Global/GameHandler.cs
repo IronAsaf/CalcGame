@@ -5,7 +5,6 @@ using UI;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Utility;
 
 namespace Global
 {
@@ -29,6 +28,7 @@ namespace Global
             StartCoroutine(GameScore());
             UiManager.Instance.UpdateScore(scoreStart);
             TetrisManager.Instance.onGameEndEvent?.AddListener(EndGame);
+            TetrisManager.Instance.onGamRestart?.AddListener(OnGameRestart);
         }
         
         private IEnumerator GameScore()
@@ -67,15 +67,11 @@ namespace Global
             UiManager.Instance.FixEndGameScoreText(currentScore);
         }
 
-        public void LoadStartScene()
+        private void OnGameRestart()
         {
-            SceneManager.LoadScene(0, LoadSceneMode.Single);
+            currentScore = scoreStart;
+            TimeController(1f);
+            StartCoroutine(GameScore());
         }
-
-        public void LoadEndScene()
-        {
-            SceneManager.LoadScene(2, LoadSceneMode.Single);
-        }
-        
     }
 }

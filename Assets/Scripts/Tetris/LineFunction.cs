@@ -10,12 +10,16 @@ namespace Tetris
         private float endGameY;
         protected override void Start()
         {
-            var center = baseFunction.transform.position;
-            transform.SetPositionAndRotation(center, Quaternion.identity);
-            endGameY = TetrisManager.Instance.GetEndGameYPos();
+            RecenterLine();
             base.Start();
         }
 
+        private void RecenterLine()
+        {
+            var center = baseFunction.transform.position;
+            transform.SetPositionAndRotation(center, Quaternion.identity);
+            endGameY = TetrisManager.Instance.GetEndGameYPos();
+        }
         protected override void OnFunctionsHitEvent()
         {
             base.OnFunctionsHitEvent();
@@ -25,6 +29,11 @@ namespace Tetris
                 TetrisManager.Instance.EndGame();
             }
             
+        }
+
+        protected override void RestartFunction()
+        {
+            RecenterLine();
         }
     }
 }

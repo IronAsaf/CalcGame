@@ -20,8 +20,8 @@ namespace Tetris
 
         protected virtual void Start()
         {
-            print($"register to on hit event - {gameObject.name}");
             TetrisManager.Instance.onHitEvent.AddListener(OnFunctionsHitEvent);
+            TetrisManager.Instance.onGamRestart.AddListener(RestartFunction);
         }
 
         protected void SetupInitialFallingFunction()
@@ -51,16 +51,23 @@ namespace Tetris
         protected virtual void OnDisable()
         {
             TetrisManager.Instance.onHitEvent?.RemoveListener(OnFunctionsHitEvent);
+            TetrisManager.Instance.onGamRestart?.RemoveListener(RestartFunction);
         }
 
         protected void OnDestroy()
         {
             TetrisManager.Instance.onHitEvent?.RemoveListener(OnFunctionsHitEvent);
+            TetrisManager.Instance.onGamRestart?.RemoveListener(RestartFunction);
         }
 
         protected virtual void OnFunctionsHitEvent()
         {
             print($"event handle on hit of {gameObject.name}");
+        }
+
+        protected virtual void RestartFunction()
+        {
+            
         }
     }
 }

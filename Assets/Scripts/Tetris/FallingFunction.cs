@@ -10,13 +10,14 @@ namespace Tetris
         private Rigidbody2D rigidbody2DRef;
         private Vector2 startingPos;
         private float speed = -1f; // TEMP
+        private const float OldSpeed = -1f;
         protected override void Awake()
         {
             base.Awake();
             startingPos = transform.localPosition;
             rigidbody2DRef = GetComponent<Rigidbody2D>();
         }
-
+        
         protected override void Start()
         {
             TetrisManager.Instance.onFunctionChangeEvent.AddListener(OnFunctionsHitEvent);
@@ -41,6 +42,15 @@ namespace Tetris
         private void OnEndGame()
         {
             speed = 0f;
+        }
+
+        protected override void RestartFunction()
+        {
+            SetupInitialFallingFunction();
+            transform.SetPositionAndRotation(PositionsUtility.Vector2ToVector3(startingPos),Quaternion.identity);
+            currentFallingPositions = TetrisManager.Instance.ResetFallingFunction();
+            SetupGo(currentFallingPositions);
+            speed = OldSpeed;
         }
     }
 }
