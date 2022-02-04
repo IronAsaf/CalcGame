@@ -1,3 +1,4 @@
+using Global;
 using Tetris;
 using TMPro;
 using UnityEngine;
@@ -29,7 +30,6 @@ namespace UI.Popups
 
         public void OnClickPlayAgain()
         {
-            //TODO
             TetrisManager.Instance.level.ResetLevel();
             TetrisManager.Instance.onGamRestart.Invoke();
             gameObject.SetActive(false);
@@ -37,17 +37,7 @@ namespace UI.Popups
 
         public void OnClickMainMenu()
         {
-            LoadStartScene();
-        }
-        
-        public void LoadStartScene()
-        {
-            SceneManager.LoadScene(0, LoadSceneMode.Single);
-        }
-
-        public void LoadEndScene()
-        {
-            SceneManager.LoadScene(2, LoadSceneMode.Single);
+            SceneHandler.Instance.LoadScene(SceneHandler.SceneNames.MainMenu);
         }
     }
 }

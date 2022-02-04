@@ -4,7 +4,6 @@ using Tetris;
 using UI;
 using Unity.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Global
 {
