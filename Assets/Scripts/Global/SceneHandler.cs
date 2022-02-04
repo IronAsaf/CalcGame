@@ -6,11 +6,6 @@ namespace Global
 {
     public class SceneHandler : Singleton<SceneHandler>
     {
-        protected override void Awake()
-        {
-            base.Awake();
-            DontDestroyOnLoad(this);
-        }
         public enum SceneNames
         {
             FunctionGame, MainMenu, QuitScene
