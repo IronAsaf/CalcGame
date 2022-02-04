@@ -3,6 +3,11 @@ using Unity.Collections;
 using UnityEngine;
 using Utility;
 
+/*
+ * This class is responsible for the wellbeing of the project itself.
+ * playerdata, logins, etc etc. All will be here. 
+ */
+
 namespace Global
 {
     public class GameHandler : Singleton<GameHandler>

@@ -2,8 +2,10 @@ using Global;
 using Tetris;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
+/*
+ * This script handles a specific popup for the tetris game, the end game popup.
+ */
 namespace UI.Popups
 {
     public class GameEndPopup : PopupHandler

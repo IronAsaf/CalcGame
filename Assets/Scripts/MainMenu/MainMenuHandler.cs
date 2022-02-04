@@ -1,6 +1,9 @@
 using Global;
 using UnityEngine;
-
+/*
+ * This script handles the main menu button inside the tetris game itself.
+ * Currently there is no proper menu other than 2 buttons to function.
+ */
 namespace MainMenu
 {
     public class MainMenuHandler : MonoBehaviour

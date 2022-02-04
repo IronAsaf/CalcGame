@@ -1,7 +1,11 @@
 using System.Collections;
 using UI;
 using UnityEngine;
-
+/*
+ * This class handles the non-functional aspects of the tetris game, like the score and anything else.
+ * it also collects the data of the game, sends it to the player data.
+ * 
+ */
 namespace Tetris
 {
     public class TetrisGameHandler : MonoBehaviour

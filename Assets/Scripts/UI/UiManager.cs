@@ -1,10 +1,12 @@
-using System;
 using System.Collections;
 using DG.Tweening;
-using Tetris;
 using TMPro;
 using UnityEngine;
 using Utility;
+
+/*
+ * This script handles all the in game Tetris UI scripts telling them what to do and when to do.
+ */
 
 namespace UI
 {

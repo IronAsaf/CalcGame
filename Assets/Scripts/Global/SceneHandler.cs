@@ -1,6 +1,10 @@
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Utility;
+
+/*
+ * This script handles the general scene loading and all that is needed with it.
+ * This is one of the DONOTDESTROY scripts.
+ */
 
 namespace Global
 {

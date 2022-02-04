@@ -1,7 +1,10 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
-
+/*
+ * This script handles the Quit Scene itself, checking to see if you are in WebGL or now
+ * to pop the correct thing.
+ */
 namespace Global
 {
     public class QuitSceneHandler : MonoBehaviour

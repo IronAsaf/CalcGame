@@ -1,16 +1,14 @@
-using System;
 using Global;
 using UnityEngine;
+
+/*
+ * This script handles the MainMenu Scene itself with the canvas functionalities here.
+ */
 
 namespace UI
 {
     public class MenuHandler : MonoBehaviour
     {
-        public void OnEnable()
-        {
-            
-        }
-
         public void OnClickCloseMenu()
         {
             gameObject.SetActive(false);

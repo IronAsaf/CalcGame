@@ -1,7 +1,10 @@
 using Tetris;
 using UnityEngine;
 using UnityEngine.UI;
-
+/*
+ * This script handles the functionaltiy of the static-like canvas aspects such as the score.
+ * And the functions to cycle through as well.
+ */
 namespace UI
 {
     public class StaticCanvasHandler : MonoBehaviour
