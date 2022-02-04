@@ -1,4 +1,5 @@
 using System;
+using Global;
 using UnityEngine;
 
 namespace UI
@@ -13,6 +14,11 @@ namespace UI
         public void OnClickCloseMenu()
         {
             gameObject.SetActive(false);
+        }
+
+        public void OnClickMainMenu()
+        {
+            SceneHandler.Instance.LoadScene(SceneHandler.SceneNames.MainMenu);
         }
     }
 }
