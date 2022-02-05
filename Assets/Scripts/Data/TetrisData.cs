@@ -1,6 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Total Tetris Game Data handler, there should be one of this basically.
+ * It will hold all that Tetris game rounds, functions, and whatever else that is needed.
+ * It will sit inside the player Data.
+ */
+
 namespace Data
 {
     [CreateAssetMenu(menuName = "GameData/Tetris Data")]

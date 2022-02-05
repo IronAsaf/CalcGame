@@ -17,16 +17,21 @@ namespace Tetris
         [SerializeField] private int scoreStart = 10000;
         public int currentScore;
         [SerializeField] private float scoreConstraint = 0.05f;
-
         [SerializeField] private TetrisRoundData currentRound;
         [SerializeField] private TetrisFunctionData currentFunctionData;
-        // Start is called before the first frame update
+        private TetrisData tetrisData;
         void Awake()
         {
+            tetrisData = GameHandler.Instance.playerData.tetrisGameData;
             currentScore = scoreStart;
-            currentFunctionData = GameHandler.Instance.playerData.tetrisGameData.GetCurrentFunctionData(TetrisManager.Instance
-                .baseFunctionMaker.functionBaseName);
-            currentRound = new TetrisRoundData();
+            GatherRoundData();
+        }
+
+        private void GatherRoundData()
+        {
+            var bottomFunctionName = TetrisManager.Instance.baseFunctionMaker.functionBaseName;
+            currentFunctionData = tetrisData.GetCurrentFunctionData(bottomFunctionName);
+            currentRound = new TetrisRoundData(bottomFunctionName);
         }
         private void Start()
         {
@@ -70,6 +75,7 @@ namespace Tetris
         {
             StopCoroutine(GameScore());
             UiManager.Instance.FixEndGameScoreText(currentScore);
+            currentRound.EndGame(TetrisManager.Instance.level.levelComplete,currentScore,scoreStart);
             GameHandler.Instance.playerData.tetrisGameData.AddRound(currentRound);
             //todo update player data here.
         }
@@ -79,6 +85,7 @@ namespace Tetris
             currentScore = scoreStart;
             TimeController(1f);
             StartCoroutine(GameScore());
+            GatherRoundData();
         }
     }
 }
