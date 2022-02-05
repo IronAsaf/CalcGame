@@ -38,9 +38,8 @@ MonoBehaviour:
   timesPlayedGame: 0
   totalWinLoseRatio: 0
   allFunctions:
-  - functionName: X^2
-    winLostRatioWithFunction: 0
-    maxScoreWithFunction: 0
-    minScoreWithFunction: 0
-    averageScoreWithFunction: 0
+  - {fileID: 11400000, guid: 5c331abda508df6429685659c5e1460b, type: 2}
+  - {fileID: 11400000, guid: 7d8a69045c567794081dc4b8c26ebb78, type: 2}
+  - {fileID: 11400000, guid: ea1b3ead0d523f8448af34f7edfef444, type: 2}
+  - {fileID: 11400000, guid: 5fc715a3566240c4899d1c6c3fff4045, type: 2}
   allRounds: []

@@ -23,6 +23,7 @@ MonoBehaviour:
     SerializationNodes: []
   functionName: X^3
   totalGamesPlayedWithThisFunction: 0
+  winLose: {x: 0, y: 0}
   winLostRatioWithFunction: 0
   maxScoreWithFunction: 0
   minScoreWithFunction: 0
