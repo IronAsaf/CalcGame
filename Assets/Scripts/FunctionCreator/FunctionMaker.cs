@@ -9,6 +9,7 @@ namespace FunctionCreator
     [CreateAssetMenu(menuName = "CalcGame/Function Data", fileName = "FunctionData_00")]
     public class FunctionMaker : SerializedScriptableObject
     {
+        public string functionBaseName;
         public Sprite functionDisplay;
 
         [Title("Outward Function Values")]

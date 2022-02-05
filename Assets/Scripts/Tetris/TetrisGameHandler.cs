@@ -1,4 +1,7 @@
+using System;
 using System.Collections;
+using Data;
+using Global;
 using UI;
 using UnityEngine;
 /*
@@ -14,10 +17,16 @@ namespace Tetris
         [SerializeField] private int scoreStart = 10000;
         public int currentScore;
         [SerializeField] private float scoreConstraint = 0.05f;
+
+        [SerializeField] private TetrisRoundData currentRound;
+        [SerializeField] private TetrisFunctionData currentFunctionData;
         // Start is called before the first frame update
         void Awake()
         {
             currentScore = scoreStart;
+            currentFunctionData = GameHandler.Instance.playerData.tetrisGameData.GetCurrentFunctionData(TetrisManager.Instance
+                .baseFunctionMaker.functionBaseName);
+            currentRound = new TetrisRoundData();
         }
         private void Start()
         {
@@ -61,7 +70,7 @@ namespace Tetris
         {
             StopCoroutine(GameScore());
             UiManager.Instance.FixEndGameScoreText(currentScore);
-            
+            GameHandler.Instance.playerData.tetrisGameData.AddRound(currentRound);
             //todo update player data here.
         }
 

@@ -170,6 +170,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerData: {fileID: 0}
   playerInfo: {fileID: 11400000, guid: 7aefa65af48787841b71d455490d251c, type: 2}
+  isDebugModeActive: 0
+  debugger: {fileID: 493253051805025148, guid: 862f9adac510cf947b2a0f9dd99f7221, type: 3}
 --- !u!1001 &203196701
 PrefabInstance:
   m_ObjectHideFlags: 0

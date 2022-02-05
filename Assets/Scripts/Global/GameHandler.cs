@@ -14,7 +14,8 @@ namespace Global
     {
         [ReadOnly] public PlayerData playerData; // make a reset functionality instead.
         [SerializeField] private PlayerData playerInfo;
-
+        public bool isDebugModeActive;
+        public GameObject debugger;
         protected override void Awake()
         {
             base.Awake();
@@ -25,6 +26,15 @@ namespace Global
         public PlayerData GetPlayerData()
         {
             return playerInfo;
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.N) && Input.GetKey(KeyCode.D) && !isDebugModeActive)
+            {
+                Instantiate(debugger, Instance.transform);
+                isDebugModeActive = true;
+            }
         }
     }
 }
