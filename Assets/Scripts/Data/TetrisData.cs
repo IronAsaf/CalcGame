@@ -15,6 +15,7 @@ namespace Data
     {
         [SerializeField] private List<TetrisFunctionData> allFunctions; // enter by hand.
         [SerializeField] private List<TetrisRoundData> allRounds;
+        
         protected override void Awake()
         {
             base.Awake();
@@ -29,7 +30,6 @@ namespace Data
 
         public void AddRound(TetrisRoundData round, TetrisFunctionData function)
         {
-            //log it, timestamp ?
             allRounds.Add(round);
             timesPlayedGame++;
             function.EndGameUpdate(round.didPlayerWinRound,round.playerScore);
@@ -38,8 +38,6 @@ namespace Data
 
             totalWinLoseRatio = winLoseVector.x / 1f * timesPlayedGame;
             totalTimeSpentPlaying += round.timeSpentPlaying;
-            
-            
         }
 
         public TetrisFunctionData GetCurrentFunctionData(FunctionUtility.FunctionNames functionName)
