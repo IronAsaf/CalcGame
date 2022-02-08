@@ -8,6 +8,7 @@ namespace Data
         public string gameName;
         public int timesPlayedGame;
         public float totalWinLoseRatio;
+        public float totalTimeSpentPlaying;
         public List<IGameRoundData> gameRounds;
 
         protected virtual void Awake()

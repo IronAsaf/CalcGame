@@ -20,6 +20,16 @@ namespace Utility
             Abs,
         }
 
+        public enum FunctionNames
+        {
+            LogX,
+            LanX,
+            XPowerTwo,
+            XPowerThree,
+            X,
+            Abs,
+        }
+
         //Calculate ImmediateValue - for like LogX , i give X it returns value.
         private static float CalculateImmediateValue(FunctionComponent func, float currentXValue)
         {

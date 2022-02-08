@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Utility;
 
 namespace Data
 {
@@ -13,7 +14,7 @@ namespace Data
     [CreateAssetMenu(menuName = "GameData/Tetris Function Data")]
     public class TetrisFunctionData : SerializedScriptableObject
     {
-        public string functionName;
+        public FunctionUtility.FunctionNames functionName;
         [SerializeField] private int totalGamesPlayedWithThisFunction;
         [SerializeField] private Vector2Int winLose = new Vector2Int(0, 0);
         [SerializeField] private float winLostRatioWithFunction;

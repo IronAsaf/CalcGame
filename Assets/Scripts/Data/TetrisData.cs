@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Utility;
 
 /*
  * Total Tetris Game Data handler, there should be one of this basically.
@@ -30,7 +31,7 @@ namespace Data
             allRounds.Add(round);
         }
 
-        public TetrisFunctionData GetCurrentFunctionData(string functionName)
+        public TetrisFunctionData GetCurrentFunctionData(FunctionUtility.FunctionNames functionName)
         {
             foreach (var function in allFunctions)
             {

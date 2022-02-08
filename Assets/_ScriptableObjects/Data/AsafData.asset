@@ -21,6 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  playerAvatar: {fileID: 21300000, guid: a777528ae4b754667bd033442a6e155e, type: 3}
+  playerAvatar: {fileID: 21300000, guid: 71f087b339ca4404291c69ea5bb3efd9, type: 3}
   playerName: Asaf
   score: 0
+  tetrisGameData: {fileID: 11400000, guid: 1965a9dc2710c824fa329efd4df915ed, type: 2}

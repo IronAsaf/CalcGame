@@ -24,7 +24,7 @@ namespace Tetris
         {
             tetrisData = GameHandler.Instance.playerData.tetrisGameData;
             currentScore = scoreStart;
-            GatherRoundData();
+            
         }
 
         private void GatherRoundData()
@@ -35,6 +35,7 @@ namespace Tetris
         }
         private void Start()
         {
+            GatherRoundData();
             StartCoroutine(GameScore());
             UiManager.Instance.UpdateScore(scoreStart);
             TetrisManager.Instance.onGameEndEvent?.AddListener(EndGame);

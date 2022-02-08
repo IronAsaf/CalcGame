@@ -21,6 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  functionBaseName: LnX
   functionDisplay: {fileID: 21300000, guid: 6ed777e018d57e645b42b612a32be4ac, type: 3}
   functionXAdvancement: 0.1
   shouldFunctionBeNormalized: 1

@@ -1,17 +1,18 @@
 using UnityEngine;
+using Utility;
 
 namespace Data
 {
     [System.Serializable]
     public class TetrisRoundData : IGameRoundData
     {
-        public string bottomFunctionName;
+        public FunctionUtility.FunctionNames bottomFunctionName;
         public bool didPlayerWinRound;
         public int playerScore;
         public int startingScore;
         public float timeSpentPlaying;
         public float startTimer, endTimer;
-        public TetrisRoundData(string name)
+        public TetrisRoundData(FunctionUtility.FunctionNames name)
         {
             bottomFunctionName = name;
             startTimer = Time.time;

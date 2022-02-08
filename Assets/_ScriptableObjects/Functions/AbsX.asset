@@ -21,6 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  functionBaseName: AbsX
   functionDisplay: {fileID: 21300000, guid: 1e49dda4f4a8c65419abc906728b93f7, type: 3}
   functionXAdvancement: 0.025
   shouldFunctionBeNormalized: 0
