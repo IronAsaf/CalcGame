@@ -30,6 +30,7 @@ namespace Tetris
         private void GatherRoundData()
         {
             var bottomFunctionName = TetrisManager.Instance.baseFunctionMaker.functionBaseName;
+            print("got bottom function name " + bottomFunctionName);
             currentFunctionData = tetrisData.GetCurrentFunctionData(bottomFunctionName);
             currentRound = new TetrisRoundData(bottomFunctionName);
         }
@@ -76,9 +77,12 @@ namespace Tetris
         {
             StopCoroutine(GameScore());
             UiManager.Instance.FixEndGameScoreText(currentScore);
+            if (TetrisManager.Instance.level.minimumAmountOfScoreToWin <= UiManager.Instance.currentScore)
+            {
+                TetrisManager.Instance.level.levelComplete = true;
+            }
             currentRound.EndGame(TetrisManager.Instance.level.levelComplete,currentScore,scoreStart);
-            GameHandler.Instance.playerData.tetrisGameData.AddRound(currentRound);
-            //todo update player data here.
+            GameHandler.Instance.playerData.tetrisGameData.AddRound(currentRound, currentFunctionData);
         }
 
         private void OnGameRestart()

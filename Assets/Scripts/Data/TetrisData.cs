@@ -18,17 +18,28 @@ namespace Data
         protected override void Awake()
         {
             base.Awake();
+            allRounds = new List<TetrisRoundData>();
         }
 
         protected override void ClearData()
         {
             base.ClearData();
+            allRounds = new List<TetrisRoundData>();
         }
 
-        public void AddRound(TetrisRoundData round)
+        public void AddRound(TetrisRoundData round, TetrisFunctionData function)
         {
-            //log it
+            //log it, timestamp ?
             allRounds.Add(round);
+            timesPlayedGame++;
+            function.EndGameUpdate(round.didPlayerWinRound,round.playerScore);
+            if (round.didPlayerWinRound) winLoseVector.x++;
+            else winLoseVector.y++;
+
+            totalWinLoseRatio = winLoseVector.x / 1f * timesPlayedGame;
+            totalTimeSpentPlaying += round.timeSpentPlaying;
+            
+            
         }
 
         public TetrisFunctionData GetCurrentFunctionData(FunctionUtility.FunctionNames functionName)

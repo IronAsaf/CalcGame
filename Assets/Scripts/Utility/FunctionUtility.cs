@@ -20,7 +20,7 @@ namespace Utility
             Abs,
         }
 
-        public enum FunctionNames
+        public enum FunctionNames //Temp for sure.
         {
             LogX,
             LanX,

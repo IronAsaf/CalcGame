@@ -56,8 +56,8 @@ namespace Tetris
 
         protected void OnDestroy()
         {
-            TetrisManager.Instance.onHitEvent?.RemoveListener(OnFunctionsHitEvent);
-            TetrisManager.Instance.onGamRestart?.RemoveListener(RestartFunction);
+            //TetrisManager.Instance.onHitEvent?.RemoveListener(OnFunctionsHitEvent);
+            //TetrisManager.Instance.onGamRestart?.RemoveListener(RestartFunction);
         }
 
         protected virtual void OnFunctionsHitEvent()

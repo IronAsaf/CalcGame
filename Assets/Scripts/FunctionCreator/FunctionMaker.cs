@@ -103,7 +103,7 @@ namespace FunctionCreator
         //This function will initiate a copy of the needed FunctionMaker Object.
         public void Init(FunctionMaker other)
         {
-            name = "In Game Function";
+            functionBaseName = other.functionBaseName;
             functionXAdvancement = other.functionXAdvancement;
             shouldFunctionBeNormalized = other.shouldFunctionBeNormalized;
             functionNormalizeScaler = other.functionNormalizeScaler;

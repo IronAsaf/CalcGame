@@ -1,5 +1,5 @@
-using System.Collections.Generic;
 using Sirenix.OdinInspector;
+using UnityEngine;
 
 namespace Data
 {
@@ -8,17 +8,16 @@ namespace Data
         public string gameName;
         public int timesPlayedGame;
         public float totalWinLoseRatio;
+        internal Vector2Int winLoseVector; // x = win, y = lose.
         public float totalTimeSpentPlaying;
-        public List<IGameRoundData> gameRounds;
 
         protected virtual void Awake()
         {
-            gameRounds = new List<IGameRoundData>();
+
         }
 
         protected virtual void ClearData()
         {
-            gameRounds = new List<IGameRoundData>();
             totalWinLoseRatio = 0f;
             timesPlayedGame = 0;
         }

@@ -21,6 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  functionBaseName: 3
   functionDisplay: {fileID: 21300000, guid: 1c1cc56ec2f35cd49b39e92b6aa59e25, type: 3}
   functionXAdvancement: 0.025
   shouldFunctionBeNormalized: 0

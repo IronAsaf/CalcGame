@@ -21,8 +21,9 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  functionName: X^2
+  functionName: 2
   totalGamesPlayedWithThisFunction: 0
+  winLose: {x: 0, y: 0}
   winLostRatioWithFunction: 0
   maxScoreWithFunction: 0
   minScoreWithFunction: 0

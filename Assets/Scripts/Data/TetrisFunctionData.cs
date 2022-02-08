@@ -16,12 +16,12 @@ namespace Data
     {
         public FunctionUtility.FunctionNames functionName;
         [SerializeField] private int totalGamesPlayedWithThisFunction;
-        [SerializeField] private Vector2Int winLose = new Vector2Int(0, 0);
+        [SerializeField] private Vector2Int winLose = new Vector2Int(0, 0); // x = win, y = lose.
         [SerializeField] private float winLostRatioWithFunction;
         [SerializeField] private int maxScoreWithFunction;
         [SerializeField] private int minScoreWithFunction;
         [SerializeField] private float averageScoreWithFunction;
-        private List<int> totalScoreGathered;
+        [SerializeField] private List<int> totalScoreGathered;
         
         [Button(name:"Clear Data")]
         public void ClearData()
@@ -32,6 +32,7 @@ namespace Data
             minScoreWithFunction = 0;
             averageScoreWithFunction = 0;
             winLose = Vector2Int.zero;
+            totalScoreGathered = new List<int>();
         }
         
         public void EndGameUpdate(bool didPlayerWin, int score) // called at end game.
@@ -50,8 +51,8 @@ namespace Data
         private void UpdateScore(int score)
         {
             totalScoreGathered.Add(score);
-            if (score > maxScoreWithFunction) maxScoreWithFunction = score;
-            else if (score < minScoreWithFunction) minScoreWithFunction = score;
+            maxScoreWithFunction = totalScoreGathered.Max();
+            minScoreWithFunction = totalScoreGathered.Min();
             averageScoreWithFunction = totalScoreGathered.Sum()*1f / totalGamesPlayedWithThisFunction;
         }
     }
