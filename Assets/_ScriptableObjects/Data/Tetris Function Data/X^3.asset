@@ -22,9 +22,10 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   functionName: 3
-  totalGamesPlayedWithThisFunction: 0
-  winLose: {x: 0, y: 0}
-  winLostRatioWithFunction: 0
-  maxScoreWithFunction: 0
-  minScoreWithFunction: 0
-  averageScoreWithFunction: 0
+  totalGamesPlayedWithThisFunction: 1
+  winLose: {x: 1, y: 0}
+  winLostRatioWithFunction: 1
+  maxScoreWithFunction: 9845
+  minScoreWithFunction: 9845
+  averageScoreWithFunction: 9845
+  totalScoreGathered: 75260000
