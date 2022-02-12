@@ -25,5 +25,5 @@ MonoBehaviour:
   playerName: Asaf
   score: 0
   tetrisGameData: {fileID: 11400000, guid: 1965a9dc2710c824fa329efd4df915ed, type: 2}
-  hasLoggedIn: 1
+  hasLoggedIn: 0
   hasBeenCached: 0

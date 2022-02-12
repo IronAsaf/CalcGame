@@ -15,9 +15,9 @@ MonoBehaviour:
   DevAccountEmail: asafdangoor@gmail.com
   DevAccountToken: nho3oby9wd4jimh113tgato7ksyn7r1w71e3jki1fph16qeo5q9gctoyt65a7i1o9kaqm8k868pq5biygdh3gkuudmroxna6joqxwpcu9spmhwkhu5e4maojpcb44tyu16otiqizj5b4yt8gism6cr9nq88a48gjziwkiwfzk54zfda4gujj78pzswxjqbseoqktt9zx
   SelectedStudio: LearningTime
-  SdkPath: Assets/PlayFabSDK
+  SdkPath: Assets/Plugins/PlayFabSDK
   EdExPath: 
   LocalCloudScriptPath: 
   PanelIsShown: 0
-  curMainMenuIdx: 1
+  curMainMenuIdx: 0
   curSubMenuIdx: 0
