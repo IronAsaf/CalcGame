@@ -1,5 +1,6 @@
 using Data;
-using Unity.Collections;
+using Sirenix.OdinInspector;
+using UI.Popups;
 using UnityEngine;
 using Utility;
 
@@ -12,20 +13,22 @@ namespace Global
 {
     public class GameHandler : Singleton<GameHandler>
     {
-        [ReadOnly] public PlayerData playerData; // make a reset functionality instead.
-        [SerializeField] private PlayerData playerInfo;
+        [Title("References")]
+        [SerializeField] private PlayerLoginPopup loginPopup;
+        
+        [Title("Player Data")]
+        public PlayerData playerData; // make a reset functionality instead.
+        
+        [Title("Ongoing Information")]
         public bool isDebugModeActive;
         public GameObject debugger;
         protected override void Awake()
         {
             base.Awake();
-            playerData = Instantiate(playerInfo);
             DontDestroyOnLoad(this);
-        }
 
-        public PlayerData GetPlayerData()
-        {
-            return playerInfo;
+            if (playerData.hasLoggedIn) return;
+            loginPopup.DisplayLogin();
         }
 
         private void Update()

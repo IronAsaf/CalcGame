@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading;
 using Global;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -13,7 +14,6 @@ namespace UI
     {
         [Title("General Controls")]
         [SerializeField] private Canvas uiCanvas;
-        [SerializeField] private GameObject loginPopup;
         
         [Space] [Title("Player Info")]
         [SerializeField] private TMP_Text playerName;
@@ -34,14 +34,10 @@ namespace UI
 
         private void Awake()
         {
-            loginPopup.SetActive(true);
+            Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
             uiCanvas.gameObject.SetActive(false);
         }
 
-        public void PlayerRegister()
-        {
-            //for the popup thing, check if the name is taken, take data, etc etc.
-        }
         public void ShowPlayerUI()
         {
             uiCanvas.gameObject.SetActive(true);
@@ -51,14 +47,16 @@ namespace UI
             playerImage.sprite = pData.playerAvatar;
 
             var tetris = pData.tetrisGameData;
-            totalWinLoseRatio.text = tetris.totalWinLoseRatio.ToString(CultureInfo.CurrentCulture);
-            amountOfGamesPlayed.text = tetris.timesPlayedGame.ToString();
-            totalTimePlayed.text = tetris.totalTimeSpentPlaying.ToString(CultureInfo.CurrentCulture);
+            totalWinLoseRatio.SetText(tetris.totalWinLoseRatio.ToString(CultureInfo.InvariantCulture));
+            amountOfGamesPlayed.SetText(tetris.timesPlayedGame.ToString());
+            totalTimePlayed.SetText(tetris.totalTimeSpentPlaying.ToString(CultureInfo.InvariantCulture));
 
             var level = tetris.GetCurrentLevel("Level 1");
             levelName.text = level.levelName;
             levelDifficulty.text = level.difficulty.ToString();
             passFail.text = level.levelComplete ? "Completed Level" : "Level incomplete";
+
+            SetupFunctionUI();
         }
         
         private void SetupFunctionUI()
@@ -67,14 +65,18 @@ namespace UI
             for (var i = 0; i < tetris.allFunctions.Count; i++)
             {
                 var funcData = tetris.allFunctions[i];
-                foreach (var function in displayedFunctions)
-                {
-                    function.functionName.text = funcData.functionName.ToString();
-                    function.totalTimePlayed.text = funcData.GetTotalTimePlayedWithThisFunction().ToString(CultureInfo.InvariantCulture);
-                    function.winLoseRatio.text = funcData.GetWinLostRatioWithFunction().ToString(CultureInfo.InvariantCulture);
-                    function.amountOfFunctionAppearance.text = funcData.GetTotalGamesPlayedWithThisFunction().ToString();
-                }
+                var function = displayedFunctions[i];
+                
+                function.functionName.SetText(funcData.functionName.ToString());
+                function.totalTimePlayed.SetText(funcData.GetTotalTimePlayedWithThisFunction().ToString(CultureInfo.InvariantCulture));
+                function.winLoseRatio.SetText(funcData.GetWinLostRatioWithFunction().ToString(CultureInfo.InvariantCulture));
+                function.amountOfFunctionAppearance.SetText(funcData.GetTotalGamesPlayedWithThisFunction().ToString());
             }
+        }
+
+        public void OnClickCloseUI()
+        {
+            uiCanvas.gameObject.SetActive(false);
         }
         
     }

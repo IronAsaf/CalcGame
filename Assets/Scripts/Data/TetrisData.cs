@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using FunctionCreator;
 using UnityEngine;
 using Utility;
@@ -54,15 +56,16 @@ namespace Data
 
         public LevelMaker GetCurrentLevel(string nameOfLevel)
         {
+            Debug.Log("I have " + levelsList.Count + " levels in me.");
             for (int i = 0; i < levelsList.Count; i++)
             {
-                if (nameOfLevel == levelsList[i].levelName)
+                if (String.Equals(levelsList[i].levelName, nameOfLevel))
                 {
                     return levelsList[i];
                 }
             }
-
-            return null;
+            Debug.LogWarning("Did not find Level");
+            return levelsList[0];
         }
     }
 }

@@ -10,11 +10,18 @@ namespace Data
         public string playerName;
         public float score;
         public TetrisData tetrisGameData;
-
-
-        public void CacheData()
+        public bool hasLoggedIn;
+        public bool hasBeenCached;
+        
+        
+        public void Serialize() // send to DB
         {
             
+        }
+
+        public void Deserialize() // take from DB
+        {
+            hasBeenCached = true;
         }
     }
 }
