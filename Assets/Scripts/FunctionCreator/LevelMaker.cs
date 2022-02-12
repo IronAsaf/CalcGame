@@ -8,14 +8,14 @@ namespace FunctionCreator
     [CreateAssetMenu(menuName = "CalcGame/Level Data", fileName = "LevelData_00")]
     public class LevelMaker : SerializedScriptableObject
     {
-        [SerializeField] private string levelName;
-        [SerializeField] private int difficulty;
-        public List<FunctionMaker> functionsForLevelList;
-        public FunctionMaker bottomFunction;
-        public float speedIncreasePerHit = 0.3f;
-        public float lineFunctionYPos = 0;
-        public int minimumAmountOfScoreToWin = 5000;
-        public bool levelComplete = false;
+        [SerializeField] public string levelName;
+        [SerializeField] public int difficulty;
+        [SerializeField] public List<FunctionMaker> functionsForLevelList;
+        [SerializeField] public FunctionMaker bottomFunction;
+        [SerializeField] public float speedIncreasePerHit = 0.3f;
+        [SerializeField] public float lineFunctionYPos = 0;
+        [SerializeField] public int minimumAmountOfScoreToWin = 5000;
+        [SerializeField] public bool levelComplete = false;
         private void Awake()
         {
             ReorderList();

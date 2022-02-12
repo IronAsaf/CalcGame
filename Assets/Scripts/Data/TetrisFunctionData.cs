@@ -16,16 +16,22 @@ namespace Data
     {
         public FunctionUtility.FunctionNames functionName;
         [SerializeField] private int totalGamesPlayedWithThisFunction;
+        [SerializeField] private float totalTimePlayedWithThisFunction;
         [SerializeField] private Vector2Int winLose = new Vector2Int(0, 0); // x = win, y = lose.
         [SerializeField] private float winLostRatioWithFunction;
         [SerializeField] private int maxScoreWithFunction;
         [SerializeField] private int minScoreWithFunction;
         [SerializeField] private float averageScoreWithFunction;
         [SerializeField] private List<int> totalScoreGathered;
+
+        public int GetTotalGamesPlayedWithThisFunction() => totalGamesPlayedWithThisFunction;
+        public float GetWinLostRatioWithFunction() => winLostRatioWithFunction;
+        public float GetTotalTimePlayedWithThisFunction() => totalTimePlayedWithThisFunction;
         
         [Button(name:"Clear Data")]
         public void ClearData()
         {
+            totalTimePlayedWithThisFunction = 0f;
             totalGamesPlayedWithThisFunction = 0;
             winLostRatioWithFunction = 0f;
             maxScoreWithFunction = 0;
@@ -35,8 +41,9 @@ namespace Data
             totalScoreGathered = new List<int>();
         }
         
-        public void EndGameUpdate(bool didPlayerWin, int score) // called at end game.
+        public void EndGameUpdate(bool didPlayerWin, int score, float time) // called at end game.
         {
+            totalTimePlayedWithThisFunction += time;
             totalGamesPlayedWithThisFunction++;
             UpdateWinLoseRatio(didPlayerWin);
             UpdateScore(score);

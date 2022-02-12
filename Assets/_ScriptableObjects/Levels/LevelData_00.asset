@@ -21,7 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
-  levelName: test 1
+  levelName: Level 1
   difficulty: 1
   functionsForLevelList:
   - {fileID: 11400000, guid: 026655c9a1855cf42a4c56b8ae9d8a24, type: 2}
@@ -31,3 +31,5 @@ MonoBehaviour:
   bottomFunction: {fileID: 11400000, guid: 708fe209c923a0a438cd72c6b96ef8d7, type: 2}
   speedIncreasePerHit: 0.4
   lineFunctionYPos: 0
+  minimumAmountOfScoreToWin: 5000
+  levelComplete: 0

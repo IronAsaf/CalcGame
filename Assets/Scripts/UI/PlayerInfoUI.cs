@@ -5,11 +5,16 @@ using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility;
 
 namespace UI
 {
     public class PlayerInfoUI : MonoBehaviour
     {
+        [Title("General Controls")]
+        [SerializeField] private Canvas uiCanvas;
+        [SerializeField] private GameObject loginPopup;
+        
         [Space] [Title("Player Info")]
         [SerializeField] private TMP_Text playerName;
         [SerializeField] private Image playerImage;
@@ -21,6 +26,7 @@ namespace UI
         
         [Space] [Title("Level Information")]
         [SerializeField] private TMP_Text levelName;
+        [SerializeField] private TMP_Text levelDifficulty;
         [SerializeField] private TMP_Text passFail;
 
         [Space] [Title("Functions UI Listing")]
@@ -28,25 +34,46 @@ namespace UI
 
         private void Awake()
         {
+            loginPopup.SetActive(true);
+            uiCanvas.gameObject.SetActive(false);
+        }
+
+        public void PlayerRegister()
+        {
+            //for the popup thing, check if the name is taken, take data, etc etc.
+        }
+        public void ShowPlayerUI()
+        {
+            uiCanvas.gameObject.SetActive(true);
+            
             var pData = GameHandler.Instance.playerData;
             playerName.text = pData.playerName;
             playerImage.sprite = pData.playerAvatar;
 
             var tetris = pData.tetrisGameData;
             totalWinLoseRatio.text = tetris.totalWinLoseRatio.ToString(CultureInfo.CurrentCulture);
-            amountOfGamesPlayed.text = "0"; //placeholder
+            amountOfGamesPlayed.text = tetris.timesPlayedGame.ToString();
             totalTimePlayed.text = tetris.totalTimeSpentPlaying.ToString(CultureInfo.CurrentCulture);
-            
-            //check the FunctionUIDisplay length versus the player data tetris function length thing.
-            //todo
-        }
 
+            var level = tetris.GetCurrentLevel("Level 1");
+            levelName.text = level.levelName;
+            levelDifficulty.text = level.difficulty.ToString();
+            passFail.text = level.levelComplete ? "Completed Level" : "Level incomplete";
+        }
+        
         private void SetupFunctionUI()
         {
             var tetris = GameHandler.Instance.playerData.tetrisGameData;
-            foreach (var function in displayedFunctions)
+            for (var i = 0; i < tetris.allFunctions.Count; i++)
             {
-                //function.functionName 
+                var funcData = tetris.allFunctions[i];
+                foreach (var function in displayedFunctions)
+                {
+                    function.functionName.text = funcData.functionName.ToString();
+                    function.totalTimePlayed.text = funcData.GetTotalTimePlayedWithThisFunction().ToString(CultureInfo.InvariantCulture);
+                    function.winLoseRatio.text = funcData.GetWinLostRatioWithFunction().ToString(CultureInfo.InvariantCulture);
+                    function.amountOfFunctionAppearance.text = funcData.GetTotalGamesPlayedWithThisFunction().ToString();
+                }
             }
         }
         

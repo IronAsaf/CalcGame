@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using FunctionCreator;
 using UnityEngine;
 using Utility;
 
@@ -13,8 +14,8 @@ namespace Data
     [CreateAssetMenu(menuName = "GameData/Tetris Data")]
     public class TetrisData : GameData
     {
-        [SerializeField] private List<TetrisFunctionData> allFunctions; // enter by hand.
-        [SerializeField] private List<TetrisRoundData> allRounds;
+        [SerializeField] public List<TetrisFunctionData> allFunctions; // enter by hand.
+        [SerializeField] public List<TetrisRoundData> allRounds;
         
         protected override void Awake()
         {
@@ -32,7 +33,7 @@ namespace Data
         {
             allRounds.Add(round);
             timesPlayedGame++;
-            function.EndGameUpdate(round.didPlayerWinRound,round.playerScore);
+            function.EndGameUpdate(round.didPlayerWinRound,round.playerScore, round.timeSpentPlaying);
             if (round.didPlayerWinRound) winLoseVector.x++;
             else winLoseVector.y++;
 
@@ -48,6 +49,19 @@ namespace Data
                     return function;
             }
             Debug.LogError("Could not find TetrisFunctionData given name as " + functionName);
+            return null;
+        }
+
+        public LevelMaker GetCurrentLevel(string nameOfLevel)
+        {
+            for (int i = 0; i < levelsList.Count; i++)
+            {
+                if (nameOfLevel == levelsList[i].levelName)
+                {
+                    return levelsList[i];
+                }
+            }
+
             return null;
         }
     }
