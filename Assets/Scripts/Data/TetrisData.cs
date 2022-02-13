@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using Data.Serialize;
 using FunctionCreator;
 using Global;
 using UnityEngine;
@@ -18,6 +20,20 @@ namespace Data
     {
         [SerializeField] public List<TetrisFunctionData> allFunctions; // enter by hand.
         [SerializeField] public List<TetrisRoundData> allRounds;
+
+        public void Setup(TetrisSerialize data)
+        {
+            gameName = data.gameName;
+            timesPlayedGame = data.timesPlayedGame;
+            totalWinLoseRatio = data.totalWinLoseRatio;
+            winLoseVector = data.winLoseVector;
+            totalTimeSpentPlaying = data.totalTimeSpentPlaying;
+            allRounds = data.allRounds.ToList();
+            for (var i =0; i < data.allFunctions.Count; i++)
+            {
+                allFunctions[i].Setup(data.allFunctions[i]);
+            }
+        }
         
         protected override void Awake()
         {

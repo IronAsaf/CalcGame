@@ -1,10 +1,10 @@
 using System.Collections.Generic;
+using Data.Serialize;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
-using Sirenix.Serialization;
 
 namespace Data
 {
@@ -16,6 +16,13 @@ namespace Data
         public TetrisData tetrisGameData;
         public bool hasLoggedIn;
         public bool hasBeenCached;
+
+        public void Setup(PlayerSerialize data)
+        {
+            playerName = data.playerName;
+            score = data.score;
+            tetrisGameData.Setup(data.tetrisGameData);
+        }
         
         [Button("Serialize test")]
         public void Serialize() // send to DB
@@ -23,16 +30,17 @@ namespace Data
             var jsonSerializerSettings = new JsonSerializerSettings();
             jsonSerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
             
-            //var t = JsonConvert.SerializeObject(this,jsonSerializerSettings);
-            //Debug.Log(t);
-            var request = new UpdateUserDataRequest
+            var data = new PlayerSerialize(this);
+            var s = JsonConvert.SerializeObject(data, jsonSerializerSettings);
+            Debug.Log(s);
+            /*var request = new UpdateUserDataRequest
             {
                 Data = new Dictionary<string, string>
                 {
-                    {"Data", JsonConvert.SerializeObject(this, jsonSerializerSettings)}
+                    {"Data", JsonConvert.SerializeObject(data, jsonSerializerSettings)}
                 }
-            };
-            PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
+            };*/
+            //PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
         }
 
         private void OnDataSend(UpdateUserDataResult res)
@@ -56,17 +64,11 @@ namespace Data
         {
             if (result.Data != null && result.Data.ContainsKey("Data"))
             {
-                PlayerData da = CreateInstance<PlayerData>();
-                da = JsonConvert.DeserializeObject<PlayerData>(result.Data["Data"].Value);
+                var da = JsonConvert.DeserializeObject<PlayerSerialize>(result.Data["Data"].Value);
                 score = da.score;
                 playerName = da.playerName;
-                name = da.name;
-                hasLoggedIn = da.hasLoggedIn;
-                hasBeenCached = da.hasBeenCached;
-                tetrisGameData = da.tetrisGameData;
+                tetrisGameData.Setup(da.tetrisGameData);
             }
         }
-        
-
     }
 }

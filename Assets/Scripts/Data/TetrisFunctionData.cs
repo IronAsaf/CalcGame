@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Data.Serialize;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using Utility;
@@ -24,6 +25,18 @@ namespace Data
         [SerializeField] public float averageScoreWithFunction;
         [SerializeField] public List<int> totalScoreGathered;
 
+        public void Setup(FunctionDataSerialize data)
+        {
+            functionName = data.functionName;
+            totalGamesPlayedWithThisFunction = data.totalGamesPlayedWithThisFunction;
+            totalTimePlayedWithThisFunction = data.totalTimePlayedWithThisFunction;
+            winLose = data.winLose;
+            winLostRatioWithFunction = data.winLostRatioWithFunction;
+            maxScoreWithFunction = data.maxScoreWithFunction;
+            minScoreWithFunction = data.minScoreWithFunction;
+            averageScoreWithFunction = data.averageScoreWithFunction;
+            totalScoreGathered = data.totalScoreGathered.ToList();
+        }
         public int GetTotalGamesPlayedWithThisFunction() => totalGamesPlayedWithThisFunction;
         public float GetWinLostRatioWithFunction() => winLostRatioWithFunction;
         public float GetTotalTimePlayedWithThisFunction() => totalTimePlayedWithThisFunction;
