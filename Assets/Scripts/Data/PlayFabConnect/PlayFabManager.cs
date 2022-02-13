@@ -1,4 +1,5 @@
 using System;
+using Global;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -20,6 +21,7 @@ namespace Data.PlayFabConnect
         private void OnSuccess(LoginResult res)
         {
             Debug.Log("PlayFab Logged in!");
+            GameHandler.Instance.playerData.Deserialize();
         }
 
         private void OnError(PlayFabError error)

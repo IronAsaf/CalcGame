@@ -30,8 +30,11 @@ namespace Global
             base.Awake();
             DontDestroyOnLoad(this);
 
-            if (playerData.hasLoggedIn) return;
-            loginPopup.DisplayLogin();
+            if (!PlayerUtility.hasPlayerLoggedIn)
+            {
+                PlayerUtility.hasPlayerLoggedIn = true;
+                loginPopup.DisplayLogin();
+            }
         }
 
         private void Update()

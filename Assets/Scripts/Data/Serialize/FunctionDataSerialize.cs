@@ -29,18 +29,6 @@ namespace Data.Serialize
             averageScoreWithFunction = 0f;
             totalScoreGathered = new List<int>();
         }
-        
-        public FunctionDataSerialize(FunctionUtility.FunctionNames functionName, int totalGamesPlayedWithThisFunction, float totalTimePlayedWithThisFunction, float winLostRatioWithFunction, int maxScoreWithFunction, int minScoreWithFunction, float averageScoreWithFunction, List<int> totalScoreGathered)
-        {
-            this.functionName = functionName;
-            this.totalGamesPlayedWithThisFunction = totalGamesPlayedWithThisFunction;
-            this.totalTimePlayedWithThisFunction = totalTimePlayedWithThisFunction;
-            this.winLostRatioWithFunction = winLostRatioWithFunction;
-            this.maxScoreWithFunction = maxScoreWithFunction;
-            this.minScoreWithFunction = minScoreWithFunction;
-            this.averageScoreWithFunction = averageScoreWithFunction;
-            this.totalScoreGathered = totalScoreGathered;
-        }
 
         public FunctionDataSerialize(TetrisFunctionData data)
         {

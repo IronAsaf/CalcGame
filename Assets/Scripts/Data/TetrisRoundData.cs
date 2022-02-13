@@ -12,6 +12,18 @@ namespace Data
         public int startingScore;
         public float timeSpentPlaying;
         public float startTimer, endTimer;
+
+        public TetrisRoundData()
+        {
+            bottomFunctionName = FunctionUtility.FunctionNames.Abs;
+            didPlayerWinRound = false;
+            playerScore = 0;
+            startingScore = 0;
+            timeSpentPlaying = 0f;
+            startTimer = 0f;
+            endTimer = 0f;
+        }
+        
         public TetrisRoundData(FunctionUtility.FunctionNames name)
         {
             bottomFunctionName = name;

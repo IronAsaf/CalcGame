@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -11,6 +12,11 @@ namespace Global
     {
         public GameObject youAreWebGL;
         // Start is called before the first frame update
+        private void Awake()
+        {
+            GameHandler.Instance.playerData.Serialize();
+        }
+
         void Start()
         {
             StartCoroutine(QuitGameDelay());
