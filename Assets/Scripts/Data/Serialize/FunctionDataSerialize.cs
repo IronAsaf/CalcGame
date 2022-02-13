@@ -17,6 +17,19 @@ namespace Data.Serialize
         public float averageScoreWithFunction;
         public List<int> totalScoreGathered;
 
+        public FunctionDataSerialize()
+        {
+            functionName = FunctionUtility.FunctionNames.Abs;
+            totalGamesPlayedWithThisFunction = 0;
+            totalTimePlayedWithThisFunction = 0f;
+            winLose = Vector2Int.zero;
+            winLostRatioWithFunction = 0f;
+            maxScoreWithFunction = 0;
+            minScoreWithFunction = 0;
+            averageScoreWithFunction = 0f;
+            totalScoreGathered = new List<int>();
+        }
+        
         public FunctionDataSerialize(FunctionUtility.FunctionNames functionName, int totalGamesPlayedWithThisFunction, float totalTimePlayedWithThisFunction, float winLostRatioWithFunction, int maxScoreWithFunction, int minScoreWithFunction, float averageScoreWithFunction, List<int> totalScoreGathered)
         {
             this.functionName = functionName;

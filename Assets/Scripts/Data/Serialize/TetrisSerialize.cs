@@ -14,6 +14,18 @@ namespace Data.Serialize
         public List<FunctionDataSerialize> allFunctions;
         public List<TetrisRoundData> allRounds;
 
+        public TetrisSerialize()
+        {
+            gameName = "";
+            timesPlayedGame = 0;
+            totalWinLoseRatio = 0f;
+            winLoseVector = Vector2Int.zero;
+            totalTimeSpentPlaying = 0f;
+            allFunctions = new List<FunctionDataSerialize>();
+            allRounds = new List<TetrisRoundData>();
+        }
+        
+        
         public TetrisSerialize(string gameName, int timesPlayedGame, float totalWinLoseRatio, Vector2Int winLoseVector, float totalTimeSpentPlaying, List<FunctionDataSerialize> allFunctions, List<TetrisRoundData> allRounds)
         {
             this.gameName = gameName;

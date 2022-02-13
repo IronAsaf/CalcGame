@@ -31,16 +31,16 @@ namespace Data
             jsonSerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
             
             var data = new PlayerSerialize(this);
-            var s = JsonConvert.SerializeObject(data, jsonSerializerSettings);
-            Debug.Log(s);
-            /*var request = new UpdateUserDataRequest
+            //var s = JsonConvert.SerializeObject(data, jsonSerializerSettings);
+            //Debug.Log(s);
+            var request = new UpdateUserDataRequest
             {
                 Data = new Dictionary<string, string>
                 {
                     {"Data", JsonConvert.SerializeObject(data, jsonSerializerSettings)}
                 }
-            };*/
-            //PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
+            };
+            PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
         }
 
         private void OnDataSend(UpdateUserDataResult res)
@@ -68,6 +68,8 @@ namespace Data
                 score = da.score;
                 playerName = da.playerName;
                 tetrisGameData.Setup(da.tetrisGameData);
+                
+                Debug.Log("I am done with player setup");
             }
         }
     }
