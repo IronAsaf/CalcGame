@@ -44,7 +44,6 @@ namespace UI
             
             var pData = GameHandler.Instance.playerData;
             playerName.text = pData.playerName;
-            playerImage.sprite = pData.playerAvatar;
 
             var tetris = pData.tetrisGameData;
             totalWinLoseRatio.SetText(tetris.totalWinLoseRatio.ToString(CultureInfo.InvariantCulture));
