@@ -1,8 +1,5 @@
-using System.Collections.Generic;
-using FunctionCreator;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Utility;
 
 namespace Data
 {

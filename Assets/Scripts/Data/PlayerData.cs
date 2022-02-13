@@ -4,6 +4,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
+using Sirenix.Serialization;
 
 namespace Data
 {
@@ -55,7 +56,8 @@ namespace Data
         {
             if (result.Data != null && result.Data.ContainsKey("Data"))
             {
-                PlayerData da = JsonConvert.DeserializeObject<PlayerData>(result.Data["Data"].Value);
+                PlayerData da = CreateInstance<PlayerData>();
+                da = JsonConvert.DeserializeObject<PlayerData>(result.Data["Data"].Value);
                 score = da.score;
                 playerName = da.playerName;
                 name = da.name;
