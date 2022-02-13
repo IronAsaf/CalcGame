@@ -11,7 +11,7 @@ namespace Data
         public string gameName;
         public int timesPlayedGame;
         public float totalWinLoseRatio;
-        internal GeneralUtility.WinLose winLoseVector; // x = win, y = lose.
+        internal Vector2Int winLoseVector = Vector2Int.zero; // x = win, y = lose.
         public float totalTimeSpentPlaying;
         
         protected virtual void Awake()

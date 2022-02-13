@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Utility;
 using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
@@ -20,16 +19,19 @@ namespace Data
         [Button("Serialize test")]
         public void Serialize() // send to DB
         {
-            var t = JsonConvert.SerializeObject(this);
-            Debug.Log(t);
-            /*var request = new UpdateUserDataRequest
+            var jsonSerializerSettings = new JsonSerializerSettings();
+            jsonSerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            
+            //var t = JsonConvert.SerializeObject(this,jsonSerializerSettings);
+            //Debug.Log(t);
+            var request = new UpdateUserDataRequest
             {
                 Data = new Dictionary<string, string>
                 {
-                    {"Data", JsonConvert.SerializeObject(this)}
+                    {"Data", JsonConvert.SerializeObject(this, jsonSerializerSettings)}
                 }
             };
-            PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);*/
+            PlayFabClientAPI.UpdateUserData(request, OnDataSend, OnError);
         }
 
         private void OnDataSend(UpdateUserDataResult res)
@@ -40,9 +42,27 @@ namespace Data
         {
             Debug.LogError("Error on PlayFab Login -- \n" + error.GenerateErrorReport());
         }
+        
+        [Button("Deserialize")]
         public void Deserialize() // take from DB
         {
             hasBeenCached = true;
+            
+            PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataRecieved, OnError);
+        }
+
+        private void OnDataRecieved(GetUserDataResult result)
+        {
+            if (result.Data != null && result.Data.ContainsKey("Data"))
+            {
+                PlayerData da = JsonConvert.DeserializeObject<PlayerData>(result.Data["Data"].Value);
+                score = da.score;
+                playerName = da.playerName;
+                name = da.name;
+                hasLoggedIn = da.hasLoggedIn;
+                hasBeenCached = da.hasBeenCached;
+                tetrisGameData = da.tetrisGameData;
+            }
         }
         
 

@@ -36,10 +36,10 @@ namespace Data
             allRounds.Add(round);
             timesPlayedGame++;
             function.EndGameUpdate(round.didPlayerWinRound,round.playerScore, round.timeSpentPlaying);
-            if (round.didPlayerWinRound) winLoseVector.win++;
-            else winLoseVector.lose++;
+            if (round.didPlayerWinRound) winLoseVector.x++;
+            else winLoseVector.y++;
 
-            totalWinLoseRatio = winLoseVector.win / 1f * timesPlayedGame;
+            totalWinLoseRatio = winLoseVector.x / 1f * timesPlayedGame;
             totalTimeSpentPlaying += round.timeSpentPlaying;
         }
 

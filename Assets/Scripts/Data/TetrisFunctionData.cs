@@ -15,14 +15,14 @@ namespace Data
     public class TetrisFunctionData : SerializedScriptableObject
     {
         public FunctionUtility.FunctionNames functionName;
-        [SerializeField] private int totalGamesPlayedWithThisFunction;
-        [SerializeField] private float totalTimePlayedWithThisFunction;
-        [SerializeField] private GeneralUtility.WinLose winLose = new(){win = 0, lose = 0};
-        [SerializeField] private float winLostRatioWithFunction;
-        [SerializeField] private int maxScoreWithFunction;
-        [SerializeField] private int minScoreWithFunction;
-        [SerializeField] private float averageScoreWithFunction;
-        [SerializeField] private List<int> totalScoreGathered;
+        [SerializeField] public int totalGamesPlayedWithThisFunction;
+        [SerializeField] public float totalTimePlayedWithThisFunction;
+        [SerializeField] public Vector2Int winLose = Vector2Int.zero;
+        [SerializeField] public float winLostRatioWithFunction;
+        [SerializeField] public int maxScoreWithFunction;
+        [SerializeField] public int minScoreWithFunction;
+        [SerializeField] public float averageScoreWithFunction;
+        [SerializeField] public List<int> totalScoreGathered;
 
         public int GetTotalGamesPlayedWithThisFunction() => totalGamesPlayedWithThisFunction;
         public float GetWinLostRatioWithFunction() => winLostRatioWithFunction;
@@ -37,7 +37,7 @@ namespace Data
             maxScoreWithFunction = 0;
             minScoreWithFunction = 0;
             averageScoreWithFunction = 0;
-            winLose = new(){win = 0, lose = 0};
+            winLose = Vector2Int.zero;
             totalScoreGathered = new List<int>();
         }
         
@@ -50,9 +50,9 @@ namespace Data
         }
         private void UpdateWinLoseRatio(bool didPlayerWin)
         {
-            if (didPlayerWin) winLose.win++;
-            else winLose.lose++;
-            winLostRatioWithFunction = winLose.win*1f / totalGamesPlayedWithThisFunction;
+            if (didPlayerWin) winLose.x++;
+            else winLose.y++;
+            winLostRatioWithFunction = winLose.x*1f / totalGamesPlayedWithThisFunction;
         }
 
         private void UpdateScore(int score)

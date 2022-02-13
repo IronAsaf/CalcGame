@@ -25,8 +25,6 @@ MonoBehaviour:
   timesPlayedGame: 4
   totalWinLoseRatio: 12
   totalTimeSpentPlaying: 77.81953
-  levelsList:
-  - {fileID: 11400000, guid: f174a0720beb2574e8ca7b139e4fef3b, type: 2}
   allFunctions:
   - {fileID: 11400000, guid: 5c331abda508df6429685659c5e1460b, type: 2}
   - {fileID: 11400000, guid: 7d8a69045c567794081dc4b8c26ebb78, type: 2}
