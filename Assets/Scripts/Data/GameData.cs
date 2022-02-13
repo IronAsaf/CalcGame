@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using FunctionCreator;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Utility;
 
 namespace Data
 {
@@ -10,11 +11,8 @@ namespace Data
         public string gameName;
         public int timesPlayedGame;
         public float totalWinLoseRatio;
-        internal Vector2Int winLoseVector; // x = win, y = lose.
+        internal GeneralUtility.WinLose winLoseVector; // x = win, y = lose.
         public float totalTimeSpentPlaying;
-        [SerializeField] protected List<LevelMaker> levelsList; 
-        
-        
         
         protected virtual void Awake()
         {

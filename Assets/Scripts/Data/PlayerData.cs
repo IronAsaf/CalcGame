@@ -1,5 +1,7 @@
+using System.Runtime.InteropServices;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using Utility;
 
 namespace Data
 {
@@ -13,15 +15,18 @@ namespace Data
         public bool hasLoggedIn;
         public bool hasBeenCached;
         
-        
+        [Button("Serialize test")]
         public void Serialize() // send to DB
         {
-            
+            var data = GeneralUtility.CreateToJSON(this);
+            Debug.Log(data);
         }
 
         public void Deserialize() // take from DB
         {
             hasBeenCached = true;
         }
+        
+
     }
 }

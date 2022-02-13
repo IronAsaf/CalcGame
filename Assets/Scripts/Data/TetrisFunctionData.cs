@@ -17,7 +17,7 @@ namespace Data
         public FunctionUtility.FunctionNames functionName;
         [SerializeField] private int totalGamesPlayedWithThisFunction;
         [SerializeField] private float totalTimePlayedWithThisFunction;
-        [SerializeField] private Vector2Int winLose = new Vector2Int(0, 0); // x = win, y = lose.
+        [SerializeField] private GeneralUtility.WinLose winLose = new(){win = 0, lose = 0};
         [SerializeField] private float winLostRatioWithFunction;
         [SerializeField] private int maxScoreWithFunction;
         [SerializeField] private int minScoreWithFunction;
@@ -37,7 +37,7 @@ namespace Data
             maxScoreWithFunction = 0;
             minScoreWithFunction = 0;
             averageScoreWithFunction = 0;
-            winLose = Vector2Int.zero;
+            winLose = new(){win = 0, lose = 0};
             totalScoreGathered = new List<int>();
         }
         
@@ -50,9 +50,9 @@ namespace Data
         }
         private void UpdateWinLoseRatio(bool didPlayerWin)
         {
-            if (didPlayerWin) winLose.x++;
-            else winLose.y++;
-            winLostRatioWithFunction = winLose.x*1f / totalGamesPlayedWithThisFunction;
+            if (didPlayerWin) winLose.win++;
+            else winLose.lose++;
+            winLostRatioWithFunction = winLose.win*1f / totalGamesPlayedWithThisFunction;
         }
 
         private void UpdateScore(int score)

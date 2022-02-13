@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using Data;
+using FunctionCreator;
 using Sirenix.OdinInspector;
 using UI.Popups;
 using UnityEngine;
@@ -15,6 +17,7 @@ namespace Global
     {
         [Title("References")]
         [SerializeField] private PlayerLoginPopup loginPopup;
+        [SerializeField] public List<LevelMaker> levelsList;
         
         [Title("Player Data")]
         public PlayerData playerData; // make a reset functionality instead.

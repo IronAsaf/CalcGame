@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using FunctionCreator;
+using Global;
 using UnityEngine;
 using Utility;
 
@@ -36,10 +36,10 @@ namespace Data
             allRounds.Add(round);
             timesPlayedGame++;
             function.EndGameUpdate(round.didPlayerWinRound,round.playerScore, round.timeSpentPlaying);
-            if (round.didPlayerWinRound) winLoseVector.x++;
-            else winLoseVector.y++;
+            if (round.didPlayerWinRound) winLoseVector.win++;
+            else winLoseVector.lose++;
 
-            totalWinLoseRatio = winLoseVector.x / 1f * timesPlayedGame;
+            totalWinLoseRatio = winLoseVector.win / 1f * timesPlayedGame;
             totalTimeSpentPlaying += round.timeSpentPlaying;
         }
 
@@ -56,16 +56,16 @@ namespace Data
 
         public LevelMaker GetCurrentLevel(string nameOfLevel)
         {
-            Debug.Log("I have " + levelsList.Count + " levels in me.");
-            for (int i = 0; i < levelsList.Count; i++)
+            Debug.Log("I have " + GameHandler.Instance.levelsList.Count + " levels in me.");
+            for (int i = 0; i < GameHandler.Instance.levelsList.Count; i++)
             {
-                if (String.Equals(levelsList[i].levelName, nameOfLevel))
+                if (String.Equals(GameHandler.Instance.levelsList[i].levelName, nameOfLevel))
                 {
-                    return levelsList[i];
+                    return GameHandler.Instance.levelsList[i];
                 }
             }
             Debug.LogWarning("Did not find Level");
-            return levelsList[0];
+            return GameHandler.Instance.levelsList[0];
         }
     }
 }

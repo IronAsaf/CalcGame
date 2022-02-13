@@ -305,6 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loginPopup: {fileID: 847130329}
+  levelsList: []
   playerData: {fileID: 11400000, guid: 7aefa65af48787841b71d455490d251c, type: 2}
   isDebugModeActive: 0
   debugger: {fileID: 493253051805025148, guid: 862f9adac510cf947b2a0f9dd99f7221, type: 3}
@@ -3998,7 +3999,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1849558228
 RectTransform:
   m_ObjectHideFlags: 0
