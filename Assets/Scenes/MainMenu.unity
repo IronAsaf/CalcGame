@@ -305,7 +305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loginPopup: {fileID: 847130329}
-  levelsList: []
+  levelsList:
+  - {fileID: 11400000, guid: f174a0720beb2574e8ca7b139e4fef3b, type: 2}
   playerData: {fileID: 11400000, guid: 7aefa65af48787841b71d455490d251c, type: 2}
   isDebugModeActive: 0
   debugger: {fileID: 493253051805025148, guid: 862f9adac510cf947b2a0f9dd99f7221, type: 3}

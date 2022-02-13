@@ -33,7 +33,7 @@ namespace UI.Popups
             
             //if new, create new playerData
             //if old, call Cache
-            
+            GameHandler.Instance.playerData.playerName = login.text;
             loginCanvas.gameObject.SetActive(false);
         }
         
