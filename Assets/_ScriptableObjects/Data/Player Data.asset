@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b2a9b2117331db44854cb24ddb7bdd7, type: 3}
   m_Name: Player Data
   m_EditorClassIdentifier: 
-  playerName: Asaf
+  playerName: test asaf
   score: 0
   tetrisGameData: {fileID: 11400000, guid: 1965a9dc2710c824fa329efd4df915ed, type: 2}
   hasLoggedIn: 0

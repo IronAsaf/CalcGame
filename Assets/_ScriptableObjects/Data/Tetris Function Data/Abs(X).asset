@@ -23,8 +23,10 @@ MonoBehaviour:
     SerializationNodes: []
   functionName: 5
   totalGamesPlayedWithThisFunction: 0
+  totalTimePlayedWithThisFunction: 0
   winLose: {x: 0, y: 0}
   winLostRatioWithFunction: 0
   maxScoreWithFunction: 0
   minScoreWithFunction: 0
   averageScoreWithFunction: 0
+  totalScoreGathered: 
