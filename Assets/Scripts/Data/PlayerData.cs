@@ -23,7 +23,16 @@ namespace Data
             score = data.score;
             tetrisGameData.Setup(data.tetrisGameData);
         }
-        
+
+        [Button("Print out Serialize")]
+        public void PrintOutSerialize()
+        {
+            var jsonSerializerSettings = new JsonSerializerSettings();
+            jsonSerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
+            var data = new PlayerSerialize(this);
+            var s = JsonConvert.SerializeObject(data, jsonSerializerSettings);
+            Debug.Log(s);
+        }
         [Button("Serialize test")]
         public void Serialize() // send to DB
         {
