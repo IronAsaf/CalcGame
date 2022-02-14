@@ -3,6 +3,7 @@ using Global;
 using UnityEngine;
 using PlayFab;
 using PlayFab.ClientModels;
+using Utility;
 
 namespace Data.PlayFabConnect
 {
@@ -10,6 +11,7 @@ namespace Data.PlayFabConnect
     {
         public void Login()
         {
+            if (!PlayerUtility.gatherData) return;
             var req = new LoginWithCustomIDRequest
             {
                 CustomId = SystemInfo.deviceUniqueIdentifier,

@@ -5,6 +5,7 @@ using UnityEngine;
 using Newtonsoft.Json;
 using PlayFab;
 using PlayFab.ClientModels;
+using Utility;
 
 namespace Data
 {
@@ -36,6 +37,7 @@ namespace Data
         [Button("Serialize test")]
         public void Serialize() // send to DB
         {
+            if (!PlayerUtility.gatherData) return;
             var jsonSerializerSettings = new JsonSerializerSettings();
             jsonSerializerSettings.Converters.Add(new Newtonsoft.Json.Converters.StringEnumConverter());
             
@@ -64,6 +66,7 @@ namespace Data
         [Button("Deserialize")]
         public void Deserialize() // take from DB
         {
+            if (!PlayerUtility.gatherData) return;
             hasBeenCached = true;
             
             PlayFabClientAPI.GetUserData(new GetUserDataRequest(), OnDataRecieved, OnError);
