@@ -18,6 +18,7 @@ namespace Global
         [Title("References")]
         [SerializeField] private PlayerLoginPopup loginPopup;
         [SerializeField] public List<LevelMaker> levelsList;
+        [SerializeField] private List<LevelDifficulty> difficulties;
         
         [Title("Player Data")]
         public PlayerData playerData; // make a reset functionality instead.
@@ -25,6 +26,7 @@ namespace Global
         [Title("Ongoing Information")]
         public bool isDebugModeActive;
         public GameObject debugger;
+        public LevelDifficulty difficulty;
         protected override void Awake()
         {
             base.Awake();
@@ -45,5 +47,21 @@ namespace Global
                 isDebugModeActive = true;
             }
         }
+
+
+        public void OnClickDifficultySet(int diff)
+        {
+            for (int i = 0; i < difficulties.Count; i++)
+            {
+                if (difficulties[i].difficulty.Equals((LevelDifficulty.Difficulty) diff))
+                {
+                    difficulty = difficulties[i];
+                    return;
+                }
+            }
+
+            difficulty = difficulties[0];
+        }
+        
     }
 }
