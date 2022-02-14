@@ -16,3 +16,5 @@ MonoBehaviour:
   scoreDecreaseRate: 20
   speedIncreaseRate: 0.6
   speedClamp: {x: 0, y: -5}
+  baseStartingScore: 8500
+  minimumWinningScore: 6500
