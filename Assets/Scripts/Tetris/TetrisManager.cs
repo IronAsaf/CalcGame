@@ -18,6 +18,7 @@ namespace Tetris
         public LevelMaker level;
         [SerializeField] private GameObject endGameScreen;
         [SerializeField] private List<FunctionComponent> currentTopFunction;
+        [SerializeField] private Vector2 clampForSpeed = new(0f, -3.5f);
         private List<Vector3> startingBaseFunctionPositions;
         private int currentFallingFunctionIndex;
         public FunctionMaker baseFunctionMaker;
@@ -71,7 +72,13 @@ namespace Tetris
 
         public int GetLengthOfFunctionsList() => level.functionsForLevelList.Count;
         public float GetEndGameYPos() => level.lineFunctionYPos;
-        public float GetNewFallingSpeed(float currentSpeed) => currentSpeed - level.speedIncreasePerHit;
+        public float GetNewFallingSpeed(float currentSpeed)
+        {
+            var sped = currentSpeed - level.speedIncreasePerHit;
+            //if
+            if (sped <= clampForSpeed.y) sped = clampForSpeed.y;
+            return sped;
+        }
         public Sprite GetSpriteOfFunctionByIndex(int index)
         {
             currentFallingFunctionIndex = index;
