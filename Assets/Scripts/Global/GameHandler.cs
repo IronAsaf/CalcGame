@@ -30,7 +30,15 @@ namespace Global
         protected override void Awake()
         {
             base.Awake();
-            DontDestroyOnLoad(this);
+            int numMusicPlayers = FindObjectsOfType<GameHandler>().Length;
+            if (numMusicPlayers != 1)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                DontDestroyOnLoad(gameObject);
+            }
 
             if (!PlayerUtility.hasPlayerLoggedIn)
             {

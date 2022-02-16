@@ -1,3 +1,4 @@
+using System.Collections;
 using Global;
 using UnityEngine;
 /*
@@ -8,8 +9,15 @@ namespace MainMenu
 {
     public class MainMenuHandler : MonoBehaviour
     {
-        public void OnClickStartGame()
+        public void OnClickStartGame(int difficulty)
         {
+            StartCoroutine(SmallDelay(difficulty));
+        }
+
+        private IEnumerator SmallDelay(int difficulty)
+        {
+            GameHandler.Instance.OnClickDifficultySet(difficulty);
+            yield return new WaitForSeconds(0.05f);
             SceneHandler.Instance.LoadScene(SceneHandler.SceneNames.FunctionGame);
         }
 

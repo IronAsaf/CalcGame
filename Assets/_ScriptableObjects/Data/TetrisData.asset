@@ -22,7 +22,7 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   gameName: Tetris
-  timesPlayedGame: 10
+  timesPlayedGame: 0
   totalWinLoseRatio: 0
   totalTimeSpentPlaying: 0
   allFunctions:
