@@ -45,6 +45,8 @@ namespace Global
                 PlayerUtility.hasPlayerLoggedIn = true;
                 loginPopup.DisplayLogin();
             }
+
+            GeneralUtility.AdjustTimeScale();
         }
 
         private void Update()

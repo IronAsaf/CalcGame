@@ -11,13 +11,16 @@ namespace MainMenu
     {
         public void OnClickStartGame(int difficulty)
         {
+            print("am i a cunt? probably");
             StartCoroutine(SmallDelay(difficulty));
         }
 
         private IEnumerator SmallDelay(int difficulty)
         {
             GameHandler.Instance.OnClickDifficultySet(difficulty);
-            yield return new WaitForSeconds(0.05f);
+            yield return new WaitForEndOfFrame();
+            yield return new WaitForEndOfFrame();
+            print("going to load a thing");
             SceneHandler.Instance.LoadScene(SceneHandler.SceneNames.FunctionGame);
         }
 

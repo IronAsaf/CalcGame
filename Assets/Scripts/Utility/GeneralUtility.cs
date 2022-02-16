@@ -21,5 +21,10 @@ namespace Utility
         {
             return JsonUtility.ToJson(toSave);
         }
+
+        public static void AdjustTimeScale(float towards = 1f)
+        {
+            Time.timeScale = towards;
+        }
     }
 }

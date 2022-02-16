@@ -54,6 +54,7 @@ namespace Tetris
 
         private void RestartTetrisManager()
         {
+            GeneralUtility.AdjustTimeScale();
             TetrisManagerAwake();
             InitializeBottomFunction();
         }
