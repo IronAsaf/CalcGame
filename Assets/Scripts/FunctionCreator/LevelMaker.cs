@@ -12,9 +12,7 @@ namespace FunctionCreator
         [SerializeField] public int difficulty;
         [SerializeField] public List<FunctionMaker> functionsForLevelList;
         [SerializeField] public FunctionMaker bottomFunction;
-        [SerializeField] public float speedIncreasePerHit = 0.3f;
         [SerializeField] public float lineFunctionYPos = 0;
-        [SerializeField] public int minimumAmountOfScoreToWin = 5000;
         [SerializeField] public bool levelComplete = false;
         private void Awake()
         {

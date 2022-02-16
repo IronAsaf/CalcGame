@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Data;
 using Global;
@@ -23,6 +22,7 @@ namespace Tetris
         void Awake()
         {
             tetrisData = GameHandler.Instance.playerData.tetrisGameData;
+            scoreStart = GameHandler.Instance.difficulty.baseStartingScore;
             currentScore = scoreStart;
             
         }
@@ -45,10 +45,11 @@ namespace Tetris
         
         private IEnumerator GameScore()
         {
+            var scoreDecrease = GameHandler.Instance.difficulty.scoreDecreaseRate;
             while (currentScore > 0)
             {
                 yield return new WaitForSeconds(scoreConstraint);
-                currentScore -= 1;
+                currentScore -= scoreDecrease;
                 if (currentScore <= scoreStart % 10)
                 {
                     StartCoroutine(UiManager.Instance.TextUrgency(Color.red));
@@ -77,7 +78,7 @@ namespace Tetris
         {
             StopCoroutine(GameScore());
             UiManager.Instance.FixEndGameScoreText(currentScore);
-            if (TetrisManager.Instance.level.minimumAmountOfScoreToWin <= UiManager.Instance.currentScore)
+            if (GameHandler.Instance.difficulty.minimumWinningScore <= UiManager.Instance.currentScore)
             {
                 TetrisManager.Instance.level.levelComplete = true;
             }

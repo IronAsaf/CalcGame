@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Medium
   m_EditorClassIdentifier: 
   difficulty: 1
+  startingSpeed: -1
   scoreDecreaseRate: 10
   speedIncreaseRate: 0.4
   speedClamp: {x: 0, y: -3.5}

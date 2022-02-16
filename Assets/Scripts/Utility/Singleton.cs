@@ -13,11 +13,11 @@ namespace Utility
         protected virtual void Awake()
         {
             // If we don't have reference to instance than this object will take control
-            if (_instance == null)
+            if (ReferenceEquals(_instance,null))
             {
                 _instance = this as T;
             }
-            else if (_instance != this) // Else this is other instance and we should destroy it!
+            else if (!ReferenceEquals(_instance,this)) // Else this is other instance and we should destroy it!
             {
                 Destroy(this);
             }
@@ -27,7 +27,7 @@ namespace Utility
         /// </summary>
         protected virtual void OnDestroy()
         {
-            if (_instance != this) // Skip if instance is other than this object.
+            if (!ReferenceEquals(_instance,this)) // Skip if instance is other than this object.
             {
                 return;
             }

@@ -12,6 +12,7 @@ namespace Data
         }
 
         public Difficulty difficulty = Difficulty.Medium;
+        public float startingSpeed = -1f;
         public int scoreDecreaseRate = 10;
         public float speedIncreaseRate = 0.4f;
         public Vector2 speedClamp = new(0, -3.5f);

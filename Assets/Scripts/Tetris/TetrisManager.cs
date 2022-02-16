@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using FunctionCreator;
+using Global;
 using UnityEngine;
 using UnityEngine.Events;
 using Utility;
@@ -18,7 +19,6 @@ namespace Tetris
         public LevelMaker level;
         [SerializeField] private GameObject endGameScreen;
         [SerializeField] private List<FunctionComponent> currentTopFunction;
-        [SerializeField] private Vector2 clampForSpeed = new(0f, -3.5f);
         private List<Vector3> startingBaseFunctionPositions;
         private int currentFallingFunctionIndex;
         public FunctionMaker baseFunctionMaker;
@@ -52,7 +52,7 @@ namespace Tetris
             baseFunctionMaker.Init(level.bottomFunction);
         }
 
-        public void RestartTetrisManager()
+        private void RestartTetrisManager()
         {
             TetrisManagerAwake();
             InitializeBottomFunction();
@@ -74,7 +74,9 @@ namespace Tetris
         public float GetEndGameYPos() => level.lineFunctionYPos;
         public float GetNewFallingSpeed(float currentSpeed)
         {
-            var sped = currentSpeed - level.speedIncreasePerHit;
+            var diff = GameHandler.Instance.difficulty;
+            var clampForSpeed = diff.speedClamp;
+            var sped = currentSpeed - diff.speedIncreaseRate;
             //if
             if (sped <= clampForSpeed.y) sped = clampForSpeed.y;
             return sped;
