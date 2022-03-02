@@ -15,7 +15,7 @@ MonoBehaviour:
   difficulty: 0
   startingSpeed: -0.75
   scoreDecreaseRate: 5
-  speedIncreaseRate: 0.2
+  speedIncreaseRate: 0.1
   speedClamp: {x: 0, y: -2}
   baseStartingScore: 10000
   minimumWinningScore: 5000

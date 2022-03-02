@@ -28,7 +28,7 @@ namespace Tetris
 
         private void OnChangeEvent()
         {
-            speed = TetrisManager.Instance.GetNewFallingSpeed(speed);
+            //speed = TetrisManager.Instance.GetNewFallingSpeed(speed);
             currentFallingPositions = TetrisManager.Instance.ResetFallingFunction();
             SetupGo(currentFallingPositions);
         }

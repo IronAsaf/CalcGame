@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Medium
   m_EditorClassIdentifier: 
   difficulty: 1
-  startingSpeed: -1
+  startingSpeed: -0.85
   scoreDecreaseRate: 10
-  speedIncreaseRate: 0.4
+  speedIncreaseRate: 0.2
   speedClamp: {x: 0, y: -3.5}
   baseStartingScore: 9000
   minimumWinningScore: 6000
