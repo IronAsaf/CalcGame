@@ -20,12 +20,18 @@ namespace Tetris
         
         protected override void Start()
         {
-            TetrisManager.Instance.onFunctionChangeEvent.AddListener(OnFunctionsHitEvent);
+            TetrisManager.Instance.onFunctionChangeEvent.AddListener(OnChangeEvent);
             TetrisManager.Instance.onGameEndEvent.AddListener(OnEndGame);
             SetupInitialFallingFunction();
             base.Start();
         }
 
+        private void OnChangeEvent()
+        {
+            speed = TetrisManager.Instance.GetNewFallingSpeed(speed);
+            currentFallingPositions = TetrisManager.Instance.ResetFallingFunction();
+            SetupGo(currentFallingPositions);
+        }
         protected override void OnFunctionsHitEvent()
         {
             speed = TetrisManager.Instance.GetNewFallingSpeed(speed);

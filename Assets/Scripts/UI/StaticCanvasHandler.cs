@@ -21,6 +21,18 @@ namespace UI
             displayedFunction.sprite = TetrisManager.Instance.GetSpriteOfFunctionByIndex(0);
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                OnClickCycleFunction(-1);
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                OnClickCycleFunction(1);
+            }
+        }
         public void OnClickCycleFunction(int dir)
         {
             var newVal = currentFunctionIndex + dir;
@@ -35,10 +47,6 @@ namespace UI
 
             currentFunctionIndex = newVal;
             displayedFunction.sprite = TetrisManager.Instance.GetSpriteOfFunctionByIndex(currentFunctionIndex);
-        }
-
-        public void OnClickActivateFunction()
-        {
             TetrisManager.Instance.onFunctionChangeEvent.Invoke();
         }
     }
