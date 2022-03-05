@@ -67,7 +67,10 @@ namespace Tetris
                 g.SetActive(true);
             }
 
+            PlayerUtility.hasSeenFtue = true;
             Time.timeScale = 1f;
+            gameObject.SetActive(false);
+            enabled = false;
         }
     }
 }
