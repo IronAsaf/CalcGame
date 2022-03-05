@@ -22,9 +22,9 @@ MonoBehaviour:
     PrefabModifications: []
     SerializationNodes: []
   gameName: Tetris
-  timesPlayedGame: 0
-  totalWinLoseRatio: 0
-  totalTimeSpentPlaying: 0
+  timesPlayedGame: 1
+  totalWinLoseRatio: 1
+  totalTimeSpentPlaying: 11.32007
   allFunctions:
   - {fileID: 11400000, guid: 5c331abda508df6429685659c5e1460b, type: 2}
   - {fileID: 11400000, guid: 7d8a69045c567794081dc4b8c26ebb78, type: 2}
