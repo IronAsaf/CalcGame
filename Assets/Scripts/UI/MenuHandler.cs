@@ -15,11 +15,6 @@ namespace UI
             Awakening();
         }
 
-        private void OnEnable()
-        {
-            Awakening();
-        }
-
         private void Awakening()
         {
             Time.timeScale = 0f;

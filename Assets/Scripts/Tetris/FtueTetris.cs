@@ -20,7 +20,7 @@ namespace Tetris
 
         private void Start()
         {
-            if (!enabled) return; //idk
+            if (PlayerUtility.hasSeenFtue) return; //idk
 
             foreach (var go in toDisable)
             {
