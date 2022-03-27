@@ -21,6 +21,7 @@ MonoBehaviour:
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
     SerializationNodes: []
+  functionBaseName: 0
   functionDisplay: {fileID: 21300000, guid: 6008c1e9e5405496085ba3c4ebcb707a, type: 3}
   functionXAdvancement: 0.1
   shouldFunctionBeNormalized: 1
@@ -51,7 +52,38 @@ MonoBehaviour:
   - {x: 1.2000003, y: -0.24000037}
   - {x: 1.3000003, y: -0.39000046}
   - {x: 1.4000003, y: -0.56000066}
+  positionsDef:
+  - {x: -0.79999983, y: -1.4399996}
+  - {x: -0.6999998, y: -1.1899996}
+  - {x: -0.5999998, y: -0.95999956}
+  - {x: -0.4999998, y: -0.7499996}
+  - {x: -0.3999998, y: -0.55999964}
+  - {x: -0.2999998, y: -0.3899997}
+  - {x: -0.19999981, y: -0.23999974}
+  - {x: -0.09999981, y: -0.10999977}
+  - {x: 0.0000001937151, y: 0.00000019371505}
+  - {x: 0.100000195, y: 0.09000015}
+  - {x: 0.2000002, y: 0.16000012}
+  - {x: 0.3000002, y: 0.21000007}
+  - {x: 0.40000018, y: 0.24000004}
+  - {x: 0.5000002, y: 0.25}
+  - {x: 0.6000002, y: 0.23999995}
+  - {x: 0.7000002, y: 0.20999992}
+  - {x: 0.80000025, y: 0.15999985}
+  - {x: 0.9000003, y: 0.089999795}
+  - {x: 1.0000002, y: -0.00000023841858}
+  - {x: 1.1000003, y: -0.11000037}
+  - {x: 1.2000003, y: -0.24000037}
+  - {x: 1.3000003, y: -0.39000046}
+  - {x: 1.4000003, y: -0.56000066}
   functionComponents:
+  - type: 7
+    assistiveNumber: 0
+  - type: 1
+    assistiveNumber: 0
+  - type: 6
+    assistiveNumber: 2
+  functionComponentsDef:
   - type: 7
     assistiveNumber: 0
   - type: 1

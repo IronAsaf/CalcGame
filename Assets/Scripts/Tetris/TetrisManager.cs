@@ -145,6 +145,7 @@ namespace Tetris
         public void EndGame()
         {
             onGameEndEvent?.Invoke();
+            level.ResetLevel();
             StartCoroutine(DelayEndGame());
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
@@ -20,8 +21,10 @@ namespace FunctionCreator
         public Vector2 rectClamp = new Vector2(-1.5f,1.5f);
         public Vector2 rectYClamp = new Vector2(-1.5f,1.5f);
         public List<Vector2> positions;
+        [ReadOnly] [SerializeField] private  List<Vector2> positionsDef;
         [Title("Function Creation")]
         public List<FunctionComponent> functionComponents;
+        [ReadOnly] [SerializeField] private List<FunctionComponent> functionComponentsDef;
         
         [BoxGroup("Operations", ShowLabel = true)]
         [ButtonGroup("Operations/Buttons")] [Button("+")]
@@ -111,6 +114,19 @@ namespace FunctionCreator
             rectYClamp = FunctionUtility.NewMaxClamp(rectYClamp, other.rectYClamp);
             positions = new List<Vector2>(other.positions);
             functionComponents = new List<FunctionComponent>(other.functionComponents);
+        }
+
+        [Button("Set Default")]
+        public void SetDefault()
+        {
+            positionsDef = new List<Vector2>(positions);
+            functionComponentsDef = new List<FunctionComponent>(functionComponents);
+        }
+
+        public void ResetFunctionDefaults()
+        {
+            positions = new List<Vector2>(positionsDef);
+            functionComponents = new List<FunctionComponent>(functionComponentsDef);
         }
 
         //Flips the function to be -1*F its current position;

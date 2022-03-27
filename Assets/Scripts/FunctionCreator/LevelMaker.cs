@@ -39,6 +39,11 @@ namespace FunctionCreator
             //generate a new bottom function
             var rand = Random.Range(0, functionsForLevelList.Count);
             bottomFunction = functionsForLevelList[rand];
+
+            foreach (var func in functionsForLevelList)
+            {
+                func.ResetFunctionDefaults();
+            }
             ReorderList();
         }
     }
