@@ -48,6 +48,11 @@ namespace UI
             {
                 OnSpeedChangeEvent(false);
             }
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                TetrisManager.Instance.onFunctionFlipEvent.Invoke();
+            }
         }
 
         private void OnSpeedChangeEvent(bool speedUp)

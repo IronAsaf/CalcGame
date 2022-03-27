@@ -26,13 +26,18 @@ namespace Tetris
             TetrisManager.Instance.onGameEndEvent.AddListener(OnEndGame);
             TetrisManager.Instance.onFunctionSpeedUpEvent.AddListener(SpeedUpFalling);
             TetrisManager.Instance.onFunctionSlowDownEvent.AddListener(SlowDownFalling);
+            TetrisManager.Instance.onFunctionFlipEvent.AddListener(OnFlipEvent);
             SetupInitialFallingFunction();
             base.Start();
         }
 
+        private void OnFlipEvent()
+        {
+            currentFallingPositions = TetrisManager.Instance.FlipFallingFunction();
+            SetupGo(currentFallingPositions);
+        }
         private void OnChangeEvent()
         {
-            //speed = TetrisManager.Instance.GetNewFallingSpeed(speed);
             currentFallingPositions = TetrisManager.Instance.ResetFallingFunction();
             SetupGo(currentFallingPositions);
         }

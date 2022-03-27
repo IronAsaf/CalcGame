@@ -112,5 +112,29 @@ namespace FunctionCreator
             positions = new List<Vector2>(other.positions);
             functionComponents = new List<FunctionComponent>(other.functionComponents);
         }
+
+        //Flips the function to be -1*F its current position;
+        public void FlipFunction()
+        {
+            // Knowing that the function is already made we just loop through the positions and *-1 them.
+            for (int i = 0; i < positions.Count; i++)
+            {
+                var vec = positions[i] * -1;
+                positions[i] = vec;
+            }
+
+            for (int i = 0; i < functionComponents.Count; i++)
+            {
+                if (!FunctionUtility.IsOperator(functionComponents[i].type)) continue;
+                functionComponents[i] = functionComponents[i].type switch
+                {
+                    FunctionUtility.FunctionalityType.OperatorMinus => new FunctionComponent(
+                        FunctionUtility.FunctionalityType.OperatorPlus, functionComponents[i].assistiveNumber),
+                    FunctionUtility.FunctionalityType.OperatorPlus => new FunctionComponent(
+                        FunctionUtility.FunctionalityType.OperatorMinus, functionComponents[i].assistiveNumber),
+                    _ => functionComponents[i]
+                };
+            }
+        }
     }
 }

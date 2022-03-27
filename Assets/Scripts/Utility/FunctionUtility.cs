@@ -178,7 +178,7 @@ namespace Utility
             return true;
         }
 
-        private static bool IsOperator(FunctionalityType type)
+        public static bool IsOperator(FunctionalityType type)
         {
             switch (type)
             {

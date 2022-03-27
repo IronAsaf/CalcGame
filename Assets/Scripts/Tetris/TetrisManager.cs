@@ -14,6 +14,7 @@ namespace Tetris
     {
         [HideInInspector] public UnityEvent onHitEvent;
         [HideInInspector] public UnityEvent onFunctionChangeEvent;
+        [HideInInspector] public UnityEvent onFunctionFlipEvent;
         [HideInInspector] public UnityEvent onFunctionSpeedUpEvent;
         [HideInInspector] public UnityEvent onFunctionSlowDownEvent;
         [HideInInspector] public UnityEvent onGameEndEvent;
@@ -35,6 +36,7 @@ namespace Tetris
             onGamRestart = new UnityEvent();
             TetrisManagerAwake();
             onGamRestart.AddListener(RestartTetrisManager);
+            
         }
 
 
@@ -123,6 +125,15 @@ namespace Tetris
             return b;
         }
 
+        public List<Vector3> FlipFallingFunction()
+        {
+            var func = level.functionsForLevelList[currentFallingFunctionIndex];
+            func.FlipFunction();
+            var pos = func.positions;
+            var b = pos.Select(PositionsUtility.Vector2ToVector3).ToList();
+            currentTopFunction = func.functionComponents.ToList();
+            return b;
+        }
         public List<Vector3> ResetFallingFunction()
         {
             var pos = level.functionsForLevelList[currentFallingFunctionIndex].positions;
