@@ -12,12 +12,12 @@ namespace Tetris
 {
     public class TetrisManager : Singleton<TetrisManager>
     {
-        public UnityEvent onHitEvent;
-        public UnityEvent onFunctionChangeEvent;
-        public UnityEvent onFunctionSpeedUpEvent;
-        public UnityEvent onFunctionSlowDownEvent;
-        public UnityEvent onGameEndEvent;
-        public UnityEvent onGamRestart;
+        [HideInInspector] public UnityEvent onHitEvent;
+        [HideInInspector] public UnityEvent onFunctionChangeEvent;
+        [HideInInspector] public UnityEvent onFunctionSpeedUpEvent;
+        [HideInInspector] public UnityEvent onFunctionSlowDownEvent;
+        [HideInInspector] public UnityEvent onGameEndEvent;
+        [HideInInspector] public UnityEvent onGamRestart;
         public LevelMaker level;
         [SerializeField] private GameObject endGameScreen;
         [SerializeField] private List<FunctionComponent> currentTopFunction;

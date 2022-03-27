@@ -1,4 +1,5 @@
 using Tetris;
+using UI.Popups;
 using UnityEngine;
 using UnityEngine.UI;
 /*
@@ -11,10 +12,10 @@ namespace UI
     {
         [SerializeField] private GameObject score;
         [SerializeField] private Image displayedFunction;
+        [SerializeField] private RestartGamePopUp restartGamePopUp;
         private bool invokeDownPressEvent;
         private int currentFunctionIndex = 0;
         private int amountOfFunctionsToCycle;
-
         private void Start()
         {
             amountOfFunctionsToCycle = TetrisManager.Instance.GetLengthOfFunctionsList();
@@ -33,13 +34,16 @@ namespace UI
                 OnClickCycleFunction(1);
             }
             
-            //Add on press here.
-
             if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.DownArrow))
             {
                 OnSpeedChangeEvent(true);
             }
 
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                OnForceRestart();
+            }
+            
             if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.DownArrow))
             {
                 OnSpeedChangeEvent(false);
@@ -74,6 +78,12 @@ namespace UI
             currentFunctionIndex = newVal;
             displayedFunction.sprite = TetrisManager.Instance.GetSpriteOfFunctionByIndex(currentFunctionIndex);
             TetrisManager.Instance.onFunctionChangeEvent.Invoke();
+        }
+
+        private void OnForceRestart()
+        {
+            restartGamePopUp.gameObject.SetActive(true);
+            restartGamePopUp.OnPopupDisplay();
         }
     }
 }
