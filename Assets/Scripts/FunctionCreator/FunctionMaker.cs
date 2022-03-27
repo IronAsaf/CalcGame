@@ -119,10 +119,11 @@ namespace FunctionCreator
             // Knowing that the function is already made we just loop through the positions and *-1 them.
             for (int i = 0; i < positions.Count; i++)
             {
-                var vec = positions[i] * -1;
+                var vec = new Vector2(positions[i].x, -1 * positions[i].y);
                 positions[i] = vec;
             }
-
+            Debug.Log("Flipping func " + name);
+            
             for (int i = 0; i < functionComponents.Count; i++)
             {
                 if (!FunctionUtility.IsOperator(functionComponents[i].type)) continue;
