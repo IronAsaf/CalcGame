@@ -4,6 +4,10 @@ using UnityEngine;
 
 namespace Data.Serialize
 {
+    /*
+     * Class to save the data in a JSON way. This is because the ScriptableObject doesn't serialize good in JSON.
+     * This is to save the Tetris Game data itself, how many times played and all that.
+     */
     public class TetrisSerialize
     {
         public string gameName;

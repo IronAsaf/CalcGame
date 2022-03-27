@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Data
 {
+    /*
+     * A scriptableObject that is dedicated to be saving the difficulty, its type, and parameters.
+     */
     [CreateAssetMenu(menuName = "CalcGame/Level Difficulty")]
     public class LevelDifficulty : ScriptableObject
     {

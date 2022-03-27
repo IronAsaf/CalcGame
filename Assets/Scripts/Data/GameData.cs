@@ -3,6 +3,9 @@ using UnityEngine;
 
 namespace Data
 {
+    /*
+     * For each game they need to inherit this data that we will track.
+     */
     public abstract class GameData : SerializedScriptableObject
     {
         public string gameName;

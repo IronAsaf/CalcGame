@@ -5,6 +5,10 @@ using Utility;
 
 namespace Data.Serialize
 {
+    /*
+     * Class to save the data in a JSON way. This is because the ScriptableObject doesn't serialize good in JSON.
+     * This serializes the FunctionData, which is what each function has saved.
+     */
     public class FunctionDataSerialize
     {
         public FunctionUtility.FunctionNames functionName;

@@ -1,4 +1,3 @@
-using System;
 using Global;
 using UnityEngine;
 using PlayFab;
@@ -7,6 +6,13 @@ using Utility;
 
 namespace Data.PlayFabConnect
 {
+    /*
+     * This class is controlling the server side of data, saving and loading.
+     * It is not complete, it is missing a user login option. For now its per Device, so on the same computer
+     * you get the same data, more or less.
+     * There are things here that are not totally finished.
+     * To activate you need to go to Utility > PlayerUtility > gatherData = true.
+     */
     public class PlayFabManager : MonoBehaviour
     {
         public void Login()

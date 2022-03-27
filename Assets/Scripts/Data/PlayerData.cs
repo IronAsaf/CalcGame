@@ -9,6 +9,9 @@ using Utility;
 
 namespace Data
 {
+    /*
+     * This is the runtime class for player data, that will be loaded from the PlayerSerialize object.
+     */
     [CreateAssetMenu(menuName = "CalcGame/Player Data", fileName = "PlayerName")]
     public class PlayerData : ScriptableObject
     { 
