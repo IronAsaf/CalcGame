@@ -11,7 +11,7 @@ namespace UI
     {
         [SerializeField] private GameObject score;
         [SerializeField] private Image displayedFunction;
-
+        private bool invokeDownPressEvent;
         private int currentFunctionIndex = 0;
         private int amountOfFunctionsToCycle;
 
@@ -34,6 +34,30 @@ namespace UI
             }
             
             //Add on press here.
+
+            if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.DownArrow))
+            {
+                OnSpeedChangeEvent(true);
+            }
+
+            if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.DownArrow))
+            {
+                OnSpeedChangeEvent(false);
+            }
+        }
+
+        private void OnSpeedChangeEvent(bool speedUp)
+        {
+            if (speedUp && !invokeDownPressEvent)
+            {
+                TetrisManager.Instance.onFunctionSpeedUpEvent.Invoke();
+                invokeDownPressEvent = true;
+            }
+            else if (!speedUp)
+            {
+                invokeDownPressEvent = false;
+                TetrisManager.Instance.onFunctionSlowDownEvent.Invoke();
+            }
         }
         public void OnClickCycleFunction(int dir)
         {
