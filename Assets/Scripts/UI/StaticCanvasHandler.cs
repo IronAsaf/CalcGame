@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 /*
  * This script handles the functionaltiy of the static-like canvas aspects such as the score.
- * And the functions to cycle through as well.
+ * And the functions to cycle through as well. As well as the controls of the game. <- -> __
  */
 namespace UI
 {
@@ -32,6 +32,8 @@ namespace UI
             {
                 OnClickCycleFunction(1);
             }
+            
+            //Add on press here.
         }
         public void OnClickCycleFunction(int dir)
         {

@@ -14,6 +14,8 @@ namespace Tetris
     {
         public UnityEvent onHitEvent;
         public UnityEvent onFunctionChangeEvent;
+        public UnityEvent onFunctionSpeedUpEvent;
+        public UnityEvent onFunctionSlowDownEvent;
         public UnityEvent onGameEndEvent;
         public UnityEvent onGamRestart;
         public LevelMaker level;

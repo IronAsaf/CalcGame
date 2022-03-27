@@ -9,7 +9,9 @@ namespace Tetris
     {
         private Rigidbody2D rigidbody2DRef;
         private Vector2 startingPos;
-        private float speed = -1f; // TEMP
+        private bool shouldSpeedUp = false;
+        private float speed = -1f;
+        private float speedUp = -2f;
         private const float OldSpeed = -1f;
         protected override void Awake()
         {
@@ -22,6 +24,8 @@ namespace Tetris
         {
             TetrisManager.Instance.onFunctionChangeEvent.AddListener(OnChangeEvent);
             TetrisManager.Instance.onGameEndEvent.AddListener(OnEndGame);
+            TetrisManager.Instance.onFunctionSpeedUpEvent.AddListener(SpeedUpFalling);
+            TetrisManager.Instance.onFunctionSlowDownEvent.AddListener(SlowDownFalling);
             SetupInitialFallingFunction();
             base.Start();
         }
@@ -42,12 +46,14 @@ namespace Tetris
 
         private void FixedUpdate()
         {
-            rigidbody2DRef.velocity = new Vector2(0, speed);
+            float fall = shouldSpeedUp ? speedUp : speed;
+            rigidbody2DRef.velocity = new Vector2(0, fall);
         }
 
         private void OnEndGame()
         {
             speed = 0f;
+            speedUp = 0f;
         }
 
         protected override void RestartFunction()
@@ -57,6 +63,16 @@ namespace Tetris
             currentFallingPositions = TetrisManager.Instance.ResetFallingFunction();
             SetupGo(currentFallingPositions);
             speed = OldSpeed;
+        }
+
+        private void SpeedUpFalling()
+        {
+            shouldSpeedUp = true;
+        }
+
+        private void SlowDownFalling()
+        {
+            shouldSpeedUp = false;
         }
     }
 }
